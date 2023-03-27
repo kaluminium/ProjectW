@@ -10,18 +10,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.command = void 0;
-const discord_js_1 = require("discord.js");
 exports.command = {
-    name: 'message',
-    data: new discord_js_1.SlashCommandBuilder()
-        .setName('message')
-        .setDescription('Affiche le ping du bot')
-        .addStringOption((option) => {
-        return option
-            .setName('message')
-            .setDescription('Message à afficher')
-            .setRequired(true);
-    }),
+    category: "fun",
+    description: "envoie un message",
+    name: "message",
+    usage: "/message",
+    options: [
+        { type: 'STRING', name: 'message', description: 'Message à envoyer', required: true }
+    ],
     execute: (interaction) => __awaiter(void 0, void 0, void 0, function* () {
         const message = interaction.options.get('message').value.toString();
         yield interaction.reply({ content: `Valeur du message: ${message}` });
