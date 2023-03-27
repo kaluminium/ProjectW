@@ -1,12 +1,12 @@
 import {EmbedBuilder} from "discord.js";
 import {SlashCommand} from "../types";
-import {SlashCommandBuilder} from "discord.js";
 
 export const command: SlashCommand = {
     name: 'ping',
-    data : new SlashCommandBuilder()
-        .setName('ping')
-        .setDescription('Affiche le ping du bot'),
+    description: 'Ping!',
+    category: 'misc',
+    usage: 'ping',
+
     execute: async (interaction) => {
         await interaction.reply({
                 embeds: [

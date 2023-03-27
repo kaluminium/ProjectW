@@ -1,4 +1,4 @@
-import {Collection, CommandInteraction, SlashCommandBuilder} from "discord.js";
+import {Collection, CommandInteraction} from "discord.js";
 
 declare global {
     namespace NodeJS {
@@ -23,7 +23,10 @@ export interface BotEvent {
 
 export interface SlashCommand {
     name: string;
-    data: SlashCommandBuilder | any,
+    description: string;
+    category: string;
+    usage: string;
+    options?: Array<{ type: string, name: string, description: string, required: boolean }>;
     execute: (interaction: CommandInteraction) => Promise<void>;
 }
 export {};

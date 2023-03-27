@@ -1,12 +1,12 @@
-import {EmbedBuilder, Message} from "discord.js";
+import {Message} from "discord.js";
 import {SlashCommand} from "../types";
-import {SlashCommandBuilder} from "discord.js";
 
 export const command: SlashCommand = {
-    name: 'react',
-    data : new SlashCommandBuilder()
-        .setName('react')
-        .setDescription('Envoie un message avec une réaction'),
+    category: "fun",
+    description: "reagir à une commande",
+    name: "react",
+    usage: "/react",
+
     execute: async (interaction) => {
         const message: Message = await interaction.reply({
             content: 'Message avec réaction',
