@@ -8,7 +8,6 @@ module.exports = (client: Client) => {
 
     readdirSync(eventsDir).forEach(file => {
         if(!file.endsWith('.js')) return;
-
         let event: BotEvent = require(`${eventsDir}/${file}`).default;
 
         event.once
