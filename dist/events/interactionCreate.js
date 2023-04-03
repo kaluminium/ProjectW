@@ -15,12 +15,25 @@ const event = {
     once: false,
     execute(interaction) {
         return __awaiter(this, void 0, void 0, function* () {
-            if (!interaction.isChatInputCommand())
-                return;
-            const command = interaction.client.slashCommands.get(interaction.commandName);
-            if (!command)
-                return;
-            yield command.execute(interaction);
+            if (interaction.isChatInputCommand()) {
+                const command = interaction.client.slashCommands.get(interaction.commandName);
+                if (!command)
+                    return;
+                yield command.execute(interaction);
+            }
+            else if (interaction.isAutocomplete()) {
+                const command = interaction.client.slashCommands.get(interaction.commandName);
+                if (!command) {
+                    console.error(`No command matching ${interaction.commandName} was found.`);
+                    return;
+                }
+                try {
+                    yield command.autocomplete(interaction);
+                }
+                catch (error) {
+                    console.error(error);
+                }
+            }
         });
     }
 };

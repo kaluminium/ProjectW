@@ -10,12 +10,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.command = void 0;
-const discord_js_1 = require("discord.js");
 exports.command = {
-    name: 'react',
-    data: new discord_js_1.SlashCommandBuilder()
-        .setName('react')
-        .setDescription('Envoie un message avec une réaction'),
+    category: "fun",
+    description: "reagir à une commande",
+    name: "react",
+    usage: "/react",
     execute: (interaction) => __awaiter(void 0, void 0, void 0, function* () {
         const message = yield interaction.reply({
             content: 'Message avec réaction',

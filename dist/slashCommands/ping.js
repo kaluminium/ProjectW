@@ -11,12 +11,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.command = void 0;
 const discord_js_1 = require("discord.js");
-const discord_js_2 = require("discord.js");
 exports.command = {
     name: 'ping',
-    data: new discord_js_2.SlashCommandBuilder()
-        .setName('ping')
-        .setDescription('Affiche le ping du bot'),
+    description: 'Ping!',
+    category: 'misc',
+    usage: 'ping',
     execute: (interaction) => __awaiter(void 0, void 0, void 0, function* () {
         yield interaction.reply({
             embeds: [
