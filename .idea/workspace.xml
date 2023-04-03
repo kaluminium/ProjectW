@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7ec37326-8d73-4db5-a1a9-cfd953b83b21" name="Changes" comment="ajout des fichiers manquants">
+    <list default="true" id="7ec37326-8d73-4db5-a1a9-cfd953b83b21" name="Changes" comment="nouveau gitignore">
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
@@ -88,7 +89,7 @@
       <workItem from="1680533326080" duration="178000" />
       <workItem from="1680533522507" duration="1358000" />
       <workItem from="1680534914612" duration="345000" />
-      <workItem from="1680535310052" duration="11000" />
+      <workItem from="1680535310052" duration="90000" />
     </task>
     <task id="LOCAL-00001" summary="changement de la structure des créations des slashCommands dans le commandHandler.ts">
       <created>1679930698913</created>
@@ -111,7 +112,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680535209076</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="nouveau gitignore">
+      <created>1680535351022</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1680535351022</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -158,6 +166,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="changement de la structure des créations des slashCommands dans le commandHandler.ts" />
     <MESSAGE value="ajout des fichiers manquants" />
-    <option name="LAST_COMMIT_MESSAGE" value="ajout des fichiers manquants" />
+    <MESSAGE value="nouveau gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="nouveau gitignore" />
   </component>
 </project>
