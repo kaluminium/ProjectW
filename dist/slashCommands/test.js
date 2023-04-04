@@ -87,8 +87,9 @@ exports.command = {
             const reponse = yield interaction.reply({
                 content: `Nom: ${Personnage_1.Personnage.putCapitalLetter(name)}, Race: ${race}, Sexe: ${sexe}, Divinité: ${divinite}`,
                 components: [row],
+                ephemeral: true
             });
-            const collector = reponse.createMessageComponentCollector({ time: 15000 });
+            const collector = reponse.createMessageComponentCollector({ time: 5000 });
             collector.on('collect', (i) => __awaiter(void 0, void 0, void 0, function* () {
                 if (i.member.user.id !== interaction.member.user.id)
                     return;
@@ -99,6 +100,11 @@ exports.command = {
                 else if (i.customId === 'exit') {
                     yield i.update({ content: 'Personnage non créé', components: [] });
                     collector.stop();
+                }
+            }));
+            collector.on('end', (collected, reason) => __awaiter(void 0, void 0, void 0, function* () {
+                if (reason === 'time') {
+                    yield reponse.delete();
                 }
             }));
         }

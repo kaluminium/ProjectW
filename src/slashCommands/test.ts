@@ -88,6 +88,7 @@ export const command : SlashCommand = {
             const reponse = await interaction.reply({
                 content: `Nom: ${Personnage.putCapitalLetter(name)}, Race: ${race}, Sexe: ${sexe}, Divinité: ${divinite}`,
                 components: [row],
+                ephemeral: true
             });
 
             const collector = reponse.createMessageComponentCollector({time: 15000});
@@ -103,6 +104,12 @@ export const command : SlashCommand = {
                 else if(i.customId === 'exit'){
                     await i.update({content: 'Personnage non créé', components: []});
                     collector.stop();
+                }
+            })
+
+            collector.on('end', async (collected, reason) => {
+                if(reason === 'time'){
+                    await reponse.delete();
                 }
             })
         }
