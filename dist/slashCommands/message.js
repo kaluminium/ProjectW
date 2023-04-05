@@ -16,7 +16,7 @@ exports.command = {
     name: "message",
     usage: "/message",
     options: [
-        { type: 'STRING', name: 'message', description: 'Message à envoyer', required: true }
+        { type: 'STRING', name: 'message', description: 'Message à envoyer', required: true, autocomplete: false }
     ],
     execute: (interaction) => __awaiter(void 0, void 0, void 0, function* () {
         const message = interaction.options.get('message').value.toString();

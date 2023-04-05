@@ -6,10 +6,8 @@ abstract class Race{
     private intelligence : number;
     private agilite : number;
     private description : string;
-    private poolDeDes : De;
 
-
-    constructor(nom: string, force: number, intelligence: number, agilite: number, description: string) {
+    protected constructor(nom: string, force: number, intelligence: number, agilite: number, description: string) {
         this.nom = nom;
         this.force = force;
         this.intelligence = intelligence;

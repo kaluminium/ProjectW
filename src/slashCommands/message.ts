@@ -6,7 +6,7 @@ export const command: SlashCommand = {
     name: "message",
     usage: "/message",
     options: [
-        {type: 'STRING', name: 'message', description: 'Message à envoyer', required: true}
+        {type: 'STRING', name: 'message', description: 'Message à envoyer', required: true, autocomplete: false}
     ],
 
     execute: async (interaction) => {

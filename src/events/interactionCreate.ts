@@ -5,13 +5,28 @@ const event: BotEvent = {
     name: Events.InteractionCreate,
     once: false,
     async execute(interaction: Interaction) {
-        if (!interaction.isChatInputCommand()) return;
+        if (interaction.isChatInputCommand()){
+            const command = interaction.client.slashCommands.get(interaction.commandName);
 
-        const command = interaction.client.slashCommands.get(interaction.commandName);
+            if (!command) return;
 
-        if (!command) return;
+            await command.execute(interaction);
+        }else if (interaction.isAutocomplete()) {
 
-        await command.execute(interaction);
+            const command = interaction.client.slashCommands.get(interaction.commandName);
+
+            if (!command) {
+                console.error(`No command matching ${interaction.commandName} was found.`);
+                return;
+            }
+
+            try {
+                await command.autocomplete(interaction);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
     }
 }
 

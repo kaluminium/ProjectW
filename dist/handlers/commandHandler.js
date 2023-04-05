@@ -19,16 +19,20 @@ module.exports = (client) => __awaiter(void 0, void 0, void 0, function* () {
         if (!file.endsWith('.js'))
             return;
         const command = require(`${slashCommandsDir}/${file}`).command;
-        let commandData = new discord_js_1.SlashCommandBuilder()
-            .setName(command.name)
-            .setDescription(command.description);
+        let commandData = new discord_js_1.SlashCommandBuilder();
+        commandData.setName(command.name);
+        commandData.setDescription(command.description);
         if (command.options) {
             for (let i = 0; i < command.options.length; i++) {
                 let type = command.options[i].type.slice(0, 1).toUpperCase() + command.options[i].type.slice(1).toLowerCase();
                 let name = command.options[i].name;
                 let description = command.options[i].description;
                 let required = command.options[i].required;
-                commandData[`add${type}Option`](option => option.setName(name).setDescription(description).setRequired(required));
+                let autocomplete = command.options[i].autocomplete;
+                commandData[`add${type}Option`](option => option.setName(name)
+                    .setDescription(description)
+                    .setRequired(required)
+                    .setAutocomplete(autocomplete));
             }
         }
         body.push(commandData.toJSON());
