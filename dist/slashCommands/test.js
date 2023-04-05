@@ -102,9 +102,12 @@ exports.command = {
                     collector.stop();
                 }
             }));
-            collector.on('end', (collected, reason) => __awaiter(void 0, void 0, void 0, function* () {
+            collector.on('end', (i, reason) => __awaiter(void 0, void 0, void 0, function* () {
                 if (reason === 'time') {
-                    yield reponse.delete();
+                    yield reponse.edit({ content: 'Personnage non créé, Trop de temps', components: [] });
+                    setTimeout(() => {
+                        reponse.delete();
+                    }, 10000);
                 }
             }));
         }

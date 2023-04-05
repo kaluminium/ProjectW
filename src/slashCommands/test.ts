@@ -91,7 +91,7 @@ export const command : SlashCommand = {
                 ephemeral: true
             });
 
-            const collector = reponse.createMessageComponentCollector({time: 15000});
+            const collector = reponse.createMessageComponentCollector({time: 5000});
 
 
             collector.on('collect', async (i: MessageComponentInteraction) => {
@@ -107,9 +107,12 @@ export const command : SlashCommand = {
                 }
             })
 
-            collector.on('end', async (collected, reason) => {
+            collector.on('end', async (i: MessageComponentInteraction, reason) => {
                 if(reason === 'time'){
-                    await reponse.delete();
+                    await reponse.edit({content: 'Personnage non créé, Trop de temps', components: []});
+                    setTimeout(() => {
+                        reponse.delete();
+                    }, 10000);
                 }
             })
         }
