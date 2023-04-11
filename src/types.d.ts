@@ -28,7 +28,7 @@ export interface SlashCommand {
     description: string,
     usage : string,
     options?: Array<{type: string, name: string, description: string, required: boolean, autocomplete: boolean}>,
-    execute: (interaction: CommandInteraction) => Promise<void>;
-    autocomplete?: (interaction: any) => Promise<void>;
+    execute: (interaction: CommandInteraction) => Promise<any>;
+    autocomplete?: (interaction: any) => Promise<any>;
 }
 export {};
