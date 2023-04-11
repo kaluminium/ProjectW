@@ -21,7 +21,7 @@ exports.command = {
         {
             type: 'STRING',
             name: 'nom',
-            description: 'Choisissez un nom',
+            description: 'Choisissez un nom (entre 3 à 16 caractères, pas de caractères spéciaux ni de chiffres)',
             required: true,
             autocomplete: false
         },
@@ -75,45 +75,61 @@ exports.command = {
         let race = interaction.options.get('race').value.toString();
         let sexe = interaction.options.get('sexe').value.toString();
         let divinite = interaction.options.get('divinite').value.toString();
-        if (Personnage_1.Personnage.verifyName(name)) {
-            const row = new discord_js_1.ActionRowBuilder()
-                .addComponents(new discord_js_1.ButtonBuilder()
-                .setCustomId('validate')
-                .setLabel('Valider !')
-                .setStyle(discord_js_1.ButtonStyle.Primary), new discord_js_1.ButtonBuilder()
-                .setCustomId('exit')
-                .setLabel('Quitter')
-                .setStyle(discord_js_1.ButtonStyle.Danger));
-            const reponse = yield interaction.reply({
-                content: `Nom: ${Personnage_1.Personnage.putCapitalLetter(name)}, Race: ${race}, Sexe: ${sexe}, Divinité: ${divinite}`,
-                components: [row],
-                ephemeral: true
-            });
-            const collector = reponse.createMessageComponentCollector({ time: 5000 });
-            collector.on('collect', (i) => __awaiter(void 0, void 0, void 0, function* () {
-                if (i.member.user.id !== interaction.member.user.id)
-                    return;
-                if (i.customId === 'validate') {
-                    yield i.update({ content: 'Personnage créé !', components: [] });
-                    collector.stop();
-                }
-                else if (i.customId === 'exit') {
-                    yield i.update({ content: 'Personnage non créé', components: [] });
-                    collector.stop();
-                }
-            }));
-            collector.on('end', (i, reason) => __awaiter(void 0, void 0, void 0, function* () {
-                if (reason === 'time') {
-                    yield reponse.edit({ content: 'Personnage non créé, Trop de temps', components: [] });
-                    setTimeout(() => {
-                        reponse.delete();
-                    }, 10000);
-                }
-            }));
+        let raceChoices = ['human', 'elf', 'dwarf'];
+        let sexeChoices = ['man', 'woman'];
+        let diviniteChoices = ['mountain', 'ocean', 'forest'];
+        if (!raceChoices.includes(race)) {
+            yield interaction.reply({ content: `Race invalide`, ephemeral: true });
+            return;
         }
-        else {
+        if (!sexeChoices.includes(sexe)) {
+            yield interaction.reply({ content: `Sexe invalide`, ephemeral: true });
+            return;
+        }
+        if (!diviniteChoices.includes(divinite)) {
+            yield interaction.reply({ content: `Divinité invalide`, ephemeral: true });
+            return;
+        }
+        if (!Personnage_1.Personnage.verifyName(name)) {
             yield interaction.reply({ content: `Nom invalide` });
             return;
         }
+        const row = new discord_js_1.ActionRowBuilder()
+            .addComponents(new discord_js_1.ButtonBuilder()
+            .setCustomId('validate')
+            .setLabel('Valider !')
+            .setStyle(discord_js_1.ButtonStyle.Primary), new discord_js_1.ButtonBuilder()
+            .setCustomId('exit')
+            .setLabel('Quitter')
+            .setStyle(discord_js_1.ButtonStyle.Danger));
+        name = Personnage_1.Personnage.putCapitalLetter(name);
+        const reponse = yield interaction.reply({
+            content: `Nom: ${name}, Race: ${race}, Sexe: ${sexe}, Divinité: ${divinite}`,
+            components: [row],
+            ephemeral: true
+        });
+        const personnage = new Personnage_1.Personnage(name, divinite, race, sexe);
+        const collector = reponse.createMessageComponentCollector({ time: 5000 });
+        collector.on('collect', (i) => __awaiter(void 0, void 0, void 0, function* () {
+            if (i.member.user.id !== interaction.member.user.id)
+                return;
+            if (i.customId === 'validate') {
+                yield i.update({ content: 'Personnage créé !', components: [] });
+                //await personnage.create();
+                collector.stop();
+            }
+            else if (i.customId === 'exit') {
+                yield i.update({ content: 'Personnage non créé', components: [] });
+                collector.stop();
+            }
+        }));
+        collector.on('end', (i, reason) => __awaiter(void 0, void 0, void 0, function* () {
+            if (reason === 'time') {
+                yield reponse.edit({ content: 'Personnage non créé, Trop de temps', components: [] });
+                setTimeout(() => {
+                    reponse.delete();
+                }, 10000);
+            }
+        }));
     })
 };
