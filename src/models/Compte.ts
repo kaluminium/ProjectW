@@ -47,14 +47,20 @@ class Compte{
         if (!Compte.checkCompliantAccountName(accountName)) throw new Error("Le nom de compte n'est pas conforme");
         if (!Compte.checkCompliantMail(mail)) throw new Error("L'adresse mail n'est pas conforme");
         if (!Compte.checkCompliantPassword(password)) throw new Error("Le mot de passe n'est pas conforme");
+        const id : number = 0 //TODO
         bcrypt
             .hash(password, 10)
             .then(hash => {
-                console.log("Enregistrement de compte => " + discordId + ":" + accountName + ":" + mail + ":" + hash);
+                console.log("\nLog[account] : Enregistrement de compte => " +
+                    "\n\taccountId : " + id +
+                    "\n\tdiscordId : " + discordId +
+                    "\n\taccountName : " + accountName +
+                    "\n\tmail : " + mail +
+                    "\n\thash : " + hash);
             })
             .catch(err => console.error(err.message))
         //TODO
-        return 0;
+        return id;
     }
 }
 
