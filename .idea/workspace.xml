@@ -6,8 +6,32 @@
   <component name="ChangeListManager">
     <list default="true" id="7ec37326-8d73-4db5-a1a9-cfd953b83b21" name="Changes" comment="Ajout d'un message d'erreur quand le temps est écoulé">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/events/interactionCreate.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/events/interactionCreate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/events/ready.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/events/ready.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/handlers/commandHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/handlers/commandHandler.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/handlers/eventHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/handlers/eventHandler.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/models/BackPack.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/models/BackPack.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/models/Compte.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/models/Compte.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/models/De.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/models/De.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/models/Divitiné/Montagne.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/models/Divitiné/Montagne.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/models/Divitiné/Ocean.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/models/Divitiné/Ocean.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/models/Divitiné/Volcan.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/models/Divitiné/Volcan.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/models/Divitnite.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/models/Divitnite.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/models/Equipment.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/models/Equipment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/models/FaceDeDes.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/models/FaceDeDes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/models/Inventaire.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/models/Inventaire.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/models/Personnage.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/models/Personnage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/models/Race.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/models/Race.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/models/Race/Elfe.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/models/Race/Elfe.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/models/Race/Humain.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/models/Race/Humain.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/models/Race/Nain.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/models/Race/Nain.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/models/Succes.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/models/Succes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/slashCommands/message.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/slashCommands/message.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/slashCommands/ping.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/slashCommands/ping.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/slashCommands/react.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/slashCommands/react.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/slashCommands/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/slashCommands/test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/slashCommands/test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/slashCommands/test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +74,7 @@
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\lukal\\WebstormProjects\\ProjetW\\node_modules\\typescript\\lib&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\Administrateur\\Desktop\\ProjetW\\ProjectW\\node_modules\\typescript\\lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -96,6 +120,8 @@
       <workItem from="1680611395659" duration="4000" />
       <workItem from="1680674634894" duration="60000" />
       <workItem from="1680682032175" duration="929000" />
+      <workItem from="1681229805818" duration="4438000" />
+      <workItem from="1681312739897" duration="5340000" />
     </task>
     <task id="LOCAL-00001" summary="changement de la structure des créations des slashCommands dans le commandHandler.ts">
       <created>1679930698913</created>
