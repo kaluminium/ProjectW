@@ -27,6 +27,7 @@ const dotenv = __importStar(require("dotenv"));
 const discord_js_1 = require("discord.js");
 const fs_1 = require("fs");
 const path_1 = require("path");
+const BDDConnexion_1 = require("./models/BDDConnexion");
 dotenv.config();
 const client = new discord_js_1.Client({
     intents: [
@@ -42,3 +43,10 @@ const handlersDirs = (0, path_1.join)(__dirname, './handlers');
     require(`${handlersDirs}/${file}`)(client);
 });
 client.login(process.env.TOKEN);
+BDDConnexion_1.BDDConnexion.getInstance()
+    .then(() => {
+    client.login(process.env.TOKEN);
+})
+    .catch((error) => {
+    console.error('Erreur lors de la connexion à la base de données :', error);
+});
