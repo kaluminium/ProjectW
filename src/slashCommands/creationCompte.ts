@@ -62,7 +62,7 @@ export const command : SlashCommand = {
             const password = submitted.fields.getTextInputValue('passwordInput');
 
             try {
-                let id : number = Compte.register(
+                let id : number = await Compte.register(
                     interaction.member.user.id,
                     username,
                     password,
