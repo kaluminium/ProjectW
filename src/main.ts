@@ -3,6 +3,9 @@ import {Collection, Client, GatewayIntentBits} from "discord.js";
 import {readdirSync} from "fs";
 import {join} from "path";
 import {SlashCommand} from "./types";
+import {BDDConnexion} from "./models/BDDConnexion";
+
+
 
 dotenv.config();
 
@@ -24,3 +27,13 @@ readdirSync(handlersDirs).forEach(file => {
 })
 
 client.login(process.env.TOKEN);
+
+
+BDDConnexion.getInstance()
+    .then(() => {
+        client.login(process.env.TOKEN);
+
+    })
+    .catch((error) => {
+        console.error('Erreur lors de la connexion à la base de données :', error);
+    });
