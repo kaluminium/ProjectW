@@ -42,8 +42,20 @@ class Compte{
         return false;
     }
 
+    public static mailExist(mail : string) : boolean{
+        //TODO
+        return false;
+    }
+
+    public static accountNameExist(accountName : string) : boolean{
+        //TODO
+        return false;
+    }
+
     public static register(discordId : string, accountName : string, password : string, mail : string) : number{
         if (Compte.isRegistered(discordId)) throw new Error("Vous avez déjà un compte");
+        if (Compte.mailExist(mail)) throw new Error("Cette adresse mail est déjà utilisée");
+        if (Compte.accountNameExist(accountName)) throw new Error("Ce nom de compte est déjà utilisé");
         if (!Compte.checkCompliantAccountName(accountName)) throw new Error("Le nom de compte n'est pas conforme");
         if (!Compte.checkCompliantMail(mail)) throw new Error("L'adresse mail n'est pas conforme");
         if (!Compte.checkCompliantPassword(password)) throw new Error("Le mot de passe n'est pas conforme");
