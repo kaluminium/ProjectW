@@ -1,6 +1,7 @@
 import {Personnage} from "./Personnage";
 import {ListePersonnage} from "./ListePersonnage";
 import * as bcrypt from "bcrypt";
+import {BDDConnexion} from "./BDDConnexion";
 
 class Compte{
     private id : number;
@@ -37,41 +38,50 @@ class Compte{
         return regex.test(mail);
     }
 
-    public static isRegistered(discordId : string) : boolean{
-        //TODO
-        return false;
+    public static async isRegisteredDiscord(discordId : string) : Promise<boolean>{
+        const bdd = await BDDConnexion.getInstance();
+        const query = "SELECT * FROM compte WHERE discord_id = ?";
+        return await bdd.query(query, [discordId]) > 0;
     }
 
-    public static mailExist(mail : string) : boolean{
-        //TODO
-        return false;
+    public static async isRegisteredMail(mail : string) : Promise<boolean>{
+        const bdd = await BDDConnexion.getInstance();
+        const query = "SELECT * FROM compte WHERE mail = ?";
+        const result =  await bdd.query(query, [mail]);
+        return result.length > 0;
     }
 
-    public static accountNameExist(accountName : string) : boolean{
-        //TODO
-        return false;
+    public static async isRegisteredAccount(accountName : string) : Promise<boolean>{
+        const bdd = await BDDConnexion.getInstance();
+        const query = "SELECT * FROM compte WHERE account_name = ?";
+        const result =  await bdd.query(query, [accountName]);
+        return result.length > 0;
     }
 
-    public static register(discordId : string, accountName : string, password : string, mail : string) : number{
-        if (Compte.isRegistered(discordId)) throw new Error("Vous avez déjà un compte");
-        if (Compte.mailExist(mail)) throw new Error("Cette adresse mail est déjà utilisée");
-        if (Compte.accountNameExist(accountName)) throw new Error("Ce nom de compte est déjà utilisé");
+    public static async getLastId() : Promise<number>{
+        const bdd = await BDDConnexion.getInstance();
+        const query = "SELECT MAX(id) FROM compte";
+        const result = await bdd.query(query);
+        return result[0]["MAX(id)"];
+    }
+
+    public static async register(discordId : string, accountName : string, password : string, mail : string) : Promise<number>{
+        if (await Compte.isRegisteredDiscord(discordId)) throw new Error("Vous avez déjà un compte");
+        if (await Compte.isRegisteredMail(mail)) throw new Error("Cette adresse mail est déjà utilisée");
+        if (await Compte.isRegisteredAccount(accountName)) throw new Error("Ce nom de compte est déjà utilisé");
         if (!Compte.checkCompliantAccountName(accountName)) throw new Error("Le nom de compte n'est pas conforme");
         if (!Compte.checkCompliantMail(mail)) throw new Error("L'adresse mail n'est pas conforme");
         if (!Compte.checkCompliantPassword(password)) throw new Error("Le mot de passe n'est pas conforme");
-        const id : number = 0 //TODO
-        bcrypt
-            .hash(password, 10)
-            .then(hash => {
-                console.log("\nLog[account] : Enregistrement de compte => " +
-                    "\n\taccountId : " + id +
-                    "\n\tdiscordId : " + discordId +
-                    "\n\taccountName : " + accountName +
-                    "\n\tmail : " + mail +
-                    "\n\thash : " + hash);
-            })
-            .catch(err => console.error(err.message))
-        //TODO
+        const id : number = await this.getLastId() + 1;
+        let hash : string = await bcrypt.hash(password, 10)
+        console.log("\nLog[account] : Enregistrement de compte => " +
+            "\n\taccountId : " + id +
+            "\n\tdiscordId : " + discordId +
+            "\n\taccountName : " + accountName +
+            "\n\tmail : " + mail +
+            "\n\thash : " + hash);
+        const bdd = await BDDConnexion.getInstance()
+        await bdd.query("INSERT INTO `compte` (`discord_id`, `account_name`, `mail`, `hash`) VALUES (?, ?, ?, ?)", [discordId, accountName, mail, hash]);
         return id;
     }
 }
