@@ -1,3 +1,5 @@
+import {Compte} from "./Compte";
+
 class Personnage{
     private name : string;
     private xp : number;

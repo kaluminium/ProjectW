@@ -19,7 +19,7 @@ export const command : SlashCommand = {
         {
             type: 'STRING',
             name: 'nom',
-            description: 'Choisissez un nom',
+            description: 'Choisissez un nom (entre 3 à 16 caractères, pas de caractères spéciaux ni de chiffres)',
             required: true,
             autocomplete: false
         },
@@ -73,8 +73,30 @@ export const command : SlashCommand = {
         let sexe : string = interaction.options.get('sexe').value.toString();
         let divinite : string = interaction.options.get('divinite').value.toString();
 
-        if(Personnage.verifyName(name)) {
-            const row  = new ActionRowBuilder<any>()
+        let raceChoices : Array<string> = ['human', 'elf', 'dwarf'];
+        let sexeChoices : Array<string> = ['man', 'woman'];
+        let diviniteChoices : Array<string> = ['mountain', 'ocean', 'forest'];
+
+        if(!raceChoices.includes(race)) {
+            await interaction.reply({content: `Race invalide`, ephemeral: true});
+            return;
+        }
+
+        if(!sexeChoices.includes(sexe)) {
+            await interaction.reply({content: `Sexe invalide`, ephemeral: true});
+            return;
+        }
+
+        if(!diviniteChoices.includes(divinite)) {
+            await interaction.reply({content: `Divinité invalide`, ephemeral: true});
+            return;
+        }
+
+        if(!Personnage.verifyName(name)) {
+            await interaction.reply({content: `Nom invalide`});
+            return;
+        }
+        const row  = new ActionRowBuilder<any>()
                 .addComponents(
                     new ButtonBuilder()
                         .setCustomId('validate')
@@ -85,41 +107,41 @@ export const command : SlashCommand = {
                         .setLabel('Quitter')
                         .setStyle(ButtonStyle.Danger),
                 );
-            const reponse = await interaction.reply({
-                content: `Nom: ${Personnage.putCapitalLetter(name)}, Race: ${race}, Sexe: ${sexe}, Divinité: ${divinite}`,
-                components: [row],
-                ephemeral: true
-            });
 
-            const collector = reponse.createMessageComponentCollector({time: 5000});
+        name = Personnage.putCapitalLetter(name);
+
+        const reponse = await interaction.reply({
+            content: `Nom: ${name}, Race: ${race}, Sexe: ${sexe}, Divinité: ${divinite}`,
+            components: [row],
+            ephemeral: true
+        });
+
+        const personnage : Personnage = new Personnage(name, divinite, race, sexe);
+
+        const collector = reponse.createMessageComponentCollector({time: 5000});
 
 
-            collector.on('collect', async (i: MessageComponentInteraction) => {
-                if(i.member.user.id !== interaction.member.user.id) return;
+        collector.on('collect', async (i: MessageComponentInteraction) => {
+            if(i.member.user.id !== interaction.member.user.id) return;
 
-                if(i.customId === 'validate'){
-                    await i.update({content: 'Personnage créé !', components: []});
-                    collector.stop();
-                }
-                else if(i.customId === 'exit'){
-                    await i.update({content: 'Personnage non créé', components: []});
-                    collector.stop();
-                }
-            })
+            if(i.customId === 'validate'){
+                await i.update({content: 'Personnage créé !', components: []});
+                //await personnage.create();
+                collector.stop();
+            }
+            else if(i.customId === 'exit'){
+                await i.update({content: 'Personnage non créé', components: []});
+                collector.stop();
+            }
+        })
 
-            collector.on('end', async (i: MessageComponentInteraction, reason) => {
-                if(reason === 'time'){
-                    await reponse.edit({content: 'Personnage non créé, Trop de temps', components: []});
-                    setTimeout(() => {
-                        reponse.delete();
-                    }, 10000);
-                }
-            })
-        }
-
-        else {
-            await interaction.reply({content: `Nom invalide`});
-            return;
-        }
+        collector.on('end', async (i: MessageComponentInteraction, reason) => {
+            if(reason === 'time'){
+                await reponse.edit({content: 'Personnage non créé, Trop de temps', components: []});
+                setTimeout(() => {
+                    reponse.delete();
+                }, 10000);
+            }
+        })
     }
 }
