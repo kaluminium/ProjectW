@@ -41,7 +41,8 @@ class Compte{
     public static async isRegisteredDiscord(discordId : string) : Promise<boolean>{
         const bdd = await BDDConnexion.getInstance();
         const query = "SELECT * FROM compte WHERE discord_id = ?";
-        return await bdd.query(query, [discordId]) > 0;
+        const result =  await bdd.query(query, [discordId]);
+        return result.length > 0;
     }
 
     public static async isRegisteredMail(mail : string) : Promise<boolean>{
