@@ -26,13 +26,9 @@ readdirSync(handlersDirs).forEach(file => {
     require(`${handlersDirs}/${file}`)(client);
 })
 
-client.login(process.env.TOKEN);
-
-
 BDDConnexion.getInstance()
     .then(() => {
         client.login(process.env.TOKEN);
-
     })
     .catch((error) => {
         console.error('Erreur lors de la connexion à la base de données :', error);
