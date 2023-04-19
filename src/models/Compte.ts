@@ -7,10 +7,22 @@ class Compte{
     private id : number;
     private discordId : string;
     private accountName : string;
-    private listPersonnage : ListePersonnage;
+    private readonly listPersonnage : ListePersonnage;
 
-    constructor(discordId : string) {
+    private constructor(discordId : string, accountName : string, listPersonnage : ListePersonnage, id : number) {
         this.discordId = discordId;
+        this.accountName = accountName;
+        this.listPersonnage = listPersonnage;
+        this.id = id;
+    }
+
+    public static async getAccount(discordId : string) : Promise<Compte>{
+        const bdd = await BDDConnexion.getInstance();
+        const query = "SELECT * FROM compte WHERE discord_id = ?";
+        const result = await bdd.query(query, [discordId]);
+        if (result.length == 0) throw new Error("Vous n'avez pas de compte");
+        const listPersonnage = await ListePersonnage.getListePersonnage(result[0].id);
+        return new Compte(result[0].discord_id, result[0].account_name, listPersonnage, result[0].id);
     }
 
     public static checkCompliantPassword(password : string) : boolean{
@@ -84,6 +96,14 @@ class Compte{
         const bdd = await BDDConnexion.getInstance()
         await bdd.query("INSERT INTO `compte` (`discord_id`, `account_name`, `mail`, `hash`) VALUES (?, ?, ?, ?)", [discordId, accountName, mail, hash]);
         return id;
+    }
+
+    public getListPersonnage() : ListePersonnage{
+        return this.listPersonnage;
+    }
+
+    public getId() : number{
+        return this.id;
     }
 }
 
