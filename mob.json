@@ -1,0 +1,135 @@
+{
+    "Gobelin": {
+      "description": "un gobelin vert",
+      "vie_min": 10,
+      "vie_max": 20,
+      "type": [
+        "normal",
+        "elite",
+        "boss"
+      ],
+      "prefixe": [
+        "gentil",
+        "mechant",
+        "loyal"
+      ],
+      "sufixe": [
+        "des pronfondeurs",
+        "necrotique",
+        "des cavernes"
+      ],
+      "attaque": [
+        {
+          "id": "attaque basic",
+          "degat": 5
+        },
+        {
+          "id": "morsure de gobelin",
+          "degat": 7
+        },
+        {
+          "id": "coup de griffe",
+          "degat": 9
+        }
+      ],
+      "loot": [
+        {
+          "id": "peau de gobelin",
+          "chance": 20,
+          "drop_min": 2,
+          "drop_max": 3,
+          "description": ""
+        },
+        {
+          "id": "os de gobelin",
+          "chance": 40,
+          "drop_min": 1,
+          "drop_max": 2,
+          "description": ""
+        },
+        {
+          "id": "dent de gobelin",
+          "chance": 50,
+          "drop_min": 1,
+          "drop_max": 8,
+          "description": ""
+        }
+      ],
+      "loot_boss": [
+        {
+          "id": "fusdo vert",
+          "chance": 0.01,
+          "drop_min": 1,
+          "drop_max": 1,
+          "description": ""
+        }
+      ]
+    },
+
+    "Troll": {
+      "description": "un troll bleu",
+      "vie_min": 40,
+      "vie_max": 90,
+      "type": [
+        "normal",
+        "elite",
+        "boss"
+      ],
+      "prefixe": [
+        "terrible",
+        "stupide",
+        "moche"
+      ],
+      "sufixe": [
+        "des montagnes",
+        "des cavernes",
+        "des ocean"
+      ],
+      "attaque": [
+        {
+          "id": "attaque basic",
+          "degat": 5
+        },
+        {
+          "id": "morsure de troll",
+          "degat": 7
+        },
+        {
+          "id": "coup de massue",
+          "degat": 9
+        }
+      ],
+      "loot": [
+        {
+          "id": "peau de troll",
+          "chance": 20,
+          "drop_min": 2,
+          "drop_max": 3,
+          "description": ""
+        },
+        {
+          "id": "os de troll",
+          "chance": 40,
+          "drop_min": 1,
+          "drop_max": 2,
+          "description": ""
+        },
+        {
+          "id": "dent de troll",
+          "chance": 50,
+          "drop_min": 1,
+          "drop_max": 8,
+          "description": ""
+        }
+      ],
+      "loot_boss": [
+        {
+          "id": "fusdo bleu",
+          "chance": 0.01,
+          "drop_min": 1,
+          "drop_max": 1,
+          "description": ""
+        }
+      ]
+    }
+  }
