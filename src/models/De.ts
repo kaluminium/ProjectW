@@ -1,51 +1,81 @@
-import {FaceDeDes} from "./FaceDeDes";
 class De {
     private nomDuDe: string;
-    private faces :{[Key:number]: {valeur : number; couleur : string}};
+    private valeurFaces : number[];
+    private couleurFaces : string[];
     private description : string;
 
-    //Finalement on va plutôt utiliser un dictionnaire alliant couleur et valeur plutôt que des face de dés
+    //Ne semble plus être le meilleur
     //private tableauDeDe: FaceDeDes[];
 
-    private constructor(valeurs : number[], couleurs : string[], couleurPrincipale : string) {
+    constructor(valeurs : number[], couleurs : string[], couleurPrincipale : string) {
 
-        if (!(valeurs.length == 6 && couleurs.length == 6)) {
-            this.faces = {
-                1: {valeur: 1, couleur: couleurs[0]},
-                2: {valeur: 2, couleur: couleurs[1]},
-                3: {valeur: 3, couleur: couleurs[2]},
-                4: {valeur: 4, couleur: couleurs[3]},
-                5: {valeur: 5, couleur: couleurs[4]},
-                6: {valeur: 6, couleur: couleurs[5]},
-            }
-        } else {
-            this.faces = {
-                1: {valeur: valeurs[0], couleur: couleurPrincipale},
-                2: {valeur: valeurs[1], couleur: couleurPrincipale},
-                3: {valeur: valeurs[2], couleur: couleurPrincipale},
-                4: {valeur: valeurs[3], couleur: couleurPrincipale},
-                5: {valeur: valeurs[4], couleur: couleurPrincipale},
-                6: {valeur: valeurs[5], couleur: couleurPrincipale},
-            }
+        //Si l'array de valeurs passé en argument ne contient pas 6 valeurs, assigne [1, 2, 3, 4, 5, 6]
+        //Sinon assigne les valeurs passées en argument
+        if (!(valeurs.length == 6)){
+            this.valeurFaces = [1, 2, 3, 4, 5, 6];
+        }
+        else {
+            this.valeurFaces = valeurs;
+        }
+
+        //Si l'array de couleurs passé en argument ne contient pas 6 valeurs, assigne un array rempli de 6 fois la couleur principale
+        //Sinon assigne les valeurs passées en argument
+        if (!(couleurs.length == 6)){
+            this.couleurFaces = [couleurPrincipale, couleurPrincipale, couleurPrincipale, couleurPrincipale, couleurPrincipale, couleurPrincipale];
+        }
+        else {
+            this.couleurFaces = couleurs;
         }
 
     }
 
-    private getFaceNumero(index : number) : [number, string]{
-        let valeursFaces = Object.values(this.faces);
-        let element = valeursFaces[index];
+    //Tire une face au hasard puis récupére la valeur et la couleur de cette face
+    //Puis renvoie la valeur et la couleur de la face tirée
+    public lancerLeDe() : [number, string]{
 
-        let {valeur, couleur} = element;
+        let index = this.tirerFace();
+
+        let valeur = this.getValeurFace(index);
+        let couleur = this.getCouleurFace(index);
 
         return [valeur, couleur];
     }
 
-    public lancerLeDe() : [number, string] {
+    //Choisis une face au hasard
+    private tirerFace() : number{
 
-        //Pour l'instant les valeurs sont hardcoder parce que les dés ont forcément 6 faces mais va potentiellement changer
-        let faceNumero = Math.floor(Math.random() * (5 - 0 + 1) + 0);
+        //Valeurs hardcodées car les dés ont forcément 6 faces
+        let faceNumero = Math.floor(Math.random() * 6);
 
-        return this.getFaceNumero(faceNumero);
+        return faceNumero;
+    }
+
+    //Récupère la valeur d'une face donnée
+    private getValeurFace(index : number) : number{
+
+        return this.valeurFaces[index] ;
+    }
+
+    //Récupère la couleur d'une face donnée
+    private getCouleurFace(index : number) : string{
+
+        return this.couleurFaces[index];
+    }
+
+    //Renvoie les valeurs du dé
+    public getValeurs() : number[]{
+
+        //Retourne une copie de l'array valeurFaces
+        // Cela évite de renvoyer une référence directement à l'attribut afin de respecter l'encapsulation
+        return this.valeurFaces.slice();
+    }
+
+    //Renvoie les couleurs du dé
+    public getCouleurs() : string[]{
+
+        //Retourne une copie de l'array couleurFaces
+        // Cela évite de renvoyer une référence directement à l'attribut afin de respecter l'encapsulation
+        return this.couleurFaces.slice();
     }
 }
 
