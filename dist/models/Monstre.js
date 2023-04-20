@@ -73,7 +73,7 @@ class Monstre {
         while (i < nbDeSortAPush || i == nombreDeSort) {
             let valeurAleatoire = Math.floor(Math.random() * (nombreDeSort - 1 + 1));
             if (!this.sort.includes(monstre[race].attaque[valeurAleatoire])) {
-                this.sort.push(monstre[race].attaque[valeurAleatoire]);
+                this.sort.push(monstre[race].attaque[valeurAleatoire].id);
                 i++;
             }
         }
@@ -86,6 +86,20 @@ class Monstre {
         let nom = monstre[race].prefixe[randomPrefixe] + " " + race + " "
             + monstre[race].sufixe[randomSufixe];
         return nom;
+    }
+    degatDeLattaque() {
+        let nombreDeSortDisponible = this.sort.length;
+        let randomSort = Math.floor(Math.random() * (nombreDeSortDisponible - 1 + 1));
+        let idDuSort = this.sort[randomSort];
+        for (let i = 0; i < monstre[this.race].attaque.length; i++) {
+            if (monstre[this.race].attaque[i].id === idDuSort) {
+                return monstre[this.race].attaque[i].degat;
+            }
+        }
+        return 0; // si trouve pas retourne 0
+    }
+    setPv(pv) {
+        this.pv = pv;
     }
     getTailleInventaire() {
         return this.inventaire.length;

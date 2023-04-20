@@ -61,6 +61,7 @@ export const command : SlashCommand = {
         console.log(b.getPv());
         console.log(b.getSort());
         console.log(b.getInventaire());
+        console.log(b.degatDeLattaque());
 
     }
 }
