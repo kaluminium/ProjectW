@@ -39,7 +39,7 @@ export const command : SlashCommand = {
             .setCustomId('passwordInput')
             .setStyle(TextInputStyle.Short)
             .setLabel("Mettez votre mot de passe")
-            .setPlaceholder("Ex : Kaluminium1234!")
+            .setPlaceholder("1 Majuscule + 1 chiffre + 1 caractère spécial")
             .setMinLength(8)
             .setMaxLength(30)
             .setRequired(true)
@@ -54,7 +54,7 @@ export const command : SlashCommand = {
 
         const myfilter = i=> i.customId === 'accountCreationModal' && i.user.id === interaction.user.id;
 
-        const submitted = await interaction.awaitModalSubmit({time: 50000, filter : myfilter}).catch(() => {return null});
+        const submitted = await interaction.awaitModalSubmit({time: 300000, filter : myfilter}).catch(() => {return null});
 
         if (submitted) {
             const username = submitted.fields.getTextInputValue('usernameInput');
@@ -62,7 +62,7 @@ export const command : SlashCommand = {
             const password = submitted.fields.getTextInputValue('passwordInput');
 
             try {
-                let id : number = Compte.register(
+                let id : number = await Compte.register(
                     interaction.member.user.id,
                     username,
                     password,

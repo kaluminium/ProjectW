@@ -26,3 +26,4 @@ class FaceDeDes{
 
 
 }
+export{FaceDeDes}

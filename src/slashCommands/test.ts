@@ -8,6 +8,7 @@ import {
     ButtonStyle,
     MessageComponentInteraction
 } from 'discord.js';
+import {Compte} from "../models/Compte";
 
 
 export const command : SlashCommand = {
@@ -68,10 +69,20 @@ export const command : SlashCommand = {
     },
 
     execute: async (interaction) => {
+        let compte : Compte;
+
+        try{
+            compte = await Compte.getAccount(interaction.user.id)
+        }catch (e){
+            return await interaction.reply({content: `Vous n'avez pas de compte /creation_compte`, ephemeral: true});
+        }
+
+        if(compte.getListPersonnage().isFull()) return await interaction.reply({content: `Vous avez déjà 3 personnages veuillez en supprimer un`, ephemeral: true});
+
         let name : string = interaction.options.get('nom').value.toString();
         let race : string = interaction.options.get('race').value.toString();
         let sexe : string = interaction.options.get('sexe').value.toString();
-        let divinite : string = interaction.options.get('divinite').value.toString();
+        let divinity : string = interaction.options.get('divinite').value.toString();
 
         let raceChoices : Array<string> = ['human', 'elf', 'dwarf'];
         let sexeChoices : Array<string> = ['man', 'woman'];
@@ -87,7 +98,7 @@ export const command : SlashCommand = {
             return;
         }
 
-        if(!diviniteChoices.includes(divinite)) {
+        if(!diviniteChoices.includes(divinity)) {
             await interaction.reply({content: `Divinité invalide`, ephemeral: true});
             return;
         }
@@ -111,14 +122,12 @@ export const command : SlashCommand = {
         name = Personnage.putCapitalLetter(name);
 
         const reponse = await interaction.reply({
-            content: `Nom: ${name}, Race: ${race}, Sexe: ${sexe}, Divinité: ${divinite}`,
+            content: `Nom: ${name}, Race: ${race}, Sexe: ${sexe}, Divinité: ${divinity}`,
             components: [row],
             ephemeral: true
         });
 
-        const personnage : Personnage = new Personnage(name, divinite, race, sexe);
-
-        const collector = reponse.createMessageComponentCollector({time: 5000});
+        const collector = reponse.createMessageComponentCollector({time: 60000});
 
 
         collector.on('collect', async (i: MessageComponentInteraction) => {
@@ -126,7 +135,7 @@ export const command : SlashCommand = {
 
             if(i.customId === 'validate'){
                 await i.update({content: 'Personnage créé !', components: []});
-                //await personnage.create();
+                await Personnage.register(compte.getId(), name, sexe, divinity, race);
                 collector.stop();
             }
             else if(i.customId === 'exit'){

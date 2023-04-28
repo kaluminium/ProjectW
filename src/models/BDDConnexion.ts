@@ -18,10 +18,10 @@ export class BDDConnexion {
   private async connect(): Promise<void> {
     try {
       this.connection = await mysql.createConnection({
-        host: 'sql928.main-hosting.eu',
-        user: 'u578660070_projetw',
-        password: 'Lu6!9lu1lu0Fa0IUT',
-        database: 'u578660070_projetw',
+        host: '5.189.129.40',
+        user: 'kaluminium',
+        password: 'Kalulebg69100/',
+        database: 'projetw',
       });
       console.log('Connexion à la base de données réussie !');
     } catch (error) {
@@ -39,6 +39,16 @@ export class BDDConnexion {
       throw error;
     }
   }
+
+    public async query(query: string, values?: any | any[] | { [param: string]: any }): Promise<any> {
+        try {
+            const [rows] = await this.connection.query(query, values);
+            return rows;
+        } catch (error) {
+            console.error('Erreur lors de la requête :', error);
+            throw error;
+        }
+    }
 }
 
 
