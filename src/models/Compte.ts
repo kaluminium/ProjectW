@@ -8,12 +8,14 @@ class Compte{
     private discordId : string;
     private accountName : string;
     private readonly listPersonnage : ListePersonnage;
+    private selectedPersonnage : Personnage;
 
-    private constructor(discordId : string, accountName : string, listPersonnage : ListePersonnage, id : number) {
+    private constructor(discordId : string, accountName : string, listPersonnage : ListePersonnage, id : number, selectedPersonnage : Personnage) {
         this.discordId = discordId;
         this.accountName = accountName;
         this.listPersonnage = listPersonnage;
         this.id = id;
+        this.selectedPersonnage = selectedPersonnage;
     }
 
     public static async getAccount(discordId : string) : Promise<Compte>{
@@ -22,7 +24,7 @@ class Compte{
         const result = await bdd.query(query, [discordId]);
         if (result.length == 0) throw new Error("Vous n'avez pas de compte");
         const listPersonnage = await ListePersonnage.getListePersonnage(result[0].id);
-        return new Compte(result[0].discord_id, result[0].account_name, listPersonnage, result[0].id);
+        return new Compte(result[0].discord_id, result[0].account_name, listPersonnage, result[0].id, result[0].selected_character);
     }
 
     public static checkCompliantPassword(password : string) : boolean{
@@ -104,6 +106,12 @@ class Compte{
 
     public getId() : number{
         return this.id;
+    }
+
+    public async changeSelectedPersonnage(personnage : Personnage) : Promise<void>{
+        const bdd = await BDDConnexion.getInstance();
+        await bdd.query("UPDATE compte SET selected_character = ? WHERE id = ?", [personnage.getId(), this.id]);
+        this.selectedPersonnage = personnage;
     }
 }
 
