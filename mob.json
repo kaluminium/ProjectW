@@ -14,13 +14,13 @@
         "loyal"
       ],
       "sufixe": [
-        "des pronfondeurs",
+        "des profondeurs",
         "necrotique",
         "des cavernes"
       ],
       "attaque": [
         {
-          "id": "attaque basic",
+          "id": "attaque basique",
           "degat": 5
         },
         {
@@ -83,11 +83,11 @@
       "sufixe": [
         "des montagnes",
         "des cavernes",
-        "des ocean"
+        "des oceans"
       ],
       "attaque": [
         {
-          "id": "attaque basic",
+          "id": "attaque basique",
           "degat": 5
         },
         {
