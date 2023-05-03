@@ -3,6 +3,7 @@
       "description": "un gobelin vert",
       "vie_min": 10,
       "vie_max": 20,
+      "xp": 10,
       "type": [
         "normal",
         "elite",
@@ -53,6 +54,13 @@
           "drop_min": 1,
           "drop_max": 8,
           "description": ""
+        },
+        {
+          "id": "Or",
+          "chance": 100,
+          "drop_min": 50,
+          "drop_max": 100,
+          "description": ""
         }
       ],
       "loot_boss": [
@@ -70,6 +78,7 @@
       "description": "un troll bleu",
       "vie_min": 40,
       "vie_max": 90,
+      "xp": 40,
       "type": [
         "normal",
         "elite",
@@ -119,6 +128,13 @@
           "chance": 50,
           "drop_min": 1,
           "drop_max": 8,
+          "description": ""
+        },
+        {
+          "id": "Or",
+          "chance": 100,
+          "drop_min": 150,
+          "drop_max": 200,
           "description": ""
         }
       ],
