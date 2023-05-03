@@ -10,17 +10,28 @@ export class Monstre {
     private sort: Array<string> = []; // tableau de sorts
 
     private  inventaire: [string, number][] = []; // inventaire que le monstre drop à sa mort
+    private xp: number; // xp que le monstre donne à sa mort
 
     constructor(race: string, type: string) {
         this.type = type;
         this.race = race;
-       this.nom = this.creationDuNom(race);
+        this.nom = this.creationDuNom(race);
         this.description = monstre[race].description;
         this.pv = this.calculeDeLaVie(race, type);
         this.ajoutDesSort(race);
         this.ajouterInventaire(race, type);
+        this.ajouterXp(race, type);
     }
-
+    public ajouterXp(race : string, type : string){
+        let xp: number = monstre[race].xp
+        if (type === "boss"){
+            this.xp = xp * 2;
+        }else if (type === "elite"){
+            this.xp = xp * 1.5;
+        }else{
+            this.xp = xp;
+        }
+    }
     public ajouterInventaire(race : string, type : string){
         let tailleTableauLoot: number = monstre[race].loot.length;
         let i : number = 0;
