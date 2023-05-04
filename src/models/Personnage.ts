@@ -1,6 +1,7 @@
 import {Compte} from "./Compte";
 import {ListePersonnage} from "./ListePersonnage";
 import {BDDConnexion} from "./BDDConnexion";
+import {De} from "./De";
 
 class Personnage{
     private name : string;
@@ -22,6 +23,89 @@ class Personnage{
         this.xp = xp;
     }
 
+    public creationDice(id : number): Array<De> {
+        let diceRace: Array<De> = this.creationDiceRace(id);
+        diceRace.concat(this.creationDiceDivinite(id));
+        return diceRace;
+    }
+
+  public  creationDiceRace(id : number): Array<De>{
+        Personnage.getPersonnage(id);
+        let faceDeDes : number[] = [1,2,3,4,5,6];
+        let DiceRace : Array<De> = [];
+        switch (this.getRace()) {
+            case 'Humain':
+                let couleurfacesB: string[] = ['B', 'B', 'B', 'B', 'B', 'B'];
+                for (let i = 0; i < 5; i++) {
+                    let HumainB = new De(faceDeDes, couleurfacesB, 'B');
+                    DiceRace.push(HumainB);
+                }
+                break;
+            case 'Nain':
+                let couleurfacesR: string[] = ['R', 'R', 'R', 'R', 'R', 'R'];
+                for (let i = 0; i < 5; i++){
+                     let NainR = new De(faceDeDes, couleurfacesR, 'R');
+                DiceRace.push(NainR);
+                 }
+                break;
+            case 'Elfe':
+                let couleurfacesG : string[] = ['G', 'G', 'G', 'G', 'G', 'G'];
+                for (let i = 0; i < 5; i++) {
+                    let ElfeG = new De(faceDeDes, couleurfacesG, 'G');
+                    DiceRace.push(ElfeG);
+                }
+                break;
+        }
+        return DiceRace;
+    }
+
+  public  creationDiceDivinite(id : number): Array<De>{
+        Personnage.getPersonnage(id);
+        let faceDeDes : number[] = [1,2,3,4,5,6];
+        let couleurfacesG : string[] = ['G', 'G', 'G', 'G', 'G', 'G'];
+        let couleurfacesB : string[] = ['B', 'B', 'B', 'B', 'B', 'B'];
+        let couleurfacesR : string[] = ['R', 'R', 'R', 'R', 'R', 'R'];
+        let DiceRace : Array<De> = [];
+        switch (this.getDivinity()){
+            case 'Montagne':
+                for (let i = 0; i < 4; i++) {
+                    let MontagneD = new De(faceDeDes, couleurfacesG, 'G');
+                    DiceRace.push(MontagneD);
+                }
+                for (let i = 0; i < 2; i++) {
+                    let MontagneD = new De(faceDeDes, couleurfacesR, 'R');
+                    DiceRace.push(MontagneD);
+                }
+                break;
+            case 'Ocean':
+                for (let i = 0; i < 4; i++) {
+                    let OceanD = new De(faceDeDes, couleurfacesB, 'B');
+                    DiceRace.push(OceanD);
+                }
+                for (let i = 0; i < 2; i++) {
+                    let OceanD = new De(faceDeDes, couleurfacesG, 'G');
+                    DiceRace.push(OceanD);
+                }
+                break;
+            case 'Volcan':
+            for (let i = 0; i < 4; i++) {
+                let VolcanD = new De(faceDeDes, couleurfacesR, 'R');
+                DiceRace.push(VolcanD);
+            }
+            for (let i = 0; i < 2; i++) {
+                let VolcanD = new De(faceDeDes, couleurfacesB, 'B');
+                DiceRace.push(VolcanD);
+            }
+                break;
+        }
+        return DiceRace;
+    }
+    public getRace() : string{
+        return this.race;
+    }
+    public getDivinity() : string{
+        return this.divinity;
+    }
     public getId() : number{
         return this.id;
     }

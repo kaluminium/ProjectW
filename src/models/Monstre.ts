@@ -90,6 +90,7 @@ export class Monstre {
 
     public ajoutDesSort(race: string): void {
         let nombreDeSort: number = monstre[race].attaque.length;
+        // indique le nombre de sort que le monstre va avoir
         let nbDeSortAPush: number = 1;
         let i: number = 0;
         while (i < nbDeSortAPush || i == nombreDeSort) {
