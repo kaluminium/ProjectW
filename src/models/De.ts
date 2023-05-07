@@ -78,4 +78,4 @@ export class De {
         return this.couleurFaces.slice();
     }
 }
-export{De};
+

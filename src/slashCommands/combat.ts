@@ -4,6 +4,7 @@ import {Compte} from "../models/Compte";
 import {Personnage} from "../models/Personnage";
 import {ListePersonnage} from "../models/ListePersonnage";
 import {De} from "../models/De";
+import {combatLogic} from "../combatLogic";
 
 export const command: SlashCommand = {
     name: "combat",
@@ -25,20 +26,28 @@ export const command: SlashCommand = {
             return await interaction.reply({content: `Vous n'avez pas de compte, faites /creation_compte pour créer un compte`, ephemeral: true});
         }
         //Récupère la liste de personnages du compte
+        //Puis vérifie que l'utilisateur a des personnages, sinon lui propose d'en créer un puis de le sélectionner
         const listePersonnages : ListePersonnage = await compte.getListPersonnage();
-
-        //Vérifie que l'utilisateur a des personnages, sinon lui propose d'en créer un puis de le sélectionner
         if(listePersonnages.isEmpty()) return await interaction.reply({content: `Vous n'avez pas de personnage, faites /creation_personnage pour créer un personnage,
         \npuis /select_personnage pour sélectionner un personnage`, ephemeral: true});
 
-        //Récupère le personnage sélectionné du compte
-        const selectedPersonnage : Personnage = await compte.getSelectedPersonnage();
+        //TODO : A TESTER, je peux pas test parce que je peux pas select de perso, tout ce qui est au dessus fonctionne, tout ce qui est en dessous n'est pas testé
 
-        //Vérifie que l'utilisateur a un personnage sélectionné, sinon lui propose d'en sélectionner un
+        //Récupère le personnage sélectionné du compte
+        //Puis vérifie que l'utilisateur a un personnage sélectionné, sinon lui propose d'en sélectionner un
+        const selectedPersonnage : Personnage = await compte.getSelectedPersonnage();
         if(selectedPersonnage == null) return await interaction.reply({content: `Vous n'avez pas de personnage sélectionné, faites /select_personnage pour sélectionner un personnage`, ephemeral: true});
 
-        //Temporairement placé ici, à terme la logique du combat sera déplacée dans une classe statique et seulement appelée ici
-        //const listeDe : De[] = await selectedPersonnage.
+        //Une partie de la logique de combat est placée dans le script "combatLogic.ts", toutefois c'est une classe static donc c'est tout de même
+        //la fonction de combat qui gérera les variables (Arrays de dés)
+        const listeDe : Array<De> = selectedPersonnage.creationDice(selectedPersonnage.getId());
+
+        //TODO : Temporaire, debugging pour vérifier que le reste de la commande fonctionne
+        return await interaction.reply({content: listeDe.toString(), ephemeral: true})
+
+        //A mettre dans une boucle while une fois la création du monstre gérée dans le combat, pour l'instant vérifie juste que le tirage de dé fonctionne
+        let deDuTour = combatLogic.choixDeDuTour(listeDe);
+        let valeurDeDuTour = combatLogic.lancerDeDuTour(deDuTour);
     }
 
 }
