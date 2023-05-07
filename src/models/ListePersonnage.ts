@@ -13,6 +13,10 @@ class ListePersonnage{
         return this.listePersonnage.length >= this.maxPersonnage;
     }
 
+    public isEmpty() : boolean{
+        return this.listePersonnage.length == 0;
+    }
+
     public addPersonnage(personnage : Personnage) : void{
         if (this.isFull()) throw new Error("Vous avez atteint le nombre maximum de personnage");
         this.listePersonnage.push(personnage);
@@ -35,6 +39,13 @@ class ListePersonnage{
         return listePersonnage;
     }
 
+    public getLength() : number{
+        return this.listePersonnage.length;
+    }
+
+    public getPersonnage(index : number) : Personnage{
+        return this.listePersonnage[index];
+    }
 }
 
 export{ListePersonnage};
