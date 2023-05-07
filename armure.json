@@ -1,0 +1,68 @@
+{
+  "iron_faceplate": {
+    "id": "iron_faceplate",
+    "name": "plastron en fer",
+    "description": "Un plastron en fer pour se protéger",
+    "type": "armure",
+    "stats": {
+      "attack": {
+        "min": 0,
+        "max": 0
+      },
+      "hp": {
+        "min": 5,
+        "max": 15
+      },
+      "dp": {
+        "min": 3,
+        "max": 9
+      }
+    },
+    "required_level": 5,
+    "recipe": "iron_faceplate_recipe"
+  },
+  "gobelin_faceplate": {
+    "id": "gobelin_faceplate",
+    "name": "plastron de gobelin",
+    "description": "Un plastron de gobelin pour se protéger, mais pas trop",
+    "type": "armure",
+    "stats": {
+      "attack": {
+        "min": 0,
+        "max": 0
+      },
+      "hp": {
+        "min": 5,
+        "max": 10
+      },
+      "dp": {
+        "min": 3,
+        "max": 6
+      }
+    },
+    "required_level": 0,
+    "recipe": "gobelin_faceplate_recipe"
+  },
+  "troll_faceplate": {
+    "id": "troll_faceplate",
+    "name": "plastron de Troll",
+    "description": "Un plastron de Troll pour se protéger comme un Troll ! ",
+    "type": "armure",
+    "stats": {
+      "attack": {
+        "min": 0,
+        "max": 0
+      },
+      "hp": {
+        "min": 7,
+        "max": 13
+      },
+      "dp": {
+        "min": 6,
+        "max": 9
+      }
+    },
+    "required_level": 10,
+    "recipe": "troll_faceplate_recipe"
+  }
+}
