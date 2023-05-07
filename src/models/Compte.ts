@@ -108,6 +108,10 @@ class Compte{
         return this.id;
     }
 
+    public getSelectedPersonnage() : Personnage{
+        return this.selectedPersonnage;
+    }
+
     public async changeSelectedPersonnage(personnage : Personnage) : Promise<void>{
         const bdd = await BDDConnexion.getInstance();
         await bdd.query("UPDATE compte SET selected_character = ? WHERE id = ?", [personnage.getId(), this.id]);
