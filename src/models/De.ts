@@ -1,10 +1,10 @@
-class De {
+export class De {
     private nomDuDe: string;
     private valeurFaces : number[];
     private couleurFaces : string[];
     private description : string;
 
-    //Ne semble plus être le meilleur
+    //Ne semble plus être une bonne idée
     //private tableauDeDe: FaceDeDes[];
 
     constructor(valeurs : number[], couleurs : string[], couleurPrincipale : string) {
