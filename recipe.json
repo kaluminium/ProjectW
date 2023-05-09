@@ -1,7 +1,7 @@
 {
   "club_troll_recipe": {
-    "id": "club_troll",
-    "metier": "Forgeron",
+    "id": "club_troll_recipe",
+    "metier": "forgeron",
     "required_level": 10,
     "ingredients": [
       {
@@ -20,7 +20,7 @@
   },
   "iron_sword_recipe": {
     "id": "iron_sword_recipe",
-    "metier": "Forgeron",
+    "metier": "forgeron",
     "required_level": 5,
     "ingredients": [
       {
@@ -35,7 +35,7 @@
   },
   "gobelin_sword_recipe": {
     "id": "gobelin_sword_recipe",
-    "metier": "Forgeron",
+    "metier": "forgeron",
     "required_level": 0,
     "ingredients": [
       {
@@ -54,7 +54,7 @@
   },
   "troll_faceplate_recipe": {
     "id": "troll_faceplate_recipe",
-    "metier": "Forgeron",
+    "metier": "forgeron",
     "required_level": 10,
     "ingredients": [
       {
@@ -73,7 +73,7 @@
   },
   "gobelin_faceplate_recipe": {
     "id": "gobelin_faceplate_recipe",
-    "metier": "Forgeron",
+    "metier": "forgeron",
     "required_level": 0,
     "ingredients": [
       {
@@ -92,7 +92,7 @@
   },
   "iron_faceplate_recipe": {
     "id": "gobelin_sword_recipe",
-    "metier": "Forgeron",
+    "metier": "forgeron",
     "required_level": 5,
     "ingredients": [
       {
@@ -107,7 +107,7 @@
   },
   "troll_shield_recipe": {
     "id": "troll_shield_recipe",
-    "metier": "Forgeron",
+    "metier": "forgeron",
     "required_level": 10,
     "ingredients": [
       {
@@ -126,7 +126,7 @@
   },
   "gobelin_shield_recipe": {
     "id": "gobelin_shield_recipe",
-    "metier": "Forgeron",
+    "metier": "forgeron",
     "required_level": 0,
     "ingredients": [
       {
@@ -145,7 +145,7 @@
   },
   "iron_shield_recipe": {
     "id": "iron_shield_recipe",
-    "metier": "Forgeron",
+    "metier": "forgeron",
     "required_level": 5,
     "ingredients": [
       {
@@ -155,6 +155,17 @@
       {
         "id": "minerai de fer",
         "quantity": 4
+      }
+    ]
+  },
+  "iron_ingot_recipe" : {
+    "id": "iron_ingot_recipe",
+    "metier": "forgeron",
+    "required_level": 1,
+    "ingredients": [
+      {
+        "id": "minerai de fer",
+        "quantity": "2"
       }
     ]
   }

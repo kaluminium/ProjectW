@@ -1,0 +1,12 @@
+{
+  "lingot de fer" : {
+    "id": "lingot de fer",
+    "base_drop_rate" : 0,
+    "metier" : "forgeron"
+  },
+  "minerai de fer" : {
+    "id": "minerai de fer",
+    "base_drop_rate" : 0.5,
+    "metier" : "mineur"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "forgeron" : {
+    "id": "forgeron",
+    "description" : "métier permettant de forger armes et bouclier"
+  },
+  "armurier" : {
+    "id": "armurier",
+    "description" : "métier permettant de forger des armures"
+  },
+  "mineur" : {
+    "id" : "mineur",
+    "description" : "métier permettant de récolter du minerai"
+  }
+}
