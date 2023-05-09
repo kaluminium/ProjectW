@@ -6,6 +6,7 @@ const materiau = require("../../materiau.json");
 export class Metier {
     private nom: string; // nom du métier instancié
     private xp: number; // expérience accumulée avant d'atteindre le prochain niveau
+    private pallierNiveau;
     private niveau: number; // niveau du métier
     private craftable: string[]; //liste qui contient l'ensemble des recettes réalisable
     private recoltable: string[]; //liste qui contient l'ensemble des matériaux récoltable
@@ -14,13 +15,16 @@ export class Metier {
         this.nom = nom;
         this.xp = 0;
         this.niveau = 1;
+        this.pallierNiveau = 100;
         this.checkCraftable();
+        this.checkRecoltable();
     }
 
     public incrXP(xp: number){
         this.xp +=xp;
-        if (this.xp >= 100){
-            this.xp -=100;
+        if (this.xp >= this.pallierNiveau){
+            this.xp -= this.pallierNiveau;
+            this.pallierNiveau *= 1.2;
             this.incrNiveau(1);
         }
     }
@@ -48,3 +52,5 @@ export class Metier {
     }
 
 }
+
+/* TODO: Création d'une connexion à la BDD (creation de champs niveauMetier si nouveau métier) */

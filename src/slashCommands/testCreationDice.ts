@@ -2,7 +2,6 @@ import {Personnage} from "../models/Personnage";
 import {SlashCommand} from "../types";
 import {ButtonStyle, CommandInteraction,} from 'discord.js';
 
-
 export const command : SlashCommand = {
     category: "test",
     description: "verification que la creation de dice fonctionne",
