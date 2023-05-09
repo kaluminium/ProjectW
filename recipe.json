@@ -5,15 +5,15 @@
     "required_level": 10,
     "ingredients": [
       {
-        "id": "os de troll",
+        "id": "os_de_troll",
         "quantity": 2
       },
       {
-        "id": "minerai de fer",
+        "id": "minerai_de_fer",
         "quantity": 5
       },
       {
-        "id": "dent de troll",
+        "id": "dent_de_troll",
         "quantity": 3
       }
     ]
@@ -28,7 +28,7 @@
         "quantity": 10
       },
       {
-        "id": "lingot de fer",
+        "id": "lingot_de_fer",
         "quantity": 2
       }
     ]
@@ -39,15 +39,15 @@
     "required_level": 0,
     "ingredients": [
       {
-        "id": "os de gobelin",
+        "id": "os_de_gobelin",
         "quantity": 2
       },
       {
-        "id": "dent de gobelin",
+        "id": "dent_de_gobelin",
         "quantity": 3
       },
       {
-        "id": "minerai de fer",
+        "id": "minerai_de_fer",
         "quantity": 1
       }
     ]
@@ -58,15 +58,15 @@
     "required_level": 10,
     "ingredients": [
       {
-        "id": "os de troll",
+        "id": "os_de_troll",
         "quantity": 2
       },
       {
-        "id": "dent de troll",
+        "id": "dent_de_troll",
         "quantity": 3
       },
       {
-        "id": "minerai de fer",
+        "id": "minerai_de_fer",
         "quantity": 1
       }
     ]
@@ -77,15 +77,15 @@
     "required_level": 0,
     "ingredients": [
       {
-        "id": "os de gobelin",
+        "id": "os_de_gobelin",
         "quantity": 2
       },
       {
-        "id": "dent de gobelin",
+        "id": "dent_de_gobelin",
         "quantity": 3
       },
       {
-        "id": "minerai de fer",
+        "id": "minerai_de_fer",
         "quantity": 1
       }
     ]
@@ -96,11 +96,11 @@
     "required_level": 5,
     "ingredients": [
       {
-        "id": "lingot de fer",
+        "id": "lingot_de_fer",
         "quantity": 6
       },
       {
-        "id": "minerai de fer",
+        "id": "minerai_de_fer",
         "quantity": 4
       }
     ]
@@ -111,15 +111,15 @@
     "required_level": 10,
     "ingredients": [
       {
-        "id": "os de troll",
+        "id": "os_de_troll",
         "quantity": 2
       },
       {
-        "id": "dent de troll",
+        "id": "dent_de_troll",
         "quantity": 3
       },
       {
-        "id": "minerai de fer",
+        "id": "minerai_de_fer",
         "quantity": 1
       }
     ]
@@ -130,15 +130,15 @@
     "required_level": 0,
     "ingredients": [
       {
-        "id": "os de gobelin",
+        "id": "os_de_gobelin",
         "quantity": 2
       },
       {
-        "id": "dent de gobelin",
+        "id": "dent_de_gobelin",
         "quantity": 3
       },
       {
-        "id": "minerai de fer",
+        "id": "minerai_de_fer",
         "quantity": 1
       }
     ]
@@ -149,11 +149,11 @@
     "required_level": 5,
     "ingredients": [
       {
-        "id": "lingot de fer",
+        "id": "lingot_de_fer",
         "quantity": 6
       },
       {
-        "id": "minerai de fer",
+        "id": "minerai_de_fer",
         "quantity": 4
       }
     ]

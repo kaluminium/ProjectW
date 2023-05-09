@@ -35,21 +35,21 @@
       ],
       "loot": [
         {
-          "id": "peau de gobelin",
+          "id": "peau_de_gobelin",
           "chance": 20,
           "drop_min": 2,
           "drop_max": 3,
           "description": ""
         },
         {
-          "id": "os de gobelin",
+          "id": "os_de_gobelin",
           "chance": 40,
           "drop_min": 1,
           "drop_max": 2,
           "description": ""
         },
         {
-          "id": "dent de gobelin",
+          "id": "dent_de_gobelin",
           "chance": 50,
           "drop_min": 1,
           "drop_max": 8,
@@ -65,7 +65,7 @@
       ],
       "loot_boss": [
         {
-          "id": "fusdo vert",
+          "id": "fusdo_vert",
           "chance": 0.01,
           "drop_min": 1,
           "drop_max": 1,
@@ -110,21 +110,21 @@
       ],
       "loot": [
         {
-          "id": "peau de troll",
+          "id": "peau_de_troll",
           "chance": 20,
           "drop_min": 2,
           "drop_max": 3,
           "description": ""
         },
         {
-          "id": "os de troll",
+          "id": "os_de_troll",
           "chance": 40,
           "drop_min": 1,
           "drop_max": 2,
           "description": ""
         },
         {
-          "id": "dent de troll",
+          "id": "dent_de_troll",
           "chance": 50,
           "drop_min": 1,
           "drop_max": 8,
@@ -140,7 +140,7 @@
       ],
       "loot_boss": [
         {
-          "id": "fusdo bleu",
+          "id": "fusdo_bleu",
           "chance": 0.01,
           "drop_min": 1,
           "drop_max": 1,

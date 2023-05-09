@@ -1,0 +1,50 @@
+{
+  "os_de_troll": {
+    "id": "os_de_troll",
+    "name": "Os de troll",
+    "description": "Os de troll"
+  },
+  "dent_de_troll": {
+    "id": "dent_de_troll",
+    "name": "Dent de troll",
+    "description": "Dent de troll"
+  },
+  "peau_de_troll": {
+    "id": "peau_de_troll",
+    "name": "Peau de troll",
+    "description": "Peau de troll"
+  },
+  "or": {
+    "id": "or",
+    "name": "Or",
+    "description": "Or"
+  },
+  "fusdo_bleu": {
+    "id": "fusdo_bleu",
+    "name": "Fusdo bleu",
+    "description": "Fusdo bleu"
+  },
+  "peau_de_gobelin": {
+    "id": "peau_de_gobelin",
+    "name": "Peau de gobelin",
+    "description": "Peau de gobelin"
+  },
+  "os_de_gobelin": {
+    "id": "os_de_gobelin",
+    "name": "Os de gobelin",
+    "description": "Os de gobelin"
+  },
+  "dent_de_gobelin": {
+    "id": "dent_de_gobelin",
+    "name": "Dent de gobelin",
+    "description": "Dent de gobelin"
+  },
+  "fusdo_vert": {
+    "id": "fusdo_vert",
+    "name": "Fusdo vert",
+    "description": "Fusdo vert"
+  }
+
+  }
+  
+
