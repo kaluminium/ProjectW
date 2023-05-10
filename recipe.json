@@ -1,0 +1,161 @@
+{
+  "club_troll_recipe": {
+    "id": "club_troll",
+    "metier": "Forgeron",
+    "required_level": 10,
+    "ingredients": [
+      {
+        "id": "os de troll",
+        "quantity": 2
+      },
+      {
+        "id": "minerai de fer",
+        "quantity": 5
+      },
+      {
+        "id": "dent de troll",
+        "quantity": 3
+      }
+    ]
+  },
+  "iron_sword_recipe": {
+    "id": "iron_sword_recipe",
+    "metier": "Forgeron",
+    "required_level": 5,
+    "ingredients": [
+      {
+        "id": "iron",
+        "quantity": 10
+      },
+      {
+        "id": "lingot de fer",
+        "quantity": 2
+      }
+    ]
+  },
+  "gobelin_sword_recipe": {
+    "id": "gobelin_sword_recipe",
+    "metier": "Forgeron",
+    "required_level": 0,
+    "ingredients": [
+      {
+        "id": "os de gobelin",
+        "quantity": 2
+      },
+      {
+        "id": "dent de gobelin",
+        "quantity": 3
+      },
+      {
+        "id": "minerai de fer",
+        "quantity": 1
+      }
+    ]
+  },
+  "troll_faceplate_recipe": {
+    "id": "troll_faceplate_recipe",
+    "metier": "Forgeron",
+    "required_level": 10,
+    "ingredients": [
+      {
+        "id": "os de troll",
+        "quantity": 2
+      },
+      {
+        "id": "dent de troll",
+        "quantity": 3
+      },
+      {
+        "id": "minerai de fer",
+        "quantity": 1
+      }
+    ]
+  },
+  "gobelin_faceplate_recipe": {
+    "id": "gobelin_faceplate_recipe",
+    "metier": "Forgeron",
+    "required_level": 0,
+    "ingredients": [
+      {
+        "id": "os de gobelin",
+        "quantity": 2
+      },
+      {
+        "id": "dent de gobelin",
+        "quantity": 3
+      },
+      {
+        "id": "minerai de fer",
+        "quantity": 1
+      }
+    ]
+  },
+  "iron_faceplate_recipe": {
+    "id": "gobelin_sword_recipe",
+    "metier": "Forgeron",
+    "required_level": 5,
+    "ingredients": [
+      {
+        "id": "lingot de fer",
+        "quantity": 6
+      },
+      {
+        "id": "minerai de fer",
+        "quantity": 4
+      }
+    ]
+  },
+  "troll_shield_recipe": {
+    "id": "troll_shield_recipe",
+    "metier": "Forgeron",
+    "required_level": 10,
+    "ingredients": [
+      {
+        "id": "os de troll",
+        "quantity": 2
+      },
+      {
+        "id": "dent de troll",
+        "quantity": 3
+      },
+      {
+        "id": "minerai de fer",
+        "quantity": 1
+      }
+    ]
+  },
+  "gobelin_shield_recipe": {
+    "id": "gobelin_shield_recipe",
+    "metier": "Forgeron",
+    "required_level": 0,
+    "ingredients": [
+      {
+        "id": "os de gobelin",
+        "quantity": 2
+      },
+      {
+        "id": "dent de gobelin",
+        "quantity": 3
+      },
+      {
+        "id": "minerai de fer",
+        "quantity": 1
+      }
+    ]
+  },
+  "iron_shield_recipe": {
+    "id": "iron_shield_recipe",
+    "metier": "Forgeron",
+    "required_level": 5,
+    "ingredients": [
+      {
+        "id": "lingot de fer",
+        "quantity": 6
+      },
+      {
+        "id": "minerai de fer",
+        "quantity": 4
+      }
+    ]
+  }
+}

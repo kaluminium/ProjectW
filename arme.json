@@ -1,0 +1,68 @@
+{
+  "gobelin_sword":{
+    "id":"gobelin_sword",
+    "name":"Epee de gobelin",
+    "description": "Une epée ayant appartenu à un gobelin",
+    "type": "weapon",
+    "stats":{
+      "attack": {
+        "min": 1,
+        "max": 3
+      },
+      "hp": {
+        "min": 0,
+        "max": 5
+      },
+      "dp":{
+        "min": 0,
+        "max": 1
+      }
+    },
+    "required_level": 0,
+    "recipe": "gobelin_sword_recipe"
+  },
+  "iron_sword":{
+    "id":"iron_sword",
+    "name":"Epee en fer",
+    "description": "Une epée en fer",
+    "type": "weapon",
+    "stats":{
+      "attack": {
+        "min": 3,
+        "max": 6
+      },
+      "hp": {
+        "min": 5,
+        "max": 10
+      },
+      "dp":{
+        "min": 1,
+        "max": 2
+      }
+    },
+    "required_level": 0,
+    "recipe": "iron_sword_recipe"
+  },
+  "club_troll":{
+    "id":"club_troll",
+    "name":"Un massue de troll",
+    "description": "Un massue de troll qui a l'air bien lourd",
+    "type": "weapon",
+    "stats":{
+      "attack": {
+        "min": 2,
+        "max": 8
+      },
+      "hp": {
+        "min": 1,
+        "max": 15
+      },
+      "dp":{
+        "min": 0,
+        "max": 3
+      }
+    },
+    "required_level": 0,
+    "recipe": "club_troll_recipe"
+  }
+}

@@ -10,17 +10,28 @@ export class Monstre {
     private sort: Array<string> = []; // tableau de sorts
 
     private  inventaire: [string, number][] = []; // inventaire que le monstre drop à sa mort
+    private xp: number; // xp que le monstre donne à sa mort
 
     constructor(race: string, type: string) {
         this.type = type;
         this.race = race;
-       this.nom = this.creationDuNom(race);
+        this.nom = this.creationDuNom(race);
         this.description = monstre[race].description;
         this.pv = this.calculeDeLaVie(race, type);
         this.ajoutDesSort(race);
         this.ajouterInventaire(race, type);
+        this.ajouterXp(race, type);
     }
-
+    public ajouterXp(race : string, type : string){
+        let xp: number = monstre[race].xp
+        if (type === "boss"){
+            this.xp = xp * 2;
+        }else if (type === "elite"){
+            this.xp = xp * 1.5;
+        }else{
+            this.xp = xp;
+        }
+    }
     public ajouterInventaire(race : string, type : string){
         let tailleTableauLoot: number = monstre[race].loot.length;
         let i : number = 0;
@@ -79,12 +90,13 @@ export class Monstre {
 
     public ajoutDesSort(race: string): void {
         let nombreDeSort: number = monstre[race].attaque.length;
+        // indique le nombre de sort que le monstre va avoir
         let nbDeSortAPush: number = 1;
         let i: number = 0;
         while (i < nbDeSortAPush || i == nombreDeSort) {
             let valeurAleatoire = Math.floor(Math.random() * (nombreDeSort - 1 + 1));
             if (!this.sort.includes(monstre[race].attaque[valeurAleatoire])) {
-                this.sort.push(monstre[race].attaque[valeurAleatoire]);
+                this.sort.push(monstre[race].attaque[valeurAleatoire].id);
                 i++;
             }
         }
@@ -100,6 +112,21 @@ export class Monstre {
         return nom;
 
 
+    }
+    public degatDeLattaque():number{
+        let nombreDeSortDisponible = this.sort.length;
+        let randomSort : number = Math.floor(Math.random() * (nombreDeSortDisponible - 1 + 1));
+        let idDuSort = this.sort[randomSort];
+        for (let i = 0; i< monstre[this.race].attaque.length; i++){
+            if (monstre[this.race].attaque[i].id === idDuSort){
+                return monstre[this.race].attaque[i].degat;
+            }
+        }
+        return 0; // si trouve pas retourne 0
+    }
+
+    public setPv(pv: number): void {
+        this.pv = pv;
     }
 
     public getTailleInventaire(): number{

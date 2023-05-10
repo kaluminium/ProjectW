@@ -1,0 +1,68 @@
+{
+  "iron_shield": {
+    "id": "iron_shield",
+    "name": "bouclier en fer",
+    "description": "Une plastron en fer pour se protéger",
+    "type": "armure",
+    "stats": {
+      "attack": {
+        "min": 0,
+        "max": 2
+      },
+      "hp": {
+        "min": 5,
+        "max": 15
+      },
+      "dp": {
+        "min": 7,
+        "max": 9
+      }
+    },
+    "required_level": 5,
+    "recipe": "iron_shield_recipe"
+  },
+  "gobelin_shield": {
+    "id": "gobelin_shield",
+    "name": "bouclier de gobelin",
+    "description": "Un bouclier de gobelin pour se protéger, mais pas trop",
+    "type": "armure",
+    "stats": {
+      "attack": {
+        "min": 0,
+        "max": 0
+      },
+      "hp": {
+        "min": 5,
+        "max": 8
+      },
+      "dp": {
+        "min": 3,
+        "max": 6
+      }
+    },
+    "required_level": 0,
+    "recipe": "gobelin_shield_recipe"
+  },
+  "troll_shield": {
+    "id": "troll_shield",
+    "name": "plastron de Troll",
+    "description": "Un bouclier de Troll pour se protéger comme un Troll ! ",
+    "type": "armure",
+    "stats": {
+      "attack": {
+        "min": 0,
+        "max": 0
+      },
+      "hp": {
+        "min": 10,
+        "max": 20
+      },
+      "dp": {
+        "min": 6,
+        "max": 15
+      }
+    },
+    "required_level": 10,
+    "recipe": "troll_shield_recipe"
+  }
+}
