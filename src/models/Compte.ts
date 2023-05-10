@@ -110,8 +110,8 @@ class Compte{
         return this.id;
     }
 
-    public getSelectedPersonnage() : Personnage{
-        return this.selectedPersonnage;
+    public async getSelectedPersonnage(): Promise<Personnage> {
+        return await Personnage.getPersonnage(this.selectedPersonnage.getId());
     }
 
     public async changeSelectedPersonnage(personnage : Personnage) : Promise<void>{
