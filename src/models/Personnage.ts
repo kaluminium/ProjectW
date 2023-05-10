@@ -23,14 +23,14 @@ class Personnage{
         this.xp = xp;
     }
 
-    public creationDice(id : number): Array<De> {
-        let diceRace: Array<De> = this.creationDiceRace(id);
-        diceRace.concat(this.creationDiceDivinite(id));
+    public creationDice(): Array<De> {
+        let diceRace: Array<De> = this.creationDiceRace();
+        diceRace.push(...this.creationDiceDivinite());
         return diceRace;
     }
 
-  public  creationDiceRace(id : number): Array<De>{
-        Personnage.getPersonnage(id);
+  public  creationDiceRace(): Array<De>{
+
         let faceDeDes : number[] = [1,2,3,4,5,6];
         let DiceRace : Array<De> = [];
         switch (this.getRace()) {
@@ -59,8 +59,8 @@ class Personnage{
         return DiceRace;
     }
 
-  public  creationDiceDivinite(id : number): Array<De>{
-        Personnage.getPersonnage(id);
+  public  creationDiceDivinite(): Array<De>{
+
         let faceDeDes : number[] = [1,2,3,4,5,6];
         let couleurfacesG : string[] = ['G', 'G', 'G', 'G', 'G', 'G'];
         let couleurfacesB : string[] = ['B', 'B', 'B', 'B', 'B', 'B'];
@@ -68,7 +68,7 @@ class Personnage{
         let DiceRace : Array<De> = [];
         switch (this.getDivinity()){
             case 'Montagne':
-                for (let i = 0; i < 4; i++) {
+                for (let i = 0; i < 3; i++) {
                     let MontagneD = new De(faceDeDes, couleurfacesG, 'G');
                     DiceRace.push(MontagneD);
                 }
@@ -78,7 +78,7 @@ class Personnage{
                 }
                 break;
             case 'Ocean':
-                for (let i = 0; i < 4; i++) {
+                for (let i = 0; i < 3; i++) {
                     let OceanD = new De(faceDeDes, couleurfacesB, 'B');
                     DiceRace.push(OceanD);
                 }
@@ -88,7 +88,7 @@ class Personnage{
                 }
                 break;
             case 'Volcan':
-            for (let i = 0; i < 4; i++) {
+            for (let i = 0; i < 3; i++) {
                 let VolcanD = new De(faceDeDes, couleurfacesR, 'R');
                 DiceRace.push(VolcanD);
             }

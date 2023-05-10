@@ -40,7 +40,7 @@ export const command: SlashCommand = {
 
         //Une partie de la logique de combat est placée dans le script "combatLogic.ts", toutefois c'est une classe static donc c'est tout de même
         //la fonction de combat qui gérera les variables (Arrays de dés)
-        const listeDe : Array<De> = selectedPersonnage.creationDice(selectedPersonnage.getId());
+         const listeDe : Array<De> = selectedPersonnage.creationDice();
 
         //TODO : Temporaire, debugging pour vérifier que le reste de la commande fonctionne
         return await interaction.reply({content: listeDe.toString(), ephemeral: true})

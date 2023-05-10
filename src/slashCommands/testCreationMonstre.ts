@@ -13,7 +13,7 @@ import {
 export const command : SlashCommand = {
     category: "test",
     description: "verification que la creation de monstre fonctionne",
-    name: "creation_monstre",
+    name: "test_creation_monstre",
     usage: "creation_monstre",
     options: [
         {
