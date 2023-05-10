@@ -1,3 +1,5 @@
+import {Race} from "../Race";
+
 class Elfe extends Race {
 // 5 Dice green
     constructor(){

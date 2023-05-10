@@ -1,3 +1,5 @@
+import {Race} from "../Race";
+
 class Nain extends Race {
 // 5 Dice red
     constructor(){
