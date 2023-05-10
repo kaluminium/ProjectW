@@ -1,3 +1,5 @@
+import {Race} from "../Race";
+
 class Humain extends Race {
 // 5 Dice Blue
 

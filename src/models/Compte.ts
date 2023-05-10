@@ -24,7 +24,9 @@ class Compte{
         const result = await bdd.query(query, [discordId]);
         if (result.length == 0) throw new Error("Vous n'avez pas de compte");
         const listPersonnage = await ListePersonnage.getListePersonnage(result[0].id);
-        return new Compte(result[0].discord_id, result[0].account_name, listPersonnage, result[0].id, result[0].selected_character);
+        let selectedPersonnage = null;
+        if(result[0].selected_character != null) selectedPersonnage = await Personnage.getPersonnage(result[0].selected_character);
+        return new Compte(result[0].discord_id, result[0].account_name, listPersonnage, result[0].id, selectedPersonnage);
     }
 
     public static checkCompliantPassword(password : string) : boolean{

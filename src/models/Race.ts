@@ -15,4 +15,12 @@ abstract class Race{
         this.description = description;
        // this.poolDeDes = poolDeDes;
     }
+
+    public static getEmote(nom : string):string{
+        if(nom == 'human') return ':person_standing:';
+        if(nom == 'elf') return ':elf:';
+        if(nom == 'dwarf') return ':pickaxe:';
+    }
 }
+
+export {Race}

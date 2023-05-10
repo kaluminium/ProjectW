@@ -154,5 +154,63 @@ class Personnage{
         }
         throw new Error("Le personnage n'existe pas");
     }
+
+    public static ajouterVirgule(xp : number) : string{
+        let str = xp.toString();
+        let newStr = "";
+        let compteur = 0;
+        for(let i = str.length - 1; i >= 0; i--){
+            if(compteur == 3){
+                newStr += ",";
+                compteur = 0;
+            }
+            newStr += str[i];
+            compteur++;
+        }
+        return newStr.split("").reverse().join("");
+    }
+
+    public calculerNiveau() : number{
+        const niveauMax = 100;
+
+        let niveau = 1;
+        let xpNiveau = 50;
+        while (this.xp >= xpNiveau && niveau < niveauMax) {
+            this.xp -= xpNiveau;
+            niveau++;
+            xpNiveau = Math.floor(125 * Math.pow(1.1, niveau - 2));
+        }
+
+        niveau = Math.min(niveau, niveauMax);
+        return niveau;
+    }
+
+    public calculerPourcentageProchainNiveau() : string{
+        const niveauMax = 100;
+        const xpMax = 1000000000;
+
+        // Calculer le niveau et l'expérience nécessaires pour atteindre le prochain niveau
+        let niveau = 1;
+        let xpNiveau = 50;
+        while (this.xp >= xpNiveau && niveau < niveauMax) {
+            this.xp -= xpNiveau;
+            niveau++;
+            xpNiveau = Math.floor(125 * Math.pow(1.1, niveau - 2));
+        }
+
+        // Limiter le niveau à la valeur maximale
+        niveau = Math.min(niveau, niveauMax);
+
+        // Calculer le pourcentage d'expérience nécessaire pour atteindre le prochain niveau
+        let pourcentage = this.xp / xpNiveau * 100;
+
+        // Limiter le pourcentage à la plage de valeurs de 0 à 100
+        pourcentage = Math.max(0, pourcentage);
+        pourcentage = Math.min(100, pourcentage);
+
+        // Retourner le pourcentage
+        return pourcentage.toFixed(2);
+    }
+
 }
 export{Personnage};
