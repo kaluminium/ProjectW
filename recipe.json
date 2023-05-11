@@ -3,6 +3,7 @@
     "id": "club_troll",
     "metier": "Forgeron",
     "required_level": 10,
+    "Xp" : 10,
     "ingredients": [
       {
         "id": "os_de_troll",
@@ -22,6 +23,7 @@
     "id": "iron_sword_recipe",
     "metier": "Forgeron",
     "required_level": 5,
+    "Xp" : 5,
     "ingredients": [
       {
         "id": "iron",
@@ -37,6 +39,7 @@
     "id": "gobelin_sword_recipe",
     "metier": "Forgeron",
     "required_level": 0,
+    "Xp" : 5,
     "ingredients": [
       {
         "id": "os_de_gobelin",
@@ -56,6 +59,7 @@
     "id": "troll_faceplate_recipe",
     "metier": "Forgeron",
     "required_level": 10,
+    "Xp" : 10,
     "ingredients": [
       {
         "id": "os_de_troll",
@@ -75,6 +79,7 @@
     "id": "gobelin_faceplate_recipe",
     "metier": "Forgeron",
     "required_level": 0,
+    "Xp" : 10,
     "ingredients": [
       {
         "id": "os_de_gobelin",
@@ -94,6 +99,7 @@
     "id": "gobelin_sword_recipe",
     "metier": "Forgeron",
     "required_level": 5,
+    "Xp" : 10,
     "ingredients": [
       {
         "id": "lingot_de_fer",
@@ -109,6 +115,7 @@
     "id": "troll_shield_recipe",
     "metier": "Forgeron",
     "required_level": 10,
+    "Xp" : 10,
     "ingredients": [
       {
         "id": "os_de_troll",
@@ -127,6 +134,7 @@
   "gobelin_shield_recipe": {
     "id": "gobelin_shield_recipe",
     "metier": "Forgeron",
+    "Xp" : 10,
     "required_level": 0,
     "ingredients": [
       {
@@ -147,6 +155,7 @@
     "id": "iron_shield_recipe",
     "metier": "Forgeron",
     "required_level": 5,
+    "Xp" : 10,
     "ingredients": [
       {
         "id": "lingot_de_fer",
@@ -155,6 +164,18 @@
       {
         "id": "minerai_de_fer",
         "quantity": 4
+      }
+    ]
+  },
+  "lingot_de_fer": {
+    "id": "lingot_de_fer",
+    "metier": "Forgeron",
+    "required_level": 1,
+    "Xp" : 10,
+    "ingredients": [
+      {
+        "id": "minerai_de_fer",
+        "quantity": 2
       }
     ]
   }

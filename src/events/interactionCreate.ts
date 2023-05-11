@@ -9,8 +9,11 @@ const event: BotEvent = {
             const command = interaction.client.slashCommands.get(interaction.commandName);
 
             if (!command) return;
-
-            await command.execute(interaction);
+            try{
+                await command.execute(interaction);
+            }catch (error){
+                console.error(error);
+            }
         }else if (interaction.isAutocomplete()) {
 
             const command = interaction.client.slashCommands.get(interaction.commandName);

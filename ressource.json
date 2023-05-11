@@ -43,8 +43,13 @@
     "id": "fusdo_vert",
     "name": "Fusdo vert",
     "description": "Fusdo vert"
+  },
+  "lingot_de_fer": {
+    "id": "lingot_de_fer",
+    "name": "Lingot de fer",
+    "description": "Lingot de fer"
   }
 
   }
-  
+
 
