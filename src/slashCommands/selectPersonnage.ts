@@ -46,7 +46,7 @@ export const command : SlashCommand = {
 
         const reponse = await interaction.reply({embeds: [embed], components: [row]});
 
-        const collector = interaction.channel.createMessageComponentCollector({time: 60000});
+        const collector = reponse.createMessageComponentCollector({time: 60000});
 
         collector.on('collect', async (i) => {
             if(i.member.user.id !== interaction.member.user.id) return;
