@@ -77,5 +77,10 @@ export class De {
         // Cela évite de renvoyer une référence directement à l'attribut afin de respecter l'encapsulation
         return this.couleurFaces.slice();
     }
+
+    //Debug
+    public toString() : String{
+        return "Valeur des faces : " + this.valeurFaces.toString() + ", Couleur des faces : " + this.couleurFaces.toString();
+    }
 }
 
