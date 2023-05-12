@@ -57,9 +57,11 @@ export const command : SlashCommand = {
     },
 
     execute: async (interaction) => {
+        const armes = require('../../arme.json');
         let idarme : string = interaction.options.get('idarme').value.toString();
         let idarmure : string = interaction.options.get('idarmure').value.toString();
         let idbouclier : string = interaction.options.get('idbouclier').value.toString();
+        console.log(armes[idarme].stats.attack.min)
         const A: Arme = new Arme(idarme);
         const B: Armure = new Armure(idarmure);
         const C: Bouclier = new Bouclier(idbouclier);

@@ -13,14 +13,14 @@ export const command : SlashCommand = {
 
     execute: async (interaction: CommandInteraction) => {
         console.log("test");
-        const personnage = new Personnage(1, "test", "Ocean", "Elfe", "test", 0);
-       console.log(personnage);
+        let p : Personnage = await Personnage.getPersonnage(1);
+       console.log(p);
        console.log("Dice Divinite");
-       console.log(personnage.creationDiceDivinite());
+       console.log(p.creationDiceDivinite());
         console.log("Dice Race");
-       console.log(personnage.creationDiceRace());
+       console.log(p.creationDiceRace());
         console.log("Dice en 1 tableau");
-        console.log(personnage.creationDice());
+        console.log(p.creationDice());
 
     }
 }

@@ -34,21 +34,21 @@ class Personnage{
         let faceDeDes : number[] = [1,2,3,4,5,6];
         let DiceRace : Array<De> = [];
         switch (this.getRace()) {
-            case 'Humain':
+            case 'human':
                 let couleurfacesB: string[] = ['B', 'B', 'B', 'B', 'B', 'B'];
                 for (let i = 0; i < 5; i++) {
                     let HumainB = new De(faceDeDes, couleurfacesB, 'B');
                     DiceRace.push(HumainB);
                 }
                 break;
-            case 'Nain':
+            case 'dwarf':
                 let couleurfacesR: string[] = ['R', 'R', 'R', 'R', 'R', 'R'];
                 for (let i = 0; i < 5; i++){
                      let NainR = new De(faceDeDes, couleurfacesR, 'R');
                 DiceRace.push(NainR);
                  }
                 break;
-            case 'Elfe':
+            case 'elf':
                 let couleurfacesG : string[] = ['G', 'G', 'G', 'G', 'G', 'G'];
                 for (let i = 0; i < 5; i++) {
                     let ElfeG = new De(faceDeDes, couleurfacesG, 'G');
@@ -67,7 +67,7 @@ class Personnage{
         let couleurfacesR : string[] = ['R', 'R', 'R', 'R', 'R', 'R'];
         let DiceRace : Array<De> = [];
         switch (this.getDivinity()){
-            case 'Montagne':
+            case 'mountain':
                 for (let i = 0; i < 3; i++) {
                     let MontagneD = new De(faceDeDes, couleurfacesG, 'G');
                     DiceRace.push(MontagneD);
@@ -77,7 +77,7 @@ class Personnage{
                     DiceRace.push(MontagneD);
                 }
                 break;
-            case 'Ocean':
+            case 'ocean':
                 for (let i = 0; i < 3; i++) {
                     let OceanD = new De(faceDeDes, couleurfacesB, 'B');
                     DiceRace.push(OceanD);
@@ -87,7 +87,7 @@ class Personnage{
                     DiceRace.push(OceanD);
                 }
                 break;
-            case 'Volcan':
+            case 'volcano':
             for (let i = 0; i < 3; i++) {
                 let VolcanD = new De(faceDeDes, couleurfacesR, 'R');
                 DiceRace.push(VolcanD);

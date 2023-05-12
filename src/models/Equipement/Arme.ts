@@ -20,38 +20,38 @@ export class Arme {
 
     public getQualite(): string {
         // qualité ( commun, rare, légendaire)
-        let qualiteMax : number = armes[this.id].hp.max + armes[this.id].defense.max + armes[this.id].attack.max
+        let qualiteMax : number = armes[this.id].stats.hp.max + armes[this.id].stats.defense.max + armes[this.id].stats.attack.max
         let qualiteObjet : number = this.getAttack() + this.getDefense() + this.getHp();
-        if ((qualiteObjet/ qualiteMax)*100 < 50){
-            return "commun"
+        if ((qualiteObjet/ qualiteMax)*100 > 80){
+            return "légendaire";
 
-        }else if ((qualiteObjet/ qualiteMax)*100 < 75){
-            return "rare"
+        }else if ((qualiteObjet/ qualiteMax)*100 > 50){
+            return "rare";
 
         }else {
-            return "légendaire"
+            return "commun";
         }
     }
     public creationNom(): string {
-       return armes[this.id].nom;
+       return armes[this.id].name;
     }
 
     public creationDescription(): string{
        return armes[this.id].description;
     }
     public creationAttack(): number {
-        let valeurMin : number = armes[this.id].attack.min;
-        let valeurMax : number = armes[this.id].attack.max;
+        let valeurMin : number = armes[this.id].stats.attack.min;
+        let valeurMax : number = armes[this.id].stats.attack.max;
         return Math.floor((Math.random() * (valeurMax - valeurMin + 1) + valeurMin));
     }
     public creationDefense(): number {
-        let valeurMin : number = armes[this.id].defense.min;
-        let valeurMax : number = armes[this.id].defense.max;
+        let valeurMin : number = armes[this.id].stats.defense.min;
+        let valeurMax : number = armes[this.id].stats.defense.max;
         return Math.floor((Math.random() * (valeurMax - valeurMin + 1) + valeurMin));
     }
     public creationHp(): number {
-        let valeurMin : number = armes[this.id].hp.min;
-        let valeurMax : number = armes[this.id].hp.max;
+        let valeurMin : number = armes[this.id].stats.hp.min;
+        let valeurMax : number = armes[this.id].stats.hp.max;
         return Math.floor((Math.random() * (valeurMax - valeurMin + 1) + valeurMin));
     }
 

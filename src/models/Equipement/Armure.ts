@@ -20,7 +20,7 @@ export class Armure {
 
     public getQualite(): string {
         // qualité ( commun, rare, légendaire)
-        let qualiteMax : number = armure[this.id].hp.max + armure[this.id].defense.max + armure[this.id].attack.max
+        let qualiteMax : number = armure[this.id].stats.hp.max + armure[this.id].stats.defense.max + armure[this.id].stats.attack.max
         let qualiteObjet : number = this.getAttack() + this.getDefense() + this.getHp();
         if ((qualiteObjet/ qualiteMax)*100 < 50){
             return "commun"
@@ -33,25 +33,25 @@ export class Armure {
         }
     }
     public creationNom(): string {
-        return armure[this.id].nom;
+        return armure[this.id].name;
     }
 
     public creationDescription(): string{
         return armure[this.id].description;
     }
     public creationAttack(): number {
-        let valeurMin : number = armure[this.id].attack.min;
-        let valeurMax : number = armure[this.id].attack.max;
+        let valeurMin : number = armure[this.id].stats.attack.min;
+        let valeurMax : number = armure[this.id].stats.attack.max;
         return Math.floor((Math.random() * (valeurMax - valeurMin + 1) + valeurMin));
     }
     public creationDefense(): number {
-        let valeurMin : number = armure[this.id].defense.min;
-        let valeurMax : number = armure[this.id].defense.max;
+        let valeurMin : number = armure[this.id].stats.defense.min;
+        let valeurMax : number = armure[this.id].stats.defense.max;
         return Math.floor((Math.random() * (valeurMax - valeurMin + 1) + valeurMin));
     }
     public creationHp(): number {
-        let valeurMin : number = armure[this.id].hp.min;
-        let valeurMax : number = armure[this.id].hp.max;
+        let valeurMin : number = armure[this.id].stats.hp.min;
+        let valeurMax : number = armure[this.id].stats.hp.max;
         return Math.floor((Math.random() * (valeurMax - valeurMin + 1) + valeurMin));
     }
 

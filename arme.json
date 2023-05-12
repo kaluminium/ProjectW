@@ -45,7 +45,7 @@
   },
   "club_troll":{
     "id":"club_troll",
-    "name":"Un massue de troll",
+    "name":"Une massue de troll",
     "description": "Un massue de troll qui a l'air bien lourd",
     "type": "weapon",
     "stats":{

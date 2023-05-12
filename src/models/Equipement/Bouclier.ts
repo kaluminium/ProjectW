@@ -20,7 +20,7 @@ export class Bouclier {
 
     public getQualite(): string {
         // qualité ( commun, rare, légendaire)
-        let qualiteMax : number = bouclier[this.id].hp.max + bouclier[this.id].defense.max + bouclier[this.id].attack.max
+        let qualiteMax : number = bouclier[this.id].stats.hp.max + bouclier[this.id].stats.defense.max + bouclier[this.id].stats.attack.max
         let qualiteObjet : number = this.getAttack() + this.getDefense() + this.getHp();
         if ((qualiteObjet/ qualiteMax)*100 < 50){
             return "commun"
@@ -33,25 +33,25 @@ export class Bouclier {
         }
     }
     public creationNom(): string {
-        return bouclier[this.id].nom;
+        return bouclier[this.id].name;
     }
 
     public creationDescription(): string{
         return bouclier[this.id].description;
     }
     public creationAttack(): number {
-        let valeurMin : number = bouclier[this.id].attack.min;
-        let valeurMax : number = bouclier[this.id].attack.max;
+        let valeurMin : number = bouclier[this.id].stats.attack.min;
+        let valeurMax : number = bouclier[this.id].stats.attack.max;
         return Math.floor((Math.random() * (valeurMax - valeurMin + 1) + valeurMin));
     }
     public creationDefense(): number {
-        let valeurMin : number = bouclier[this.id].defense.min;
-        let valeurMax : number = bouclier[this.id].defense.max;
+        let valeurMin : number = bouclier[this.id].stats.defense.min;
+        let valeurMax : number = bouclier[this.id].stats.defense.max;
         return Math.floor((Math.random() * (valeurMax - valeurMin + 1) + valeurMin));
     }
     public creationHp(): number {
-        let valeurMin : number = bouclier[this.id].hp.min;
-        let valeurMax : number = bouclier[this.id].hp.max;
+        let valeurMin : number = bouclier[this.id].stats.hp.min;
+        let valeurMax : number = bouclier[this.id].stats.hp.max;
         return Math.floor((Math.random() * (valeurMax - valeurMin + 1) + valeurMin));
     }
 

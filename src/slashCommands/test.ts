@@ -59,7 +59,7 @@ export const command : SlashCommand = {
         else if(focusedOption.name === 'divinite') choices = [
             {name: 'Montagne', value: 'mountain'},
             {name: 'Ocean', value: 'ocean'},
-            {name: 'Foret', value: 'forest'}
+            {name: 'Volcan', value: 'volcano'}
         ];
         const filtered :Array<{name: string, value: string}> = choices.filter(
             choice => choice.name.toLowerCase().startsWith(focusedOption.value.toLowerCase()));
@@ -86,7 +86,7 @@ export const command : SlashCommand = {
 
         let raceChoices : Array<string> = ['human', 'elf', 'dwarf'];
         let sexeChoices : Array<string> = ['man', 'woman'];
-        let diviniteChoices : Array<string> = ['mountain', 'ocean', 'forest'];
+        let diviniteChoices : Array<string> = ['mountain', 'ocean', 'volcano'];
 
         if(!raceChoices.includes(race)) {
             await interaction.reply({content: `Race invalide`, ephemeral: true});
