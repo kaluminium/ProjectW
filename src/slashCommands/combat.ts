@@ -23,6 +23,9 @@ export const command: SlashCommand = {
 
     //TODO Commentaire rajouter juste parce que j'ai troller sur mon commit précédent
     execute: async (interaction) => {
+
+
+
         let compte: Compte;
 
         //region ------ VERIFICATIONS VALIDITE COMMANDE ------
@@ -71,14 +74,23 @@ export const command: SlashCommand = {
 
         //region ------ CREATION CHAMPS ------
         let t = 1;
+        let tourPasse = false;
 
         let deDuTour = combatLogic.choixDeDuTour(listeDe);
         let deLancesDuTour = combatLogic.lancerDeDuTour(deDuTour);
         let deDuTourDescription = deLancesDuTour.map(([num, str], index) => `${num}${str}`).join("; ")
+        let pvDuMonstre = 100;//TODO Temporaire, pour le debug
+        let pvDuJoueur = 150;
 
-        let fieldPvJoueur = {name : 'Pv du joueur : ', value : 'selectedPersonnage.getPV()'};
-        let fieldPvMonstre = {name : 'Pv du Monstre : ', value : 'monstre.getPV()'};
+        let fieldPvJoueur = {name : 'Pv du joueur : ', value : pvDuJoueur.toString()};
+        let fieldPvMonstre = {name : 'Pv du Monstre : ', value : pvDuMonstre.toString()};
         let fieldDeDuTour = {name : 'Dés du tour : ', value : 'Dés : ' +deDuTourDescription};
+
+        //TODO à mettre dans une boucle for, surement dans celle de création des boutons ?
+        let fieldSort1 = {name : 'Sort 1 : ', value : 'listeSort["spell1"].description + listeSort.cout'};
+        let fieldSort2 = {name : 'Sort 2 : ', value : 'listeSort["spell2"].description + listeSort.cout'};
+        let fieldSort3 = {name : 'Sort 3 : ', value : 'listeSort["spell3"].description + listeSort.cout'};
+        let fieldSort4 = {name : 'Sort 4 : ', value : 'listeSort["spell4"].description + listeSort.cout'};
 
         const embed : EmbedBuilder = new EmbedBuilder()
             .setTitle('Combat Tour '+t)
@@ -87,10 +99,10 @@ export const command: SlashCommand = {
                 fieldPvJoueur,
                 fieldPvMonstre,
                 fieldDeDuTour,
-                {name : 'Sort 1 : ', value : 'listeSort["spell1"].description + listeSort.cout'},
-                {name : 'Sort 2 : ', value : 'listeSort["spell2"].description + listeSort.cout'},
-                {name : 'Sort 3 : ', value : 'listeSort["spell3"].description + listeSort.cout'},
-                {name : 'Sort 4 : ', value : 'listeSort["spell4"].description + listeSort.cout'}
+                fieldSort1,
+                fieldSort2,
+                fieldSort3,
+                fieldSort4
         );
 
         //endregion
@@ -117,67 +129,129 @@ export const command: SlashCommand = {
 
         //endregion
 
-        //region ------ BOUCLE DE COMBAT ------
-
-        //while (t <= 5){ //TODO boucle sur i < 5 pour test et débug mais à terme bouclera sur les pv du joueurs et monstre
-
         let reponse = await interaction.reply({
             embeds: [embed],
             components: [spellRow]
         });
+
         //region ------ COLLECTOR ------
-                //TODO : Appel de la fonction nécessaire
                 //Vérifie quel sort a été lancé puis déclenche les actions nécessaires (appel de la fonction de dmg du sort)
                 // + appel de la fonction de prise du dmg du monstre
                 const collector = reponse.createMessageComponentCollector({time: 600000});
 
                 collector.on('collect', async (i) => {
-                    if(i.member.user.id !== interaction.member.user.id) return;
-                    switch (i.customId){
+                    if (i.member.user.id !== interaction.member.user.id) return;
+
+                    //region ------ GESTION DES BOUTONS ------
+                    switch (i.customId) {
                         case "spell_1" :
-                            await i.update({
-                                content: `Vous avez lancer le sort 1, le ` + 'monstre.getName()' + 'prend ' + 'calculdmg' + 'dégâts',
-                                components: [],
-                                embeds: []
-                            });
+                            //TODO c'est là que y aura le try/catch comme ça les dmg sont mis et les dé supprimés seulement si le sort se lance
+                            //Maj des pv du monstre
+                            pvDuMonstre -= 20;//TODO là ça serait un monstre.getPV
+
+                            //Maj des dés du tour
+                            deLancesDuTour.splice(0, 3);
+                            deDuTourDescription = deLancesDuTour.map(([num, str], index) => `${num}${str}`).join("; ");
+
                             break;
 
                         case "spell_2" :
-                            await i.update({
-                                content: `Vous avez lancer le sort 2, le`  + 'monstre.getName()' + 'prend ' + 'calculdmg' + 'dégâts',
-                                components: [],
-                                embeds: []
-                            });
                             break;
 
                         case "spell_3" :
-                            await i.update({
-                                content: `Vous avez lancer le sort 3, le`  + 'monstre.getName()' + 'prend ' + 'calculdmg' + 'dégâts',
-                                components: [],
-                                embeds: []
-                            });
                             break;
 
                         case "spell_4" :
-                            await i.update({
-                                content: `Vous avez lancer le sort 4, le`  + 'monstre.getName()' + 'prend ' + 'calculdmg' + 'dégâts',
-                                components: [],
-                                embeds: []
-                            });
                             break;
 
                         case "passe_tour" :
-                            console.log("passe tour avant");
-                            await i.update({
-                                content: `Vous avez passer votre tour`,
-                                components: [],
-                                embeds: []
-                            });
-                            t++; //TODO toute logique de passage de tour doit être ajoutée ici
-                            console.log("passe tour après");
+                            tourPasse = true;
                             break;
                     }
-                    collector.stop();
+                    //endregion
+
+                    //region ------ MISE A JOUR EMBED ------
+                    if (pvDuMonstre > 0 && pvDuJoueur > 0){//TODO Remplacer par les getPV()
+
+                        //region ------ TOUR DU MONSTRE ------
+                        if (deLancesDuTour.length === 0 || tourPasse) {
+
+                            //remet tourPasse à false au cas où le joueur ait passé son tour
+                            tourPasse = false;
+                            t++;
+
+                            console.log("Tour du Monstre");
+                            pvDuJoueur -= 25;//TODO là ça sera l'attaque du monstre en fait
+
+                            //regiond ------ LANCEMENT NOUVEAUX DÉS ------
+                            deDuTour = combatLogic.choixDeDuTour(listeDe);
+                            deLancesDuTour = combatLogic.lancerDeDuTour(deDuTour);
+                            deDuTourDescription = deLancesDuTour.map(([num, str], index) => `${num}${str}`).join("; ")
+
+                            //endregion
+                        }
+                        //endregion
+
+                        //region ------ MISE A JOUR DES CHAMPS ------
+
+                        //Met le champ des PV du joueur à jour (utile dans le cas de tour du monstre)
+                        fieldPvJoueur = {name : 'Pv du joueur : ', value : pvDuJoueur.toString()};
+
+                        //Met le champs des PV du Monstre à jour (utile dans le cas où le joueur à lancer un sort)
+                        fieldPvMonstre = {name: 'Pv du Monstre : ', value: pvDuMonstre.toString()};
+
+                        //Met le champs des dés du tour à jour (utile dans le cas où le joueur à lancer un sort mais aussi après le tour du monstre)
+                        fieldDeDuTour = {name: 'Dés du tour : ', value: 'Dés : ' + deDuTourDescription};
+
+                        const embedUpdate = new EmbedBuilder()
+                            .setTitle('Combat Tour ' + t)
+                            .setDescription('Vous affrontez un ')//TODO Ajoutez le getName() du Monstre mais pour l'instant la création de Monstre bug
+                            .addFields(
+                                fieldPvJoueur,
+                                fieldPvMonstre,
+                                fieldDeDuTour,
+                                fieldSort1,
+                                fieldSort2,
+                                fieldSort3,
+                                fieldSort4
+                            );
+                        await i.update({
+                            embeds: [embedUpdate],
+                            components: [spellRow]
+                        })
+                        //endregion
+                    }
+                    //endregion
+                    else{
+                        //region ------ FIN DU COMBAT ------
+                        /*TODO Bien sur le plus logique pour la réutilisation du code c'est de juste changer le avec une variable puis
+                        TODO d'update après mais un peu flemme là*/
+
+                        let messageFinCombat;
+
+                        //region ------ VICTOIRE ------
+                        if ( pvDuMonstre <= 0){//TODO remplacer par le monstre.gtPV()
+                            //TODO logique de victoire
+                            messageFinCombat = 'Vous avez gagné le combat !'
+                        }
+                        //endregion
+
+                        //region ------ DÉFAITE ------
+                        else if (pvDuJoueur <= 0){
+                            //TODO logique de défaite
+                            messageFinCombat = 'Vous avez perdu le combat ! (gros naze)'
+                        }
+                        //endregion
+
+                        await i.update({
+                            content : messageFinCombat,
+                            embeds: [],
+                            components: []
+                        })
+
+                        //endregion
+                    }
+
                 })
 
                 //TODO rajouter la "défaite" du joueur dans ce bloc pour éviter que les joueurs évitent les défaites en partant AFK
@@ -189,12 +263,6 @@ export const command: SlashCommand = {
                     }
                 })
                 //endregion
-
-        //}
-        //endregion
-
-
-
     }
 
 }
