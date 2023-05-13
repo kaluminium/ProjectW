@@ -11,6 +11,7 @@ export const command: SlashCommand = {
 
     execute: async (interaction) => {
         const message = interaction.options.get('message').value.toString();
-        await interaction.reply({content: `Valeur du message: ${message}`});
+        if (message === '%pos%') await interaction.reply({content: `Vend code audio\nNO ARNAK NO NOOB\nRDV Zaap Astrub`});
+        else await interaction.reply({content: `Valeur du message: ${message}`});
     }
 }
