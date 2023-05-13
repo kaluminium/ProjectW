@@ -20,10 +20,12 @@ export class combatLogic{
         //Crée un Array de tableau associant la valeur d'une face et sa couleur
         //Puis parcourt l'array de dé fournit en entrée, pour chaque dé, le lance
         //Puis l'ajoute à l'array
-        let valeursDe : Array<[number, string]>;
+        let valeursDe : Array<[number, string]> = [];
         for (let de of deDuTour){
             valeursDe.push(de.lancerLeDe());
         }
         return valeursDe;
     }
+
+    
 }
