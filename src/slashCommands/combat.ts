@@ -21,6 +21,7 @@ export const command: SlashCommand = {
     category: "gameplay",
     description: "Permet de lancer un combat",
 
+    //TODO Commentaire rajouter juste parce que j'ai troller sur mon commit précédent
     execute: async (interaction) => {
         let compte: Compte;
 
