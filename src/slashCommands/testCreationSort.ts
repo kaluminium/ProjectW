@@ -39,10 +39,23 @@ export const command : SlashCommand = {
         let couleurRequise3 : Array<string> = ["B","B","G"];
         let couleurEnvoye3 : Array<string> = ["B","B","B"];
         console.log(Sort.isCoutValide(couleurRequise3,couleurEnvoye3));
+        /*
+        test de throw error, en commentaire pour test les autres , le test fonctionne
         let couleurRequise4 : Array<string> = ["B","B","G"];
         let couleurEnvoye4 : Array<string> = ["B","B","B","B"];
         console.log(Sort.isCoutValide(couleurRequise4,couleurEnvoye4));
+        */
 
 
-    }
+
+        console.log("lunchSort");
+        let cout : Array<[number,string]> =  [[3, "B"], [3, "B"], [2, "B"]];
+        console.log(Sort.launch_rayon_de_givre(cout));
+        /*
+        test de throw error, en commentaire pour test les autres , le test fonctionne
+        let cout2 : Array<[number,string]> =  [[3, "B"], [3, "B"], [2, "G"]];
+        console.log(Sort.lunch_rayon_de_givre(cout2));
+        */
+
+}
 }

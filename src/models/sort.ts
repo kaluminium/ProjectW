@@ -18,9 +18,307 @@ export class Sort {
         this.association = sort[id].association;
     }
 
-  //  public  lunch_rayon_de_givre(dice: Array<De>): number{
+    public static launch_rayon_de_givre(dice: Array<[number,string]>): number{
+        const chaines: string[] = [];
+        const nombres: number[] = [];
 
-   // }
+        for (const [nombre, chaine] of dice) {
+            chaines.push(chaine);
+            nombres.push(nombre);
+        }
+        let s : Sort = new Sort("rayon_de_givre");
+        if (!Sort.isCoutValide(s.getCout(), chaines)) {
+            throw new Error("echecLancerSort");
+        }
+        if (nombres.length != 3) {
+            throw new Error("echecLancerSort");
+        }
+
+        let valeur1 = nombres[0];
+        let valeur2 = nombres[1];
+        let valeur3 = nombres[2];
+
+        let resultat = valeur1 + valeur2 + valeur3;
+
+        return resultat;
+
+    }
+    public static launch_tempete_de_grele(dice: Array<[number,string]>): number{
+        const chaines: string[] = [];
+        const nombres: number[] = [];
+
+        for (const [nombre, chaine] of dice) {
+            chaines.push(chaine);
+            nombres.push(nombre);
+        }
+        let s : Sort = new Sort("tempete_de_grele");
+        if (!Sort.isCoutValide(s.getCout(), chaines)) {
+            throw new Error("echecLancerSort");
+        }
+        if (nombres.length != 3) {
+            throw new Error("echecLancerSort");
+        }
+
+        let valeur1 = nombres[0];
+        let valeur2 = nombres[1];
+        let valeur3 = nombres[2];
+
+        let resultat = (valeur1 + valeur2) * valeur3;
+
+        return resultat;
+
+    }
+    public static launch_trait_ensorcele(dice: Array<[number,string]>): number{
+        const chaines: string[] = [];
+        const nombres: number[] = [];
+
+        for (const [nombre, chaine] of dice) {
+            chaines.push(chaine);
+            nombres.push(nombre);
+        }
+        let s : Sort = new Sort("trait_ensorcele");
+        if (!Sort.isCoutValide(s.getCout(), chaines)) {
+            throw new Error("echecLancerSort");
+        }
+        if (nombres.length != 3) {
+            throw new Error("echecLancerSort");
+        }
+
+        let valeur1 = nombres[0];
+        let valeur2 = nombres[1];
+        let valeur3 = nombres[2];
+
+        let resultat = valeur1 + valeur2 + valeur3;
+
+        return resultat;
+
+    }
+    public static launch_vague_tonnante(dice: Array<[number,string]>): number{
+        const chaines: string[] = [];
+        const nombres: number[] = [];
+
+        for (const [nombre, chaine] of dice) {
+            chaines.push(chaine);
+            nombres.push(nombre);
+        }
+        let s : Sort = new Sort("vague_tonnante");
+        if (!Sort.isCoutValide(s.getCout(), chaines)) {
+            throw new Error("echecLancerSort");
+        }
+        if (nombres.length != 3) {
+            throw new Error("echecLancerSort");
+        }
+
+        let valeur1 = nombres[0];
+        let valeur2 = nombres[1];
+        let valeur3 = nombres[2];
+
+        let resultat = (valeur1 + valeur2) * valeur3;
+
+        return resultat;
+
+    }
+    public static launch_boule_de_feu(dice: Array<[number,string]>): number{
+        const chaines: string[] = [];
+        const nombres: number[] = [];
+
+        for (const [nombre, chaine] of dice) {
+            chaines.push(chaine);
+            nombres.push(nombre);
+        }
+        let s : Sort = new Sort("boule_de_feu");
+        if (!Sort.isCoutValide(s.getCout(), chaines)) {
+            throw new Error("echecLancerSort");
+        }
+        if (nombres.length != 3) {
+            throw new Error("echecLancerSort");
+        }
+
+        let valeur1 = nombres[0];
+        let valeur2 = nombres[1];
+        let valeur3 = nombres[2];
+
+        let resultat = (valeur1 * valeur2) + valeur3;
+
+        return resultat;
+
+    }
+    public static launch_rayon_ardent(dice: Array<[number,string]>): number{
+        const chaines: string[] = [];
+        const nombres: number[] = [];
+
+        for (const [nombre, chaine] of dice) {
+            chaines.push(chaine);
+            nombres.push(nombre);
+        }
+        let s : Sort = new Sort("rayon_ardent");
+        if (!Sort.isCoutValide(s.getCout(), chaines)) {
+            throw new Error("echecLancerSort");
+        }
+        if (nombres.length != 3) {
+            throw new Error("echecLancerSort");
+        }
+
+        let valeur1 = nombres[0];
+        let valeur2 = nombres[1];
+        let valeur3 = nombres[2];
+
+        let resultat = valeur1 + valeur2 + valeur3;
+
+        return resultat;
+
+    }
+    public static launch_flamme_eternelle(dice: Array<[number,string]>): number{
+        const chaines: string[] = [];
+        const nombres: number[] = [];
+
+        for (const [nombre, chaine] of dice) {
+            chaines.push(chaine);
+            nombres.push(nombre);
+        }
+        let s : Sort = new Sort("flamme_eternelle");
+        if (!Sort.isCoutValide(s.getCout(), chaines)) {
+            throw new Error("echecLancerSort");
+        }
+        if (nombres.length != 3) {
+            throw new Error("echecLancerSort");
+        }
+
+        let valeur1 = nombres[0];
+        let valeur2 = nombres[1];
+        let valeur3 = nombres[2];
+
+        let resultat = valeur1 + valeur2 + valeur3;
+
+        return resultat;
+
+    }
+    public static launch_epee_de_feu(dice: Array<[number,string]>): number{
+        const chaines: string[] = [];
+        const nombres: number[] = [];
+
+        for (const [nombre, chaine] of dice) {
+            chaines.push(chaine);
+            nombres.push(nombre);
+        }
+        let s : Sort = new Sort("epee_de_feu");
+        if (!Sort.isCoutValide(s.getCout(), chaines)) {
+            throw new Error("echecLancerSort");
+        }
+        if (nombres.length != 3) {
+            throw new Error("echecLancerSort");
+        }
+
+        let valeur1 = nombres[0];
+        let valeur2 = nombres[1];
+        let valeur3 = nombres[2];
+
+        let resultat = (valeur1 + valeur2) * valeur3;
+
+        return resultat;
+
+    }
+    public static launch_eclair(dice: Array<[number,string]>): number{
+        const chaines: string[] = [];
+        const nombres: number[] = [];
+
+        for (const [nombre, chaine] of dice) {
+            chaines.push(chaine);
+            nombres.push(nombre);
+        }
+        let s : Sort = new Sort("eclair");
+        if (!Sort.isCoutValide(s.getCout(), chaines)) {
+            throw new Error("echecLancerSort");
+        }
+        if (nombres.length != 3) {
+            throw new Error("echecLancerSort");
+        }
+
+        let valeur1 = nombres[0];
+        let valeur2 = nombres[1];
+        let valeur3 = nombres[2];
+
+        let resultat = (valeur1 + valeur2) * valeur3;
+
+        return resultat;
+
+    }
+    public static launch_eclat_du_soleil(dice: Array<[number,string]>): number{
+        const chaines: string[] = [];
+        const nombres: number[] = [];
+
+        for (const [nombre, chaine] of dice) {
+            chaines.push(chaine);
+            nombres.push(nombre);
+        }
+        let s : Sort = new Sort("eclat_du_soleil");
+        if (!Sort.isCoutValide(s.getCout(), chaines)) {
+            throw new Error("echecLancerSort");
+        }
+        if (nombres.length != 3) {
+            throw new Error("echecLancerSort");
+        }
+
+        let valeur1 = nombres[0];
+        let valeur2 = nombres[1];
+        let valeur3 = nombres[2];
+
+        let resultat = (valeur1 + valeur2) * valeur3;
+
+        return resultat;
+
+    }
+    public static launch_nuee_de_meteores(dice: Array<[number,string]>): number{
+        const chaines: string[] = [];
+        const nombres: number[] = [];
+
+        for (const [nombre, chaine] of dice) {
+            chaines.push(chaine);
+            nombres.push(nombre);
+        }
+        let s : Sort = new Sort("nuee_de_meteores");
+        if (!Sort.isCoutValide(s.getCout(), chaines)) {
+            throw new Error("echecLancerSort");
+        }
+        if (nombres.length != 3) {
+            throw new Error("echecLancerSort");
+        }
+
+        let valeur1 = nombres[0];
+        let valeur2 = nombres[1];
+        let valeur3 = nombres[2];
+
+        let resultat = (valeur1 + valeur2) * valeur3;
+
+        return resultat;
+
+    }
+    public static launch_fleche_de_feu(dice: Array<[number,string]>): number{
+        const chaines: string[] = [];
+        const nombres: number[] = [];
+
+        for (const [nombre, chaine] of dice) {
+            chaines.push(chaine);
+            nombres.push(nombre);
+        }
+        let s : Sort = new Sort("fleche_de_feu");
+        if (!Sort.isCoutValide(s.getCout(), chaines)) {
+            throw new Error("echecLancerSort");
+        }
+        if (nombres.length != 3) {
+            throw new Error("echecLancerSort");
+        }
+
+        let valeur1 = nombres[0];
+        let valeur2 = nombres[1];
+        let valeur3 = nombres[2];
+
+        let resultat = (valeur1 + valeur2) * valeur3;
+
+        return resultat;
+
+    }
+
 
 
     public static isCoutValide(couleurRequise: Array<string>, couleurEnvoye: Array<string>): boolean {
