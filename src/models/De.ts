@@ -29,6 +29,8 @@ export class De {
 
     }
 
+    //region ------ FONCTIONS LANCER DÉS ------
+
     //Tire une face au hasard puis récupére la valeur et la couleur de cette face
     //Puis renvoie la valeur et la couleur de la face tirée
     public lancerLeDe() : [number, string]{
@@ -49,7 +51,9 @@ export class De {
 
         return faceNumero;
     }
+    //endregion
 
+    //region ------ GETTERS ------
     //Récupère la valeur d'une face donnée
     private getValeurFace(index : number) : number{
 
@@ -63,6 +67,7 @@ export class De {
     }
 
     //Renvoie les valeurs du dé
+    //Pas utilisé pour l'instant mais peut être utile plus tard à des fins de vérification
     public getValeurs() : number[]{
 
         //Retourne une copie de l'array valeurFaces
@@ -71,16 +76,14 @@ export class De {
     }
 
     //Renvoie les couleurs du dé
+    //Pas utilisé pour l'instant mais peut être utile plus tard à des fins de vérification
     public getCouleurs() : string[]{
 
         //Retourne une copie de l'array couleurFaces
         // Cela évite de renvoyer une référence directement à l'attribut afin de respecter l'encapsulation
         return this.couleurFaces.slice();
     }
+    //endregion
 
-    //Debug
-    public toString() : String{
-        return "Valeur des faces : " + this.valeurFaces.toString() + ", Couleur des faces : " + this.couleurFaces.toString();
-    }
 }
 

@@ -23,8 +23,6 @@ export const command: SlashCommand = {
 
     execute: async (interaction) => {
 
-
-
         let compte: Compte;
 
         //region ------ VERIFICATIONS VALIDITE COMMANDE ------
@@ -63,12 +61,14 @@ export const command: SlashCommand = {
         //Une partie de la logique de combat est placée dans le script "combatLogic.ts", toutefois c'est une classe static donc c'est tout de même
         //la fonction de combat qui gérera les variables (Arrays de dés)
         let pvDuJoueur = selectedPersonnage.getPv();
+        let dmgDuSort;
 
         //Création des dés
         const listeDe : Array<De> = selectedPersonnage.creationDice();
         //Séléction et lancer des dés pour le 1er tour
         let deDuTour = combatLogic.choixDeDuTour(listeDe);
         let deLancesDuTour = combatLogic.lancerDeDuTour(deDuTour);
+
         //endregion
 
         //region ------ MONSTRE ------
@@ -78,7 +78,9 @@ export const command: SlashCommand = {
 
         const nomDuMonstre = monstre.getNom();
         let pvDuMonstre = monstre.getPv();
+        let dmgDuMonstre;
         //endregion
+
         //endregion
 
         //region ------ MISE EN PLACE EMBED ------
@@ -91,6 +93,11 @@ export const command: SlashCommand = {
         //Conversion de l'array de dés en string pour pouvoir l'afficher
         let deDuTourDescription = deLancesDuTour.map(([num, str]) => `${num}${str}`).join("; ")
 
+        let messageDerniereAction = 'Vous avez engagé le combat contre '+nomDuMonstre;
+        let messageAvantDerniereAction;
+
+        let derniereAction = {name :'Dernière Action', value : messageDerniereAction};
+        let avantDerniereAction;
         let fieldPvJoueur = {name : 'Pv du joueur : ', value : pvDuJoueur.toString()};
         let fieldPvMonstre = {name : 'Pv du Monstre : ', value : pvDuMonstre.toString()};
         let fieldDeDuTour = {name : 'Dés du tour : ', value : 'Dés : ' +deDuTourDescription};
@@ -104,6 +111,7 @@ export const command: SlashCommand = {
             .setTitle('Combat Tour '+t)
             .setDescription('Vous affrontez un '+nomDuMonstre)
             .addFields(
+                derniereAction,
                 fieldPvJoueur,
                 fieldPvMonstre,
                 fieldDeDuTour,
@@ -155,7 +163,11 @@ export const command: SlashCommand = {
                         case "spell_1" :
                             //TODO c'est là que y aura le try/catch comme ça les dmg sont mis et les dé supprimés seulement si le sort se lance
                             //Maj des pv du monstre
-                            pvDuMonstre = monstre.prendreDegats(2);
+                            dmgDuSort = 2;//TODO appel à la fonction de dmg du sort
+                            pvDuMonstre = monstre.prendreDegats(dmgDuSort);
+
+                            messageAvantDerniereAction = messageDerniereAction;
+                            messageDerniereAction = 'Vous lancez '+'nomDuSort'+' : '+nomDuMonstre+' -'+dmgDuSort+'PV';
 
                             //Maj des dés du tour
                             deLancesDuTour.splice(0, 3);
@@ -188,8 +200,11 @@ export const command: SlashCommand = {
                             tourPasse = false;
                             t++;
 
-                            pvDuJoueur = selectedPersonnage.prendreDegats(monstre.degatDeLattaque());
+                            dmgDuMonstre = monstre.degatDeLattaque();
+                            pvDuJoueur = selectedPersonnage.prendreDegats(dmgDuMonstre);
 
+                            messageAvantDerniereAction = messageDerniereAction;
+                            messageDerniereAction = 'Le '+nomDuMonstre+' vous attaque avec '+'getNomAttaque()'+' : -'+dmgDuMonstre +'PV';
                             //regiond ------ LANCEMENT NOUVEAUX DÉS ------
                             deDuTour = combatLogic.choixDeDuTour(listeDe);
                             deLancesDuTour = combatLogic.lancerDeDuTour(deDuTour);
@@ -210,10 +225,19 @@ export const command: SlashCommand = {
                         //Met le champs des dés du tour à jour (utile dans le cas où le joueur à lancer un sort mais aussi après le tour du monstre)
                         fieldDeDuTour = {name: 'Dés du tour : ', value: 'Dés : ' + deDuTourDescription};
 
+                        //Met le champs de la dernière action à jour (toujours utile)
+                        derniereAction = {name :'Dernière Action', value : messageDerniereAction};
+
+                        //Met le champs de l'avant dernière action à jour (toujours utile)
+                        avantDerniereAction = {name :'Avant Dernière Action', value : messageAvantDerniereAction};
+
+
                         const embedUpdate = new EmbedBuilder()
                             .setTitle('Combat Tour ' + t)
                             .setDescription('Vous affrontez un '+nomDuMonstre)
                             .addFields(
+                                avantDerniereAction,
+                                derniereAction,
                                 fieldPvJoueur,
                                 fieldPvMonstre,
                                 fieldDeDuTour,
