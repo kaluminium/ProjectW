@@ -1,0 +1,290 @@
+ {
+  "boule_de_feu": {
+    "association" : "dwarf",
+    "id": "Boule_de_feu",
+    "name": "Boule de feu",
+    "description": "lance une boule de feu sur l'ennemi",
+    "cout" : [
+      {
+        "couleur": "R"
+      },
+      {
+        "couleur": "R"
+      },
+      {
+        "couleur": "R"
+      }
+    ],
+    "degats": "(R*R)+R"
+  },
+  "rayon_ardent": {
+    "association" : "dwarf",
+    "id": "Rayon_ardent",
+    "name": "Rayon ardent",
+    "description": "lance un rayon ardent sur l'ennemi",
+    "cout" : [
+      {
+        "couleur": "R"
+      },
+      {
+        "couleur": "R"
+      },
+      {
+        "couleur": "R"
+      }
+    ],
+    "degats": "R+R+R"
+  },
+  "main_brulante": {
+    "association" : "dwarf",
+    "id": "Main_brulante",
+    "name": "Main brulante",
+    "description": "Brule l'enemie avec une main brulante de feu ",
+    "cout" : [
+      {
+        "couleur": "R"
+      },
+      {
+        "couleur": "R"
+      },
+      {
+        "couleur": "R"
+      }
+    ],
+    "degats": "(R+R)*R"
+  },
+  "rayon_de_givre": {
+    "association" : "human",
+    "id": "Rayon_de_givre",
+    "name": "Rayon de givre",
+    "description": "lance un rayon de givre sur l'ennemi",
+    "cout" : [
+      {
+        "couleur": "B"
+      },
+      {
+        "couleur": "B"
+      },
+      {
+        "couleur": "B"
+      }
+    ],
+    "degats": "R+R+R"
+  },
+  "tempete_de_grele": {
+    "association" : "human",
+    "id": "Tempete_de_grele",
+    "name": "Tempete de grele",
+    "description": "lance une tempete de grele sur l'ennemi",
+    "cout" : [
+      {
+        "couleur": "B"
+      },
+      {
+        "couleur": "B"
+      },
+      {
+        "couleur": "B"
+      }
+    ],
+    "degats": "(B+B)*B"
+  },
+  "cone_de_froid": {
+    "association" : "human",
+    "id": "cone_de_froid",
+    "name": "Cône de froid",
+    "description": "lance un cône de froid sur l'ennemi",
+    "cout" : [
+      {
+        "couleur": "B"
+      },
+      {
+        "couleur": "B"
+      },
+      {
+        "couleur": "B"
+      }
+    ],
+    "degats": "(B*B)+B"
+  },
+  "tempete_de_grele": {
+    "association" : "human",
+    "id": "Tempete_de_grele",
+    "name": "Tempete de grele",
+    "description": "lance une tempete de grele sur l'ennemi",
+    "cout" : [
+      {
+        "couleur": "B"
+      },
+      {
+        "couleur": "B"
+      },
+      {
+        "couleur": "B"
+      }
+    ],
+    "degats": "(B+B)*B"
+  },
+  "trait_ensorcele": {
+    "association" : "elf",
+    "id": "trait_ensorcele",
+    "name": "Trait ensorcele",
+    "description": "lance un trait ensorcele sur l'ennemi",
+    "cout" : [
+      {
+        "couleur": "G"
+      },
+      {
+        "couleur": "G"
+      },
+      {
+        "couleur": "G"
+      }
+    ],
+    "degats": "G+G+G"
+  },
+  "vague_tonnante": {
+    "association" : "elf",
+    "id": "vague_tonnante",
+    "name": "Vague tonnante",
+    "description": "lance une vague tonnante sur l'ennemi",
+    "cout" : [
+      {
+        "couleur": "G"
+      },
+      {
+        "couleur": "G"
+      },
+      {
+        "couleur": "G"
+      }
+    ],
+    "degats": "(G*G)+G"
+  },
+  "orbe_chromatique": {
+    "association" : "elf",
+    "id": "orbe_chromatique",
+    "name": "Orbe chromatique",
+    "description": "lance un orbe chromatique sur l'ennemi",
+    "cout" : [
+      {
+        "couleur": "G"
+      },
+      {
+        "couleur": "G"
+      },
+      {
+        "couleur": "G"
+      }
+    ],
+    "degats": "(G+G)*G"
+  },
+  "flamme_eternelle": {
+    "association" : "mountain",
+    "id": "flamme_eternelle",
+    "name": "Flamme eternelle",
+    "description": "lance une flamme eternelle sur l'ennemi",
+    "cout" : [
+      {
+        "couleur": "G"
+      },
+      {
+        "couleur": "G"
+      },
+      {
+        "couleur": "R"
+      }
+    ],
+    "degats": "(G+G)*R"
+  },
+  "epee_de_feu": {
+    "association" : "mountain",
+    "id": "epee_de_feu",
+    "name": "Epee de feu",
+    "description": "lance une epee de feu sur l'ennemi",
+    "cout" : [
+      {
+        "couleur": "G"
+      },
+      {
+        "couleur": "R"
+      },
+      {
+        "couleur": "R"
+      }
+    ],
+    "degats": "(R+R)*G"
+  },
+  "eclair": {
+    "association" : "ocean",
+    "id": "eclair",
+    "name": "eclair",
+    "description": "lance un eclair sur l'ennemi",
+    "cout" : [
+      {
+        "couleur": "B"
+      },
+      {
+        "couleur": "B"
+      },
+      {
+        "couleur": "G"
+      }
+    ],
+    "degats": "(B+B)*G"
+  },
+  "eclat_du_soleil": {
+    "association" : "ocean",
+    "id": "eclat_du_soleil",
+    "name": "Eclat du soleil",
+    "description": "lance un eclat du soleil sur l'ennemi",
+    "cout" : [
+      {
+        "couleur": "G"
+      },
+      {
+        "couleur": "G"
+      },
+      {
+        "couleur": "B"
+      }
+    ],
+    "degats": "(G+G)*B"
+  },
+  "nuee_de_meteores": {
+    "association" : "volcano",
+    "id": "nuee_de_meteores",
+    "name": "Nuee de meteores",
+    "description": "lance une nuee de meteores sur l'ennemi",
+    "cout" : [
+      {
+        "couleur": "R"
+      },
+      {
+        "couleur": "R"
+      },
+      {
+        "couleur": "B"
+      }
+    ],
+    "degats": "(R+R)*B"
+  },
+  "fleche_de_feu": {
+    "association" : "volcano",
+    "id": "fleche_de_feu",
+    "name": "Fleche de feu",
+    "description": "lance une fleche de feu sur l'ennemi",
+    "cout" : [
+      {
+        "couleur": "R"
+      },
+      {
+        "couleur": "B"
+      },
+      {
+        "couleur": "B"
+      }
+    ],
+    "degats": "(B+B)*R"
+  }
+}
