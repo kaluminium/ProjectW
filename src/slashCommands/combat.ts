@@ -93,7 +93,20 @@ export const command: SlashCommand = {
         //Conversion de l'array de dés en string pour pouvoir l'afficher
         let deDuTourDescription = deLancesDuTour.map(([num, str]) => `${num}${str}`).join("; ")
 
-        let messageDerniereAction = 'Vous avez engagé le combat contre '+nomDuMonstre;
+        let messagesDebut =
+            ['\nVous vous êtes bien échauffé ?',
+            '\nIl aurait fallu lire les sorts avant !',
+            '\nPersonnellement je prendrais mes jambes à mon cou',
+            '\nPas sûr qu\'il vous drop un Gelano',
+            '\nBonne chance, vous en aurez besoin !',
+            '\nVous n\'auriez pas du voler ses citrons !',
+            '\nSoyez gentil il a eu une semaine dificile',
+            '\nDésolé, l\'auteur était en grève',
+            '\nMa fois, pourquoi pas ?',
+            '\nVous pourriez le laisser gagner, c\'est son anniversaire'
+            ];
+
+        let messageDerniereAction = 'Vous avez engagé le combat contre '+nomDuMonstre+messagesDebut[Math.floor(Math.random()* messagesDebut.length)];
         let messageAvantDerniereAction;
 
         let derniereAction = {name :'__Dernière Action :__', value : messageDerniereAction};
