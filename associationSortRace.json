@@ -1,0 +1,32 @@
+{
+  "human" : {
+    "listDeSort": [
+      {
+        "id": "rayon_de_givre"
+      },
+      {
+        "id": "tempete_de_grele"
+      }
+    ]
+  },
+  "elf" : {
+    "listDeSort": [
+      {
+        "id": "trait_ensorcele"
+      },
+      {
+        "id": "vague_tonnante"
+      }
+    ]
+  },
+  "dwarf" : {
+    "listDeSort": [
+      {
+        "id": "boule_de_feu"
+      },
+      {
+        "id": "rayon_ardent"
+      }
+    ]
+  }
+}

@@ -2,6 +2,8 @@ import {Compte} from "./Compte";
 import {ListePersonnage} from "./ListePersonnage";
 import {BDDConnexion} from "./BDDConnexion";
 import {De} from "./De";
+const sortRace = require("../../associationSortRace.json");
+const sortDivinity = require("../../associationSortDivinity.json");
 
 class Personnage{
     private name : string;
@@ -21,6 +23,19 @@ class Personnage{
         this.race = race;
         this.sex = sex;
         this.xp = xp;
+    }
+
+
+    public  getSort(): Array<string> {
+        let listeSort: Array<string> = [];
+        for (let i : number = 0; i < sortRace[this.getRace()].listDeSort.length; i++) {
+            listeSort.push(sortRace[this.getRace()].listDeSort[i].id);
+        }
+        for (let i : number = 0; i < sortDivinity[this.getDivinity()].listDeSort.length; i++) {
+            listeSort.push(sortDivinity[this.getDivinity()].listDeSort[i].id);
+        }
+
+        return listeSort;
     }
 
     public creationDice(): Array<De> {

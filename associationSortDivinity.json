@@ -1,0 +1,32 @@
+{
+  "mountain": {
+    "listDeSort": [
+      {
+        "id": "flamme_eternelle"
+      },
+      {
+        "id": "epee_de_feu"
+      }
+    ]
+  },
+  "ocean": {
+    "listDeSort": [
+      {
+        "id": "eclair"
+      },
+      {
+        "id": "eclat_du_soleil"
+      }
+    ]
+  },
+  "volcano": {
+    "listDeSort": [
+      {
+        "id": "nuee_de_meteores"
+      },
+      {
+        "id": "fleche_de_feu"
+      }
+    ]
+  }
+}
