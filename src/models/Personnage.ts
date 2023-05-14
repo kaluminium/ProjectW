@@ -15,6 +15,7 @@ class Personnage{
     private inventory : Inventaire;
     private race : string
     private sex : string;
+    private pv : number = 150;
 
     constructor(id : number, name: string, divinity : string, race : string, sex : string, xp : number) {
         this.id = id;
@@ -115,6 +116,10 @@ class Personnage{
         }
         return DiceRace;
     }
+    //endregion
+
+    //region ------ GETTERS ------
+
     public getRace() : string{
         return this.race;
     }
@@ -133,8 +138,42 @@ class Personnage{
         return this.xp;
     }
 
+    public getPv(){
+        return this.pv;
+    }
+    public static async getPersonnage(id : number) : Promise<Personnage>{
+        const bdd = await BDDConnexion.getInstance();
+        const result = await bdd.query("SELECT * FROM `personnage` WHERE `id` = ?", [id]);
+        if(result.length > 0){
+            let id = result[0].id;
+            let name = result[0].name;
+            let divinity = result[0].divinity;
+            let race = result[0].race;
+            let sex = result[0].sex;
+            let xp = result[0].xp;
+            return new Personnage(id, name, divinity, race, sex, xp);
+        }
+        throw new Error("Le personnage n'existe pas");
+    }
+
+    //endregion
+
+    //region ------ SETTERS ------
     public setName(name : string) : void{
         this.name = name;
+    }
+
+    private setPv(pv: number){
+        this.pv = pv;
+    }
+    //endregion
+
+    public prendreDegats(dmg: number): number{
+
+        this.setPv(this.getPv()-dmg);
+
+        //return aussi les pv pour rendre le code plus compact, cela évite d'écrire une ligne de code supplémentaire lorsqu'on appelle la fonction
+        return this.getPv();
     }
 
     public static verifyName(name : string) : boolean{
@@ -153,21 +192,6 @@ class Personnage{
         if(listePersonnage.isFull()) throw new Error("Vous avez atteint le nombre maximum de personnage");
         const bdd = await BDDConnexion.getInstance();
         await bdd.query("INSERT INTO `personnage` (`account_id`, `name`, `sex`, `divinity`, `race`) VALUES (?, ?, ?, ?, ?)", [id, name, sex, divinity, race]);
-    }
-
-    public static async getPersonnage(id : number) : Promise<Personnage>{
-        const bdd = await BDDConnexion.getInstance();
-        const result = await bdd.query("SELECT * FROM `personnage` WHERE `id` = ?", [id]);
-        if(result.length > 0){
-            let id = result[0].id;
-            let name = result[0].name;
-            let divinity = result[0].divinity;
-            let race = result[0].race;
-            let sex = result[0].sex;
-            let xp = result[0].xp;
-            return new Personnage(id, name, divinity, race, sex, xp);
-        }
-        throw new Error("Le personnage n'existe pas");
     }
 
     public static ajouterVirgule(xp : number) : string{

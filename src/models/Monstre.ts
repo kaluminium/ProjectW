@@ -22,17 +22,49 @@ export class Monstre {
         this.ajouterInventaire(race, type);
         this.ajouterXp(race, type);
     }
-    public ajouterXp(race : string, type : string){
-        let xp: number = monstre[race].xp
-        if (type === "boss"){
-            this.xp = xp * 2;
-        }else if (type === "elite"){
-            this.xp = xp * 1.5;
-        }else{
-            this.xp = xp;
+
+    //region ------ FONCTIONS INITIALISATIONS -------
+
+    private creationDuNom(race: string): string {
+        let nombreDePrefixe: number = monstre[race].prefixe.length;
+        let nombreDeSufixe: number = monstre[race].sufixe.length;
+        let randomPrefixe: number = Math.floor(Math.random() * (nombreDePrefixe - 1 + 1)) ;
+        let randomSufixe: number = Math.floor(Math.random() * (nombreDeSufixe - 1 + 1)) ;
+        let nom = monstre[race].prefixe[randomPrefixe] + " " + race + " "
+            + monstre[race].sufixe[randomSufixe];
+        return nom;
+
+
+    }
+
+    private calculeDeLaVie(race: string, type: string): number {
+        let vieMin: number = monstre[race].vie_min;
+        let vieMax: number = monstre[race].vie_max;
+        if (type === "boss") {
+            return Math.floor((Math.random() * (vieMax - vieMin + 1) + vieMin) * 1.50);
+
+        } else if (type === "elite") {
+            return Math.floor((Math.random() * (vieMax - vieMin + 1) + vieMin) * 1.20);
+
+        } else {
+            return Math.floor(Math.random() * (vieMax - vieMin + 1)) + vieMin;
         }
     }
-    public ajouterInventaire(race : string, type : string){
+
+    private ajoutDesSort(race: string): void {
+        let nombreDeSort: number = monstre[race].attaque.length;
+        // indique le nombre de sort que le monstre va avoir
+        let nbDeSortAPush: number = 1;
+        let i: number = 0;
+        while (i < nbDeSortAPush || i == nombreDeSort) {
+            let valeurAleatoire = Math.floor(Math.random() * (nombreDeSort - 1 + 1));
+            if (!this.sort.includes(monstre[race].attaque[valeurAleatoire])) {
+                this.sort.push(monstre[race].attaque[valeurAleatoire].id);
+                i++;
+            }
+        }
+    }
+    private ajouterInventaire(race : string, type : string){
         let tailleTableauLoot: number = monstre[race].loot.length;
         let i : number = 0;
         let nbDeDrop;
@@ -69,50 +101,26 @@ export class Monstre {
             }
         }
     }
+
+    private ajouterXp(race : string, type : string){
+        let xp: number = monstre[race].xp
+        if (type === "boss"){
+            this.xp = xp * 2;
+        }else if (type === "elite"){
+            this.xp = xp * 1.5;
+        }else{
+            this.xp = xp;
+        }
+    }
+
     // return un chiffre en 0 et 100 avec 2 chiffres avec la virgule
     public deCent():number{
         return parseFloat((Math.random() * 100).toFixed(2));
 
     }
-   public calculeDeLaVie(race: string, type: string): number {
-        let vieMin: number = monstre[race].vie_min;
-        let vieMax: number = monstre[race].vie_max;
-        if (type === "boss") {
-            return Math.floor((Math.random() * (vieMax - vieMin + 1) + vieMin) * 1.50);
+    //endregion
 
-        } else if (type === "elite") {
-            return Math.floor((Math.random() * (vieMax - vieMin + 1) + vieMin) * 1.20);
-
-        } else {
-            return Math.floor(Math.random() * (vieMax - vieMin + 1)) + vieMin;
-        }
-    }
-
-    public ajoutDesSort(race: string): void {
-        let nombreDeSort: number = monstre[race].attaque.length;
-        // indique le nombre de sort que le monstre va avoir
-        let nbDeSortAPush: number = 1;
-        let i: number = 0;
-        while (i < nbDeSortAPush || i == nombreDeSort) {
-            let valeurAleatoire = Math.floor(Math.random() * (nombreDeSort - 1 + 1));
-            if (!this.sort.includes(monstre[race].attaque[valeurAleatoire])) {
-                this.sort.push(monstre[race].attaque[valeurAleatoire].id);
-                i++;
-            }
-        }
-    }
-
-    public creationDuNom(race: string): string {
-        let nombreDePrefixe: number = monstre[race].prefixe.length;
-        let nombreDeSufixe: number = monstre[race].sufixe.length;
-        let randomPrefixe: number = Math.floor(Math.random() * (nombreDePrefixe - 1 + 1)) ;
-        let randomSufixe: number = Math.floor(Math.random() * (nombreDeSufixe - 1 + 1)) ;
-        let nom = monstre[race].prefixe[randomPrefixe] + " " + race + " "
-            + monstre[race].sufixe[randomSufixe];
-        return nom;
-
-
-    }
+    //region ------ FONCTIONS COMBAT ------
     public degatDeLattaque():number{
         let nombreDeSortDisponible = this.sort.length;
         let randomSort : number = Math.floor(Math.random() * (nombreDeSortDisponible - 1 + 1));
@@ -125,10 +133,25 @@ export class Monstre {
         return 0; // si trouve pas retourne 0
     }
 
-    public setPv(pv: number): void {
+    public prendreDegats(dmg): number{
+
+        //On peut ajouter ici une condition spécifique à un monstre si l'on souhaite (par ex : prend 25 de dmg max)
+        this.setPv(this.getPv()-dmg);
+
+        //return aussi les pv pour rendre le code plus compact, cela évite d'écrire une ligne de code supplémentaire lorsqu'on appelle la fonction
+        return this.getPv();
+    }
+
+    //endregion
+
+    //region ------ SETTERS ------
+    private setPv(pv: number): void {
         this.pv = pv;
     }
 
+    //endregion
+
+    //region ------ GETTERS ------
     public getTailleInventaire(): number{
         return this.inventaire.length;
     }
@@ -152,8 +175,9 @@ export class Monstre {
         return this.nom;
     }
 
-
     public getRace(): string {
         return this.race;
     }
+
+    //endregion --
 }
