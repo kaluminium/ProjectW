@@ -62,7 +62,7 @@ export const command: SlashCommand = {
         //region ------ JOUEUR ------
         //Une partie de la logique de combat est placée dans le script "combatLogic.ts", toutefois c'est une classe static donc c'est tout de même
         //la fonction de combat qui gérera les variables (Arrays de dés)
-        let pvDuJoueur = 150;
+        let pvDuJoueur = selectedPersonnage.getPv();
 
         //Création des dés
         const listeDe : Array<De> = selectedPersonnage.creationDice();
@@ -188,8 +188,7 @@ export const command: SlashCommand = {
                             tourPasse = false;
                             t++;
 
-                            console.log("Tour du Monstre");
-                            pvDuJoueur -= monstre.degatDeLattaque();
+                            pvDuJoueur = selectedPersonnage.prendreDegats(monstre.degatDeLattaque());
 
                             //regiond ------ LANCEMENT NOUVEAUX DÉS ------
                             deDuTour = combatLogic.choixDeDuTour(listeDe);
