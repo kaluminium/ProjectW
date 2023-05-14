@@ -96,19 +96,20 @@ export const command: SlashCommand = {
         let messageDerniereAction = 'Vous avez engagé le combat contre '+nomDuMonstre;
         let messageAvantDerniereAction;
 
-        let derniereAction = {name :'Dernière Action', value : messageDerniereAction};
+        let derniereAction = {name :'__Dernière Action :__', value : messageDerniereAction};
         let avantDerniereAction;
-        let fieldPvJoueur = {name : 'Pv du joueur : ', value : pvDuJoueur.toString()};
-        let fieldPvMonstre = {name : 'Pv du Monstre : ', value : pvDuMonstre.toString()};
-        let fieldDeDuTour = {name : 'Dés du tour : ', value : 'Dés : ' +deDuTourDescription};
+        let fieldPvJoueur = {name : '__Pv du joueur :__', value : pvDuJoueur.toString(), inline : true};
+        let fieldPvMonstre = {name : '__Pv du Monstre :__', value : pvDuMonstre.toString(), inline : true};
+        let fieldDeDuTour = {name : '__Dés du tour :__', value : 'Dés : ' +deDuTourDescription};
         //TODO à mettre dans une boucle for, surement dans celle de création des boutons ?
-        let fieldSort1 = {name : 'Sort 1 : ', value : 'listeSort["spell1"].description + listeSort.cout'};
-        let fieldSort2 = {name : 'Sort 2 : ', value : 'listeSort["spell2"].description + listeSort.cout'};
-        let fieldSort3 = {name : 'Sort 3 : ', value : 'listeSort["spell3"].description + listeSort.cout'};
-        let fieldSort4 = {name : 'Sort 4 : ', value : 'listeSort["spell4"].description + listeSort.cout'};
+        let fieldSort1 = {name : '__Sort 1 :__', value : 'listeSort["spell1"].description + listeSort.cout'};
+        let fieldSort2 = {name : '__Sort 2 :__', value : 'listeSort["spell2"].description + listeSort.cout'};
+        let fieldSort3 = {name : '__Sort 3 :__', value : 'listeSort["spell3"].description + listeSort.cout'};
+        let fieldSort4 = {name : '__Sort 4 :__', value : 'listeSort["spell4"].description + listeSort.cout'};
 
         const embed : EmbedBuilder = new EmbedBuilder()
-            .setTitle('Combat Tour '+t)
+            .setColor('#FF0000')
+            .setTitle('**------------ Combat Tour : **'+t+' **------------**')
             .setDescription('Vous affrontez un '+nomDuMonstre)
             .addFields(
                 derniereAction,
@@ -217,23 +218,24 @@ export const command: SlashCommand = {
                         //region ------ MISE A JOUR DES CHAMPS ------
 
                         //Met le champ des PV du joueur à jour (utile dans le cas de tour du monstre)
-                        fieldPvJoueur = {name : 'Pv du joueur : ', value : pvDuJoueur.toString()};
+                        fieldPvJoueur = {name : '__Pv du joueur :__', value : pvDuJoueur.toString(), inline : true};
 
                         //Met le champs des PV du Monstre à jour (utile dans le cas où le joueur à lancer un sort)
-                        fieldPvMonstre = {name: 'Pv du Monstre : ', value: pvDuMonstre.toString()};
+                        fieldPvMonstre = {name: '__Pv du Monstre :__', value: pvDuMonstre.toString(), inline : true};
 
                         //Met le champs des dés du tour à jour (utile dans le cas où le joueur à lancer un sort mais aussi après le tour du monstre)
-                        fieldDeDuTour = {name: 'Dés du tour : ', value: 'Dés : ' + deDuTourDescription};
+                        fieldDeDuTour = {name: '__Dés du tour :__', value: 'Dés : ' + deDuTourDescription};
 
                         //Met le champs de la dernière action à jour (toujours utile)
-                        derniereAction = {name :'Dernière Action', value : messageDerniereAction};
+                        derniereAction = {name :'__Dernière Action :__', value : messageDerniereAction};
 
                         //Met le champs de l'avant dernière action à jour (toujours utile)
-                        avantDerniereAction = {name :'Avant Dernière Action', value : messageAvantDerniereAction};
+                        avantDerniereAction = {name :'__Avant Dernière Action :__', value : messageAvantDerniereAction};
 
 
                         const embedUpdate = new EmbedBuilder()
-                            .setTitle('Combat Tour ' + t)
+                            .setColor('#FF0000')
+                            .setTitle('**------------ Combat Tour : **' + t+ ' **------------**')
                             .setDescription('Vous affrontez un '+nomDuMonstre)
                             .addFields(
                                 avantDerniereAction,
