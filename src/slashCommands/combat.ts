@@ -21,7 +21,6 @@ export const command: SlashCommand = {
     category: "gameplay",
     description: "Permet de lancer un combat",
 
-    //TODO Commentaire rajouter juste parce que j'ai troller sur mon commit précédent
     execute: async (interaction) => {
 
 
@@ -59,33 +58,42 @@ export const command: SlashCommand = {
         //endregion
 
         //region ------ MISE EN PLACE MONSTRE ET JOUEUR ------
+
+        //region ------ JOUEUR ------
         //Une partie de la logique de combat est placée dans le script "combatLogic.ts", toutefois c'est une classe static donc c'est tout de même
         //la fonction de combat qui gérera les variables (Arrays de dés)
-        const listeDe : Array<De> = selectedPersonnage.creationDice();
+        let pvDuJoueur = 150;
 
+        //Création des dés
+        const listeDe : Array<De> = selectedPersonnage.creationDice();
+        //Séléction et lancer des dés pour le 1er tour
+        let deDuTour = combatLogic.choixDeDuTour(listeDe);
+        let deLancesDuTour = combatLogic.lancerDeDuTour(deDuTour);
+        //endregion
+
+        //region ------ MONSTRE ------
         //Création du monstre
         //Valeur hardcodées dans le constructeur pour rendre la démo plus simple
-        //TODO toujours un problème de création
-        //const monstre : Monstre = new Monstre("gobelin", "normal");
+        const monstre : Monstre = new Monstre("Gobelin", "normal");
+
+        const nomDuMonstre = monstre.getNom();
+        let pvDuMonstre = monstre.getPv();
+        //endregion
         //endregion
 
         //region ------ MISE EN PLACE EMBED ------
-        //TODO créer un bouton de lancement de combat pour lancer la boucle
 
         //region ------ CREATION CHAMPS ------
+        //variables qui permettent de gérer les tours
         let t = 1;
         let tourPasse = false;
 
-        let deDuTour = combatLogic.choixDeDuTour(listeDe);
-        let deLancesDuTour = combatLogic.lancerDeDuTour(deDuTour);
-        let deDuTourDescription = deLancesDuTour.map(([num, str], index) => `${num}${str}`).join("; ")
-        let pvDuMonstre = 100;//TODO Temporaire, pour le debug
-        let pvDuJoueur = 150;
+        //Conversion de l'array de dés en string pour pouvoir l'afficher
+        let deDuTourDescription = deLancesDuTour.map(([num, str]) => `${num}${str}`).join("; ")
 
         let fieldPvJoueur = {name : 'Pv du joueur : ', value : pvDuJoueur.toString()};
         let fieldPvMonstre = {name : 'Pv du Monstre : ', value : pvDuMonstre.toString()};
         let fieldDeDuTour = {name : 'Dés du tour : ', value : 'Dés : ' +deDuTourDescription};
-
         //TODO à mettre dans une boucle for, surement dans celle de création des boutons ?
         let fieldSort1 = {name : 'Sort 1 : ', value : 'listeSort["spell1"].description + listeSort.cout'};
         let fieldSort2 = {name : 'Sort 2 : ', value : 'listeSort["spell2"].description + listeSort.cout'};
@@ -94,7 +102,7 @@ export const command: SlashCommand = {
 
         const embed : EmbedBuilder = new EmbedBuilder()
             .setTitle('Combat Tour '+t)
-            .setDescription('Vous affrontez un ')//TODO Ajoutez le getName() du Monstre mais pour l'instant la création de Monstre bug
+            .setDescription('Vous affrontez un '+nomDuMonstre)
             .addFields(
                 fieldPvJoueur,
                 fieldPvMonstre,
@@ -137,7 +145,7 @@ export const command: SlashCommand = {
         //region ------ COLLECTOR ------
                 //Vérifie quel sort a été lancé puis déclenche les actions nécessaires (appel de la fonction de dmg du sort)
                 // + appel de la fonction de prise du dmg du monstre
-                const collector = reponse.createMessageComponentCollector({time: 600000});
+                const collector = reponse.createMessageComponentCollector({time: 360000});
 
                 collector.on('collect', async (i) => {
                     if (i.member.user.id !== interaction.member.user.id) return;
@@ -147,11 +155,11 @@ export const command: SlashCommand = {
                         case "spell_1" :
                             //TODO c'est là que y aura le try/catch comme ça les dmg sont mis et les dé supprimés seulement si le sort se lance
                             //Maj des pv du monstre
-                            pvDuMonstre -= 20;//TODO là ça serait un monstre.getPV
+                            pvDuMonstre = monstre.prendreDegats(2);
 
                             //Maj des dés du tour
                             deLancesDuTour.splice(0, 3);
-                            deDuTourDescription = deLancesDuTour.map(([num, str], index) => `${num}${str}`).join("; ");
+                            deDuTourDescription = deLancesDuTour.map(([num, str]) => `${num}${str}`).join("; ");
 
                             break;
 
@@ -171,7 +179,7 @@ export const command: SlashCommand = {
                     //endregion
 
                     //region ------ MISE A JOUR EMBED ------
-                    if (pvDuMonstre > 0 && pvDuJoueur > 0){//TODO Remplacer par les getPV()
+                    if (pvDuMonstre > 0 && pvDuJoueur > 0){
 
                         //region ------ TOUR DU MONSTRE ------
                         if (deLancesDuTour.length === 0 || tourPasse) {
@@ -181,12 +189,12 @@ export const command: SlashCommand = {
                             t++;
 
                             console.log("Tour du Monstre");
-                            pvDuJoueur -= 25;//TODO là ça sera l'attaque du monstre en fait
+                            pvDuJoueur -= monstre.degatDeLattaque();
 
                             //regiond ------ LANCEMENT NOUVEAUX DÉS ------
                             deDuTour = combatLogic.choixDeDuTour(listeDe);
                             deLancesDuTour = combatLogic.lancerDeDuTour(deDuTour);
-                            deDuTourDescription = deLancesDuTour.map(([num, str], index) => `${num}${str}`).join("; ")
+                            deDuTourDescription = deLancesDuTour.map(([num, str]) => `${num}${str}`).join("; ")
 
                             //endregion
                         }
@@ -205,7 +213,7 @@ export const command: SlashCommand = {
 
                         const embedUpdate = new EmbedBuilder()
                             .setTitle('Combat Tour ' + t)
-                            .setDescription('Vous affrontez un ')//TODO Ajoutez le getName() du Monstre mais pour l'instant la création de Monstre bug
+                            .setDescription('Vous affrontez un '+nomDuMonstre)
                             .addFields(
                                 fieldPvJoueur,
                                 fieldPvMonstre,
@@ -224,13 +232,11 @@ export const command: SlashCommand = {
                     //endregion
                     else{
                         //region ------ FIN DU COMBAT ------
-                        /*TODO Bien sur le plus logique pour la réutilisation du code c'est de juste changer le avec une variable puis
-                        TODO d'update après mais un peu flemme là*/
 
                         let messageFinCombat;
 
                         //region ------ VICTOIRE ------
-                        if ( pvDuMonstre <= 0){//TODO remplacer par le monstre.gtPV()
+                        if ( pvDuMonstre <= 0){//
                             //TODO logique de victoire
                             messageFinCombat = 'Vous avez gagné le combat !'
                         }
