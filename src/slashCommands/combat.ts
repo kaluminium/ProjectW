@@ -23,9 +23,10 @@ export const command: SlashCommand = {
 
     execute: async (interaction) => {
 
+        //region ------ VERIFICATIONS VALIDITE COMMANDE ------
+
         let compte: Compte;
 
-        //region ------ VERIFICATIONS VALIDITE COMMANDE ------
         //Récupère le compte du joueur
         //Erreur(s) possible :
         //- L'utilisateur n'a pas de compte : gérée, indique à l'utilisateur qu'il n'a pas de compte et lui propose d'en créer un
@@ -173,9 +174,6 @@ export const command: SlashCommand = {
                 collector.on('collect', async (i) => {
                     if (i.member.user.id !== interaction.member.user.id) return;
 
-                    //Construction de l'embed utilisé pour les updates
-                    let embedUpdate = new EmbedBuilder()
-
                     //region ------ GESTION DES BOUTONS ------
                     switch (i.customId) {
                         case "spell_1" :
@@ -223,7 +221,7 @@ export const command: SlashCommand = {
 
                         messageAvantDerniereAction = messageDerniereAction;
                         messageDerniereAction = 'Le '+nomDuMonstre+' vous attaque avec '+'getNomAttaque()'+' : -'+dmgDuMonstre +'PV';
-                        //regiond ------ LANCEMENT NOUVEAUX DÉS ------
+                        //region ------ LANCEMENT NOUVEAUX DÉS ------
                         deDuTour = combatLogic.choixDeDuTour(listeDe);
                         deLancesDuTour = combatLogic.lancerDeDuTour(deDuTour);
                         deDuTourDescription = deLancesDuTour.map(([num, str]) => `${num}${str}`).join("; ")
@@ -250,6 +248,8 @@ export const command: SlashCommand = {
                         //Met le champs de l'avant dernière action à jour (toujours utile)
                         avantDerniereAction = {name :'__Avant Dernière Action :__', value : messageAvantDerniereAction};
 
+                        const embedUpdate = new EmbedBuilder()
+
                         embedUpdate
                             .setColor('#0000FF')
                             .setTitle('**------------ Combat Tour : **' + t + ' **------------**')
@@ -265,49 +265,59 @@ export const command: SlashCommand = {
                                 fieldSort3,
                                 fieldSort4
                             );
+
+                        await i.update({
+                            embeds: [embedUpdate],
+                            components: [spellRow]
+                        })
                     }
                     //endregion
 
                     //region ------ FIN DU COMBAT ------
+                    else {
+                        const embedFinCombat = new EmbedBuilder();
+                        //region ------ VICTOIRE ------
+                        if (pvDuMonstre <= 0) {
+                            //TODO logique de victoire
+                            embedFinCombat
+                                .setColor('#00FF00')
+                                .setTitle('**------------ VICTOIRE ------------**')
+                                .addFields(
+                                    {name: '__Drop(s) : __', value: monstre.getInventaire().toString()},
+                                    {name: '__Votre Or : __', value: 'selectedPersonnage.getOr()', inline: true},
+                                    {name: '__Or gagné : __', value: '+' + 'monstre.getOr()', inline: true},
+                                    {name: '\n', value: '\n'},
+                                    {
+                                        name: '__Votre XP : __',
+                                        value: selectedPersonnage.getXp().toString(),
+                                        inline: true
+                                    },
+                                    {name: '__XP gagnée : __', value: 'monstre.getXp()', inline: true}
+                                )
+                        }
+                            //endregion
 
-                    //region ------ VICTOIRE ------
-                    else if ( pvDuMonstre <= 0){
-                        //TODO logique de victoire
-                        embedUpdate
-                            .setColor('#00FF00')
-                            .setTitle('**------------ VICTOIRE ------------**')
-                            .addFields(
-                                {name :'__Drop(s) : __', value : monstre.getInventaire().toString()},
-                                {name :'__Votre Or : __', value : 'selectedPersonnage.getOr()', inline : true},
-                                {name :'__Or gagné : __', value : '+'+'monstre.getOr()', inline : true},
-                                {name :'\n', value : '\n'},
-                                {name :'__Votre XP : __', value : selectedPersonnage.getXp().toString(), inline : true},
-                                {name :'__XP gagnée : __', value : 'monstre.getXp()', inline : true}
-                            )
+                        //region ------ DÉFAITE ------
+                        else if (pvDuJoueur <= 0) {//Pourrait être remplace par juste else, mais ça aide la lecture
+                            //TODO logique de défaite
+                            embedFinCombat
+                                .setColor('#FF0000')
+                                .setTitle('**------------ DÉFAITE ------------**')
+                                .addFields(
+                                    {name: '__Votre Or : __', value: 'selectedPersonnage.getOr()', inline: true},
+                                    {name: '__Or perdu : __', value: '-' + 'monstre.getOrDefaite()', inline: true}
+                                )
+                        }
+                        //endregion
+
+                        await i.update({
+                            embeds: [embedFinCombat],
+                            components: []
+                        })
                     }
-                    //endregion
-
-                    //region ------ DÉFAITE ------
-                    else if (pvDuJoueur <= 0){//Pourrait être remplace par juste else, mais ça aide la lecture
-                        //TODO logique de défaite
-                        embedUpdate
-                            .setColor('#FF0000')
-                            .setTitle('**------------ DÉFAITE ------------**')
-                            .addFields(
-                                {name :'__Votre Or : __', value : 'selectedPersonnage.getOr()', inline : true},
-                                {name :'__Or perdu : __', value : '-'+'monstre.getOrDefaite()', inline : true}
-                            )
-                    }
-                    //endregion
-
                     //endregion
 
                 //endregion
-
-                    await i.update({
-                        embeds: [embedUpdate],
-                        components: [spellRow]
-                    })
                 })
 
                 //TODO rajouter la "défaite" du joueur dans ce bloc pour éviter que les joueurs évitent les défaites en partant AFK
