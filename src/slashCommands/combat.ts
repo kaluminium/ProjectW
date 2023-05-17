@@ -100,7 +100,7 @@ export const command: SlashCommand = {
             '\nPas sûr qu\'il vous drop un Gelano',
             '\nBonne chance, vous en aurez besoin !',
             '\nVous n\'auriez pas du voler ses citrons !',
-            '\nSoyez gentil il a eu une semaine dificile',
+            '\nSoyez gentil il a eu une semaine difficile',
             '\nDésolé, l\'auteur était en grève',
             '\nMa fois, pourquoi pas ?',
             '\nVous pourriez le laisser gagner, c\'est son anniversaire'
@@ -121,7 +121,7 @@ export const command: SlashCommand = {
         let fieldSort4 = {name : '__Sort 4 :__', value : 'listeSort["spell4"].description + listeSort.cout'};
 
         const embed : EmbedBuilder = new EmbedBuilder()
-            .setColor('#FF0000')
+            .setColor('#0000FF')
             .setTitle('**------------ Combat Tour : **'+t+' **------------**')
             .setDescription('Vous affrontez un '+nomDuMonstre)
             .addFields(
@@ -164,13 +164,17 @@ export const command: SlashCommand = {
             components: [spellRow]
         });
 
-        //region ------ COLLECTOR ------
+                //region ------ COLLECTOR ------
                 //Vérifie quel sort a été lancé puis déclenche les actions nécessaires (appel de la fonction de dmg du sort)
                 // + appel de la fonction de prise du dmg du monstre
                 const collector = reponse.createMessageComponentCollector({time: 360000});
 
+
                 collector.on('collect', async (i) => {
                     if (i.member.user.id !== interaction.member.user.id) return;
+
+                    //Construction de l'embed utilisé pour les updates
+                    let embedUpdate = new EmbedBuilder()
 
                     //region ------ GESTION DES BOUTONS ------
                     switch (i.customId) {
@@ -205,30 +209,31 @@ export const command: SlashCommand = {
                     //endregion
 
                     //region ------ MISE A JOUR EMBED ------
-                    if (pvDuMonstre > 0 && pvDuJoueur > 0){
 
-                        //region ------ TOUR DU MONSTRE ------
-                        if (deLancesDuTour.length === 0 || tourPasse) {
 
-                            //remet tourPasse à false au cas où le joueur ait passé son tour
-                            tourPasse = false;
-                            t++;
+                    //region ------ TOUR DU MONSTRE ------
+                    if (deLancesDuTour.length === 0 || tourPasse) {
 
-                            dmgDuMonstre = monstre.degatDeLattaque();
-                            pvDuJoueur = selectedPersonnage.prendreDegats(dmgDuMonstre);
+                        //remet tourPasse à false au cas où le joueur ait passé son tour
+                        tourPasse = false;
+                        t++;
 
-                            messageAvantDerniereAction = messageDerniereAction;
-                            messageDerniereAction = 'Le '+nomDuMonstre+' vous attaque avec '+'getNomAttaque()'+' : -'+dmgDuMonstre +'PV';
-                            //regiond ------ LANCEMENT NOUVEAUX DÉS ------
-                            deDuTour = combatLogic.choixDeDuTour(listeDe);
-                            deLancesDuTour = combatLogic.lancerDeDuTour(deDuTour);
-                            deDuTourDescription = deLancesDuTour.map(([num, str]) => `${num}${str}`).join("; ")
+                        dmgDuMonstre = monstre.degatDeLattaque();
+                        pvDuJoueur = selectedPersonnage.prendreDegats(dmgDuMonstre);
 
-                            //endregion
-                        }
+                        messageAvantDerniereAction = messageDerniereAction;
+                        messageDerniereAction = 'Le '+nomDuMonstre+' vous attaque avec '+'getNomAttaque()'+' : -'+dmgDuMonstre +'PV';
+                        //regiond ------ LANCEMENT NOUVEAUX DÉS ------
+                        deDuTour = combatLogic.choixDeDuTour(listeDe);
+                        deLancesDuTour = combatLogic.lancerDeDuTour(deDuTour);
+                        deDuTourDescription = deLancesDuTour.map(([num, str]) => `${num}${str}`).join("; ")
+
                         //endregion
+                    }
+                    //endregion
 
-                        //region ------ MISE A JOUR DES CHAMPS ------
+                    //region ------ MISE A JOUR DES CHAMPS ------
+                    if (pvDuMonstre > 0 && pvDuJoueur > 0) {
 
                         //Met le champ des PV du joueur à jour (utile dans le cas de tour du monstre)
                         fieldPvJoueur = {name : '__Pv du joueur :__', value : pvDuJoueur.toString(), inline : true};
@@ -245,11 +250,10 @@ export const command: SlashCommand = {
                         //Met le champs de l'avant dernière action à jour (toujours utile)
                         avantDerniereAction = {name :'__Avant Dernière Action :__', value : messageAvantDerniereAction};
 
-
-                        const embedUpdate = new EmbedBuilder()
-                            .setColor('#FF0000')
-                            .setTitle('**------------ Combat Tour : **' + t+ ' **------------**')
-                            .setDescription('Vous affrontez un '+nomDuMonstre)
+                        embedUpdate
+                            .setColor('#0000FF')
+                            .setTitle('**------------ Combat Tour : **' + t + ' **------------**')
+                            .setDescription('Vous affrontez un ' + nomDuMonstre)
                             .addFields(
                                 avantDerniereAction,
                                 derniereAction,
@@ -261,41 +265,49 @@ export const command: SlashCommand = {
                                 fieldSort3,
                                 fieldSort4
                             );
-                        await i.update({
-                            embeds: [embedUpdate],
-                            components: [spellRow]
-                        })
-                        //endregion
                     }
                     //endregion
-                    else{
-                        //region ------ FIN DU COMBAT ------
 
-                        let messageFinCombat;
+                    //region ------ FIN DU COMBAT ------
 
-                        //region ------ VICTOIRE ------
-                        if ( pvDuMonstre <= 0){//
-                            //TODO logique de victoire
-                            messageFinCombat = 'Vous avez gagné le combat !'
-                        }
-                        //endregion
-
-                        //region ------ DÉFAITE ------
-                        else if (pvDuJoueur <= 0){
-                            //TODO logique de défaite
-                            messageFinCombat = 'Vous avez perdu le combat ! (gros naze)'
-                        }
-                        //endregion
-
-                        await i.update({
-                            content : messageFinCombat,
-                            embeds: [],
-                            components: []
-                        })
-
-                        //endregion
+                    //region ------ VICTOIRE ------
+                    else if ( pvDuMonstre <= 0){
+                        //TODO logique de victoire
+                        embedUpdate
+                            .setColor('#00FF00')
+                            .setTitle('**------------ VICTOIRE ------------**')
+                            .addFields(
+                                {name :'__Drop(s) : __', value : monstre.getInventaire().toString()},
+                                {name :'__Votre Or : __', value : 'selectedPersonnage.getOr()', inline : true},
+                                {name :'__Or gagné : __', value : '+'+'monstre.getOr()', inline : true},
+                                {name :'\n', value : '\n'},
+                                {name :'__Votre XP : __', value : selectedPersonnage.getXp().toString(), inline : true},
+                                {name :'__XP gagnée : __', value : 'monstre.getXp()', inline : true}
+                            )
                     }
+                    //endregion
 
+                    //region ------ DÉFAITE ------
+                    else if (pvDuJoueur <= 0){//Pourrait être remplace par juste else, mais ça aide la lecture
+                        //TODO logique de défaite
+                        embedUpdate
+                            .setColor('#FF0000')
+                            .setTitle('**------------ DÉFAITE ------------**')
+                            .addFields(
+                                {name :'__Votre Or : __', value : 'selectedPersonnage.getOr()', inline : true},
+                                {name :'__Or perdu : __', value : '-'+'monstre.getOrDefaite()', inline : true}
+                            )
+                    }
+                    //endregion
+
+                    //endregion
+
+                //endregion
+
+                    await i.update({
+                        embeds: [embedUpdate],
+                        components: [spellRow]
+                    })
                 })
 
                 //TODO rajouter la "défaite" du joueur dans ce bloc pour éviter que les joueurs évitent les défaites en partant AFK
