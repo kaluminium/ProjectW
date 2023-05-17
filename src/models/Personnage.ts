@@ -15,7 +15,9 @@ class Personnage{
     private inventory : Inventaire;
     private race : string
     private sex : string;
-    private pv : number = 150;
+    //TODO A moyen terme il serait bien de séparer la logique de pvMax en pvDeBase et pvBonus
+    private pv : number = 150;//Hardcode temporaire
+    private pvMax : number = 150;//Hardcode temporaire
 
     constructor(id : number, name: string, divinity : string, race : string, sex : string, xp : number) {
         this.id = id;
@@ -126,9 +128,15 @@ class Personnage{
         return this.xp;
     }
 
-    public getPv(){
+    public getPv() :number{
         return this.pv;
     }
+
+    public getPvMax() : number{
+        return this.pvMax;
+    }
+
+
 
     public static async getPersonnage(id : number) : Promise<Personnage>{
         const bdd = await BDDConnexion.getInstance();
@@ -166,6 +174,10 @@ class Personnage{
 
     private setPv(pv: number){
         this.pv = pv;
+    }
+
+    private setPvMax(pvMax : number){
+        this.pvMax = pvMax;
     }
     //endregion
 
@@ -206,14 +218,28 @@ class Personnage{
 
     //endregion
 
-
     //region ------ COMBAT, XP ET NIVEAUX ------
     public prendreDegats(dmg: number): number{
 
+        //Possibilité de rajouter une condition
         this.setPv(this.getPv()-dmg);
 
         //return aussi les pv pour rendre le code plus compact, cela évite d'écrire une ligne de code supplémentaire lorsqu'on appelle la fonction
         return this.getPv();
+    }
+
+    public soignerDegats(soins: number): number {
+
+        //Vérifie que les soins ne vont pas dépasser la vie max, sinon set les pv égaux à pvMax
+        if (this.getPv() + soins <= this.getPvMax()){
+            this.setPv(this.getPv()+soins);
+        }
+        else {
+            this.setPv(this.getPvMax());
+        }
+
+        //return aussi les pv pour rendre le code plus compact, cela évite d'écrire une ligne de code supplémentaire lorsqu'on appelle la fonction
+        return this.getPv()
     }
     public calculerNiveau() : number{
         const niveauMax = 100;
@@ -257,5 +283,27 @@ class Personnage{
         return pourcentage.toFixed(2);
     }
     //endregion
+
+    //region ------ EQUIPEMENTS ------
+
+    public ajusterPvMax(valPv : number, equipe :boolean){
+
+        //Si le joueur équipe l'objet, ajouter son bonus de Pv aux pvMax du joueur
+        if (equipe){
+            this.setPvMax(this.getPvMax()+valPv);
+            //TODO à enlever lors de l'implémentation de l'architecture pvDeBase/pvBonus
+            //Si le joueur était full vie quand il a équipé son objet, augmente aussi ses pv actuels en conséquences
+            if (this.getPv()-valPv===this.getPvMax()) this.setPv(this.getPvMax());
+        }
+        else {
+            this.setPvMax(this.getPvMax()-valPv);
+            //TODO à enlever lors de l'implémation de l'architecture pvDeBase/pvBonus
+            //Si après avoir désequipper son objet le joueur a plus de pv que de pvMax, baisse ses pv en conséquences
+            if (this.getPv()>this.getPvMax()) this.setPv(this.getPvMax());
+        }
+    }
+
+    //endregion
+
 }
 export{Personnage};
