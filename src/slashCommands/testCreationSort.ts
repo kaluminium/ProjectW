@@ -19,8 +19,8 @@ export const command : SlashCommand = {
         let s : Sort = new Sort("boule_de_feu");
         console.log(s);
         console.log(s.getId());
-        console.log(s.getName());
-        console.log(s.getDescription());
+        console.log(Sort.getName(s.getId()));
+        console.log(Sort.getDescription(s.getId()));
         console.log(s.getAssociation());
         console.log(s.getCout());
 

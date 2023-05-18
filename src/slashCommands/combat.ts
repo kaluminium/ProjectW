@@ -121,17 +121,15 @@ export const command: SlashCommand = {
 
         //region ------ CREATION CHAMPS/BOUTONS SORTS ------
 
-        //TODO Permet de stocker les sorts pour plus tard (vraiment utile ?)
         //Tableau des champs de sorts car impossible de concaténer des noms de variables, ça me permet donc de créer les
         //champs de sort dans une boucle
-        const sorts = [];
         const fieldSort = [];
 
         const spellRow  = new ActionRowBuilder<any>()
         //Boucle à travers les sors du joueur pour créer les champs et boutons nécessaires
         for (let j = 0; j < sortsPerso.length; j++){
-            sorts[j] = new Sort(sortsPerso[j]);
-            let nomSort = sorts[j].getName();
+            let sortActuel = sortsPerso[j];
+            let nomSort = Sort.getName(sortActuel);
 
             //Crée le bouton du sort
             spellRow.addComponents(
@@ -140,9 +138,8 @@ export const command: SlashCommand = {
                     .setLabel(nomSort)
                     .setStyle(ButtonStyle.Danger)
             )
-            //TODO remplacer getCout par getDegats
             //Crée le champ du sort
-            fieldSort[j] = {name : "__"+nomSort+" : __", value : sorts[j].getDescription() + " : " + sorts[j].getCout()}
+            fieldSort[j] = {name : "__"+nomSort+" : __", value : Sort.getDescription(sortActuel) + " : " + Sort.getDegats(sortActuel)}
         }
         //bouton de passage de tour
         spellRow.addComponents(
@@ -185,18 +182,23 @@ export const command: SlashCommand = {
                     //region ------ GESTION DES BOUTONS ------
                     switch (i.customId) {
                         case "spell_1" :
-                            //TODO c'est là que y aura le try/catch comme ça les dmg sont mis et les dé supprimés seulement si le sort se lance
-                            //Maj des pv du monstre
-                            dmgDuSort = 2;//TODO appel à la fonction de dmg du sort
-                            pvDuMonstre = monstre.prendreDegats(dmgDuSort);
 
-                            messageAvantDerniereAction = messageDerniereAction;
-                            messageDerniereAction = 'Vous lancez '+'nomDuSort'+' : '+nomDuMonstre+' -'+dmgDuSort+'PV';
+                            try{
+                                dmgDuSort = Sort.launch(sortsPerso[0], deLancesDuTour.slice(0,3));
+                                //Maj des pv du monstre
+                                pvDuMonstre = monstre.prendreDegats(dmgDuSort);
 
-                            //Maj des dés du tour
-                            deLancesDuTour.splice(0, 3);
-                            deDuTourDescription = deLancesDuTour.map(([num, str]) => `${num}${str}`).join("; ");
+                                messageAvantDerniereAction = messageDerniereAction;
+                                messageDerniereAction = 'Vous lancez '+ Sort.getName(sortsPerso[0])+' : '+nomDuMonstre+' -'+dmgDuSort+'PV';
 
+                                //Maj des dés du tour
+                                deLancesDuTour.splice(0, 3);
+                                deDuTourDescription = deLancesDuTour.map(([num, str]) => `${num}${str}`).join("; ");
+                            }
+                            catch (echecLancerSort){
+                                messageAvantDerniereAction = messageDerniereAction;
+                                messageDerniereAction = 'Vous ne pouvez pas lancer ce sort';
+                            }
                             break;
 
                         case "spell_2" :
