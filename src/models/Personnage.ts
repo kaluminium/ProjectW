@@ -28,7 +28,19 @@ class Personnage{
         this.xp = xp;
     }
 
-    //region ------ CREATION DÉS ------
+
+    public  getSort(): Array<string> {
+        let listeSort: Array<string> = [];
+        for (let i : number = 0; i < sortRace[this.getRace()].listDeSort.length; i++) {
+            listeSort.push(sortRace[this.getRace()].listDeSort[i].id);
+        }
+        for (let i : number = 0; i < sortDivinity[this.getDivinity()].listDeSort.length; i++) {
+            listeSort.push(sortDivinity[this.getDivinity()].listDeSort[i].id);
+        }
+
+        return listeSort;
+    }
+
     public creationDice(): Array<De> {
         let diceRace: Array<De> = this.creationDiceRace();
         diceRace.push(...this.creationDiceDivinite());
