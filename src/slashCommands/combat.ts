@@ -197,6 +197,7 @@ export const command: SlashCommand = {
                     if (i.member.user.id !== interaction.member.user.id) return;
 
                     //region ------ GESTION DES BOUTONS ------
+                    //TODO Gros refactor à faire parce que beaucoup de répétition de code
                     switch (i.customId) {
                         case "spell_0" :
 
@@ -219,12 +220,66 @@ export const command: SlashCommand = {
                             break;
 
                         case "spell_1" :
+
+                            try{
+                                dmgDuSort = Sort.launch(sortsPerso[1], deLancesDuTour.slice(0,3));
+                                //Maj des pv du monstre
+                                pvDuMonstre = monstre.prendreDegats(dmgDuSort);
+
+                                messageAvantDerniereAction = messageDerniereAction;
+                                messageDerniereAction = 'Vous lancez '+ Sort.getName(sortsPerso[1])+' : '+nomDuMonstre+' -'+dmgDuSort+'PV';
+
+                                //Maj des dés du tour
+                                deLancesDuTour.splice(0, 3);
+                                deDuTourDescription = deLancesDuTour.map(([num, str]) => `${num}${str}`).join("; ");
+                            }
+                            catch (echecLancerSort){
+                                messageAvantDerniereAction = messageDerniereAction;
+                                messageDerniereAction = 'Vous ne pouvez pas lancer ce sort';
+                            }
+
                             break;
 
                         case "spell_2" :
+
+                            try{
+                                dmgDuSort = Sort.launch(sortsPerso[2], deLancesDuTour.slice(0,3));
+                                //Maj des pv du monstre
+                                pvDuMonstre = monstre.prendreDegats(dmgDuSort);
+
+                                messageAvantDerniereAction = messageDerniereAction;
+                                messageDerniereAction = 'Vous lancez '+ Sort.getName(sortsPerso[2])+' : '+nomDuMonstre+' -'+dmgDuSort+'PV';
+
+                                //Maj des dés du tour
+                                deLancesDuTour.splice(0, 3);
+                                deDuTourDescription = deLancesDuTour.map(([num, str]) => `${num}${str}`).join("; ");
+                            }
+                            catch (echecLancerSort){
+                                messageAvantDerniereAction = messageDerniereAction;
+                                messageDerniereAction = 'Vous ne pouvez pas lancer ce sort';
+                            }
+
                             break;
 
                         case "spell_3" :
+
+                            try{
+                                dmgDuSort = Sort.launch(sortsPerso[3], deLancesDuTour.slice(0,3));
+                                //Maj des pv du monstre
+                                pvDuMonstre = monstre.prendreDegats(dmgDuSort);
+
+                                messageAvantDerniereAction = messageDerniereAction;
+                                messageDerniereAction = 'Vous lancez '+ Sort.getName(sortsPerso[3])+' : '+nomDuMonstre+' -'+dmgDuSort+'PV';
+
+                                //Maj des dés du tour
+                                deLancesDuTour.splice(0, 3);
+                                deDuTourDescription = deLancesDuTour.map(([num, str]) => `${num}${str}`).join("; ");
+                            }
+                            catch (echecLancerSort){
+                                messageAvantDerniereAction = messageDerniereAction;
+                                messageDerniereAction = 'Vous ne pouvez pas lancer ce sort';
+                            }
+
                             break;
 
                         case "passe_tour" :
