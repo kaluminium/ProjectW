@@ -1,6 +1,7 @@
  {
   "boule_de_feu": {
     "association" : "dwarf",
+    "type" : "R",
     "id": "Boule_de_feu",
     "name": "Boule de feu",
     "description": "lance une boule de feu sur l'ennemi",
@@ -19,6 +20,7 @@
   },
   "rayon_ardent": {
     "association" : "dwarf",
+    "type" : "R",
     "id": "Rayon_ardent",
     "name": "Rayon ardent",
     "description": "lance un rayon ardent sur l'ennemi",
@@ -37,6 +39,7 @@
   },
   "main_brulante": {
     "association" : "dwarf",
+    "type" : "R",
     "id": "Main_brulante",
     "name": "Main brulante",
     "description": "Brule l'enemie avec une main brulante de feu ",
@@ -55,6 +58,7 @@
   },
   "rayon_de_givre": {
     "association" : "human",
+    "type" : "B",
     "id": "Rayon_de_givre",
     "name": "Rayon de givre",
     "description": "lance un rayon de givre sur l'ennemi",
@@ -73,6 +77,7 @@
   },
   "tempete_de_grele": {
     "association" : "human",
+    "type" : "B",
     "id": "Tempete_de_grele",
     "name": "Tempete de grele",
     "description": "lance une tempete de grele sur l'ennemi",
@@ -91,6 +96,7 @@
   },
   "cone_de_froid": {
     "association" : "human",
+    "type" : "B",
     "id": "cone_de_froid",
     "name": "Cône de froid",
     "description": "lance un cône de froid sur l'ennemi",
@@ -109,6 +115,7 @@
   },
   "tempete_de_grele": {
     "association" : "human",
+    "type" : "B",
     "id": "Tempete_de_grele",
     "name": "Tempete de grele",
     "description": "lance une tempete de grele sur l'ennemi",
@@ -127,6 +134,7 @@
   },
   "trait_ensorcele": {
     "association" : "elf",
+    "type" : "G",
     "id": "trait_ensorcele",
     "name": "Trait ensorcele",
     "description": "lance un trait ensorcele sur l'ennemi",
@@ -145,6 +153,7 @@
   },
   "vague_tonnante": {
     "association" : "elf",
+    "type" : "G",
     "id": "vague_tonnante",
     "name": "Vague tonnante",
     "description": "lance une vague tonnante sur l'ennemi",
@@ -163,6 +172,7 @@
   },
   "orbe_chromatique": {
     "association" : "elf",
+    "type" : "G",
     "id": "orbe_chromatique",
     "name": "Orbe chromatique",
     "description": "lance un orbe chromatique sur l'ennemi",
@@ -181,6 +191,7 @@
   },
   "flamme_eternelle": {
     "association" : "mountain",
+    "type" : "G",
     "id": "flamme_eternelle",
     "name": "Flamme eternelle",
     "description": "lance une flamme eternelle sur l'ennemi",
@@ -199,6 +210,7 @@
   },
   "epee_de_feu": {
     "association" : "mountain",
+    "type" : "R",
     "id": "epee_de_feu",
     "name": "Epee de feu",
     "description": "lance une epee de feu sur l'ennemi",
@@ -217,6 +229,7 @@
   },
   "eclair": {
     "association" : "ocean",
+    "type" : "B",
     "id": "eclair",
     "name": "eclair",
     "description": "lance un eclair sur l'ennemi",
@@ -235,6 +248,7 @@
   },
   "eclat_du_soleil": {
     "association" : "ocean",
+    "type" : "G",
     "id": "eclat_du_soleil",
     "name": "Eclat du soleil",
     "description": "lance un eclat du soleil sur l'ennemi",
@@ -253,6 +267,7 @@
   },
   "nuee_de_meteores": {
     "association" : "volcano",
+    "type" : "R",
     "id": "nuee_de_meteores",
     "name": "Nuee de meteores",
     "description": "lance une nuee de meteores sur l'ennemi",
@@ -271,6 +286,7 @@
   },
   "fleche_de_feu": {
     "association" : "volcano",
+    "type" : "B",
     "id": "fleche_de_feu",
     "name": "Fleche de feu",
     "description": "lance une fleche de feu sur l'ennemi",

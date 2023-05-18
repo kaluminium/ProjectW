@@ -1,8 +1,8 @@
 {
     "Gobelin": {
       "description": "un gobelin vert",
-      "vie_min": 10,
-      "vie_max": 20,
+      "vie_min": 50,
+      "vie_max": 70,
       "xp": 10,
       "type": [
         "normal",
@@ -76,8 +76,8 @@
 
     "Troll": {
       "description": "un troll bleu",
-      "vie_min": 40,
-      "vie_max": 90,
+      "vie_min": 100,
+      "vie_max": 150,
       "xp": 40,
       "type": [
         "normal",
