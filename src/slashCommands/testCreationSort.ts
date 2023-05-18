@@ -15,12 +15,19 @@ export const command : SlashCommand = {
 
 
     execute: async (interaction: CommandInteraction) => {
+        console.log("Test des static");
+        let sort : string = "boule_de_feu";
+        console.log(Sort.getName(sort));
+        console.log(Sort.getDegats(sort));
+        console.log(Sort.getType(sort));
+
+
+
+
         console.log("Creation de sort");
         let s : Sort = new Sort("boule_de_feu");
         console.log(s);
         console.log(s.getId());
-        console.log(s.getName());
-        console.log(s.getDescription());
         console.log(s.getAssociation());
         console.log(s.getCout());
 

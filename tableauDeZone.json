@@ -1,0 +1,15 @@
+{
+  "zone" :{
+      "listeDeZone" : [
+        {
+          "id" : "village",
+        },
+        {
+          "id" : "foret"
+        },
+        {
+          "id" : "montagne"
+        }
+      ]
+  }
+}

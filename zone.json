@@ -1,0 +1,16 @@
+{
+"village" : {
+   "id": "village",
+   "name": "Village",
+   "description": "Le village du debut de chaque aventures"
+},
+  "forest" : {
+   "id": "foret",
+   "name": "La foret"
+   "description": "La foret repaire des gobelins"
+},
+  "montagne" : {
+   "id": "montagne",
+   "name": "La montagne"
+   "description": "La montagne repaire des trolls"
+}
