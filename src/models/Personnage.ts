@@ -28,19 +28,7 @@ class Personnage{
         this.xp = xp;
     }
 
-
-    public  getSort(): Array<string> {
-        let listeSort: Array<string> = [];
-        for (let i : number = 0; i < sortRace[this.getRace()].listDeSort.length; i++) {
-            listeSort.push(sortRace[this.getRace()].listDeSort[i].id);
-        }
-        for (let i : number = 0; i < sortDivinity[this.getDivinity()].listDeSort.length; i++) {
-            listeSort.push(sortDivinity[this.getDivinity()].listDeSort[i].id);
-        }
-
-        return listeSort;
-    }
-
+    //region ------ CREATION DÉS ------
     public creationDice(): Array<De> {
         let diceRace: Array<De> = this.creationDiceRace();
         diceRace.push(...this.creationDiceDivinite());
@@ -148,8 +136,6 @@ class Personnage{
         return this.pvMax;
     }
 
-
-
     public static async getPersonnage(id : number) : Promise<Personnage>{
         const bdd = await BDDConnexion.getInstance();
         const result = await bdd.query("SELECT * FROM `personnage` WHERE `id` = ?", [id]);
@@ -165,7 +151,7 @@ class Personnage{
         throw new Error("Le personnage n'existe pas");
     }
 
-    public  getSort(): Array<string> {
+    public getSort(): Array<string> {
         let listeSort: Array<string> = [];
         for (let i : number = 0; i < sortRace[this.getRace()].listDeSort.length; i++) {
             listeSort.push(sortRace[this.getRace()].listDeSort[i].id);

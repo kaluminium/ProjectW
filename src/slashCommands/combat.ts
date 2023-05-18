@@ -13,6 +13,7 @@ import {ListePersonnage} from "../models/ListePersonnage";
 import {De} from "../models/De";
 import {combatLogic} from "../combatLogic";
 import {Monstre} from "../models/Monstre";
+import {Sort} from "../models/sort";
 
 
 export const command: SlashCommand = {
@@ -26,7 +27,6 @@ export const command: SlashCommand = {
         //region ------ VERIFICATIONS VALIDITE COMMANDE ------
 
         let compte: Compte;
-
         //Récupère le compte du joueur
         //Erreur(s) possible :
         //- L'utilisateur n'a pas de compte : gérée, indique à l'utilisateur qu'il n'a pas de compte et lui propose d'en créer un
@@ -62,6 +62,9 @@ export const command: SlashCommand = {
         //Une partie de la logique de combat est placée dans le script "combatLogic.ts", toutefois c'est une classe static donc c'est tout de même
         //la fonction de combat qui gérera les variables (Arrays de dés)
         let pvDuJoueur = selectedPersonnage.getPv();
+
+        //Création sorts
+        const sortsPerso = selectedPersonnage.getSort();
         let dmgDuSort;
 
         //Création des dés
@@ -69,7 +72,8 @@ export const command: SlashCommand = {
         //Séléction et lancer des dés pour le 1er tour
         let deDuTour = combatLogic.choixDeDuTour(listeDe);
         let deLancesDuTour = combatLogic.lancerDeDuTour(deDuTour);
-
+        //Conversion de l'array de dés en string pour pouvoir l'afficher
+        let deDuTourDescription = deLancesDuTour.map(([num, str]) => `${num}${str}`).join("; ")
         //endregion
 
         //region ------ MONSTRE ------
@@ -85,15 +89,13 @@ export const command: SlashCommand = {
         //endregion
 
         //region ------ MISE EN PLACE EMBED ------
-
-        //region ------ CREATION CHAMPS ------
-        //variables qui permettent de gérer les tours
         let t = 1;
         let tourPasse = false;
 
-        //Conversion de l'array de dés en string pour pouvoir l'afficher
-        let deDuTourDescription = deLancesDuTour.map(([num, str]) => `${num}${str}`).join("; ")
+        //region ------ CREATION CHAMPS ------
+        //variables qui permettent de gérer les tours
 
+        //TODO pour l'instant il est hardcodé à même le script mais à terme ça serait bien d'aller le pioche dans un JSON par exemple
         let messagesDebut =
             ['\nVous vous êtes bien échauffé ?',
             '\nIl aurait fallu lire les sorts avant !',
@@ -110,43 +112,37 @@ export const command: SlashCommand = {
         let messageDerniereAction = 'Vous avez engagé le combat contre '+nomDuMonstre+messagesDebut[Math.floor(Math.random()* messagesDebut.length)];
         let messageAvantDerniereAction;
 
+        let avantDerniereAction;//Vide au début du combat car une seule action
         let derniereAction = {name :'__Dernière Action :__', value : messageDerniereAction};
-        let avantDerniereAction;
         let fieldPvJoueur = {name : '__Pv du joueur :__', value : pvDuJoueur.toString(), inline : true};
         let fieldPvMonstre = {name : '__Pv du Monstre :__', value : pvDuMonstre.toString(), inline : true};
         let fieldDeDuTour = {name : '__Dés du tour :__', value : 'Dés : ' +deDuTourDescription};
-        //TODO à mettre dans une boucle for, surement dans celle de création des boutons ?
-        let fieldSort1 = {name : '__Sort 1 :__', value : 'listeSort["spell1"].description + listeSort.cout'};
-        let fieldSort2 = {name : '__Sort 2 :__', value : 'listeSort["spell2"].description + listeSort.cout'};
-        let fieldSort3 = {name : '__Sort 3 :__', value : 'listeSort["spell3"].description + listeSort.cout'};
-        let fieldSort4 = {name : '__Sort 4 :__', value : 'listeSort["spell4"].description + listeSort.cout'};
-
-        const embed : EmbedBuilder = new EmbedBuilder()
-            .setColor('#0000FF')
-            .setTitle('**------------ Combat Tour : **'+t+' **------------**')
-            .setDescription('Vous affrontez un '+nomDuMonstre)
-            .addFields(
-                derniereAction,
-                fieldPvJoueur,
-                fieldPvMonstre,
-                fieldDeDuTour,
-                fieldSort1,
-                fieldSort2,
-                fieldSort3,
-                fieldSort4
-        );
-
         //endregion
 
-        //region ------ CREATION BOUTONS SORTS ------
+        //region ------ CREATION CHAMPS/BOUTONS SORTS ------
+
+        //TODO Permet de stocker les sorts pour plus tard (vraiment utile ?)
+        //Tableau des champs de sorts car impossible de concaténer des noms de variables, ça me permet donc de créer les
+        //champs de sort dans une boucle
+        const sorts = [];
+        const fieldSort = [];
+
         const spellRow  = new ActionRowBuilder<any>()
-        for (let j = 1; j <= 4; j++){
+        //Boucle à travers les sors du joueur pour créer les champs et boutons nécessaires
+        for (let j = 0; j < sortsPerso.length; j++){
+            sorts[j] = new Sort(sortsPerso[j]);
+            let nomSort = sorts[j].getName();
+
+            //Crée le bouton du sort
             spellRow.addComponents(
                 new ButtonBuilder()
-                    .setCustomId(`spell_`+j)
-                    .setLabel(`Spell `+j)
+                    .setCustomId(`spell_`+(j+1))
+                    .setLabel(nomSort)
                     .setStyle(ButtonStyle.Danger)
             )
+            //TODO remplacer getCout par getDegats
+            //Crée le champ du sort
+            fieldSort[j] = {name : "__"+nomSort+" : __", value : sorts[j].getDescription() + " : " + sorts[j].getCout()}
         }
         //bouton de passage de tour
         spellRow.addComponents(
@@ -155,9 +151,23 @@ export const command: SlashCommand = {
                 .setLabel(`Passer Tour`)
                 .setStyle(ButtonStyle.Secondary)
         )
-
         //endregion
 
+        //Construction de l'embed
+        const embed : EmbedBuilder = new EmbedBuilder()
+            .setColor('#0000FF')
+            .setTitle('**------------ Combat Tour : '+t+' ------------**')
+            .setDescription('Vous affrontez un '+nomDuMonstre)
+            .addFields(
+                derniereAction,
+                fieldPvJoueur,
+                fieldPvMonstre,
+                fieldDeDuTour,
+                fieldSort[0],
+                fieldSort[1],
+                fieldSort[2],
+                fieldSort[3]
+            );
         //endregion
 
         let reponse = await interaction.reply({
@@ -169,8 +179,6 @@ export const command: SlashCommand = {
                 //Vérifie quel sort a été lancé puis déclenche les actions nécessaires (appel de la fonction de dmg du sort)
                 // + appel de la fonction de prise du dmg du monstre
                 const collector = reponse.createMessageComponentCollector({time: 360000});
-
-
                 collector.on('collect', async (i) => {
                     if (i.member.user.id !== interaction.member.user.id) return;
 
@@ -208,7 +216,6 @@ export const command: SlashCommand = {
 
                     //region ------ MISE A JOUR EMBED ------
 
-
                     //region ------ TOUR DU MONSTRE ------
                     if (deLancesDuTour.length === 0 || tourPasse) {
 
@@ -225,7 +232,6 @@ export const command: SlashCommand = {
                         deDuTour = combatLogic.choixDeDuTour(listeDe);
                         deLancesDuTour = combatLogic.lancerDeDuTour(deDuTour);
                         deDuTourDescription = deLancesDuTour.map(([num, str]) => `${num}${str}`).join("; ")
-
                         //endregion
                     }
                     //endregion
@@ -235,24 +241,18 @@ export const command: SlashCommand = {
 
                         //Met le champ des PV du joueur à jour (utile dans le cas de tour du monstre)
                         fieldPvJoueur = {name : '__Pv du joueur :__', value : pvDuJoueur.toString(), inline : true};
-
                         //Met le champs des PV du Monstre à jour (utile dans le cas où le joueur à lancer un sort)
                         fieldPvMonstre = {name: '__Pv du Monstre :__', value: pvDuMonstre.toString(), inline : true};
-
                         //Met le champs des dés du tour à jour (utile dans le cas où le joueur à lancer un sort mais aussi après le tour du monstre)
                         fieldDeDuTour = {name: '__Dés du tour :__', value: 'Dés : ' + deDuTourDescription};
-
                         //Met le champs de la dernière action à jour (toujours utile)
                         derniereAction = {name :'__Dernière Action :__', value : messageDerniereAction};
-
                         //Met le champs de l'avant dernière action à jour (toujours utile)
                         avantDerniereAction = {name :'__Avant Dernière Action :__', value : messageAvantDerniereAction};
 
                         const embedUpdate = new EmbedBuilder()
-
-                        embedUpdate
                             .setColor('#0000FF')
-                            .setTitle('**------------ Combat Tour : **' + t + ' **------------**')
+                            .setTitle('**------------ Combat Tour : ' + t + ' ------------**')
                             .setDescription('Vous affrontez un ' + nomDuMonstre)
                             .addFields(
                                 avantDerniereAction,
@@ -260,10 +260,10 @@ export const command: SlashCommand = {
                                 fieldPvJoueur,
                                 fieldPvMonstre,
                                 fieldDeDuTour,
-                                fieldSort1,
-                                fieldSort2,
-                                fieldSort3,
-                                fieldSort4
+                                fieldSort[0],
+                                fieldSort[1],
+                                fieldSort[2],
+                                fieldSort[3]
                             );
 
                         await i.update({
@@ -295,7 +295,7 @@ export const command: SlashCommand = {
                                     {name: '__XP gagnée : __', value: 'monstre.getXp()', inline: true}
                                 )
                         }
-                            //endregion
+                        //endregion
 
                         //region ------ DÉFAITE ------
                         else if (pvDuJoueur <= 0) {//Pourrait être remplace par juste else, mais ça aide la lecture
