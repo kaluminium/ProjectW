@@ -18,46 +18,32 @@ export class Sort {
         this.association = sort[id].association;
     }
 
-
-
-    public static launch(id: string, dice: Array<[number,string]>): void {
+    public static launch(id: string, dice: Array<[number,string]>): number {
         switch (id) {
             case "rayon_de_givre":
-                Sort.launch_rayon_de_givre(dice);
-                break;
+                return Sort.launch_rayon_de_givre(dice);
             case "tempete_de_grele":
-                Sort.launch_tempete_de_grele(dice);
-                break;
+                return Sort.launch_tempete_de_grele(dice);
             case "trait_ensorcele":
-                Sort.launch_trait_ensorcele(dice);
-                break;
+                return Sort.launch_trait_ensorcele(dice);
             case "vague_tonnante":
-                Sort.launch_vague_tonnante(dice);
-                break;
+                return Sort.launch_vague_tonnante(dice);
             case "boule_de_feu":
-                Sort.launch_boule_de_feu(dice);
-                break;
+                return Sort.launch_boule_de_feu(dice);
             case "rayon_ardent":
-                Sort.launch_rayon_ardent(dice);
-                break;
+                return Sort.launch_rayon_ardent(dice);
             case "flamme_eternelle":
-                Sort.launch_flamme_eternelle(dice);
-                break;
+                return Sort.launch_flamme_eternelle(dice);
             case "epee_de_feu":
-                Sort.launch_epee_de_feu(dice);
-                break;
+                return Sort.launch_epee_de_feu(dice);
             case "eclair":
-                Sort.launch_eclair(dice);
-                break;
+                return Sort.launch_eclair(dice);
             case "eclat_du_soleil":
-                Sort.launch_eclat_du_soleil(dice);
-                break;
+                return Sort.launch_eclat_du_soleil(dice);
             case "nuee_de_meteores":
-                Sort.launch_nuee_de_meteores(dice);
-                break;
+                return Sort.launch_nuee_de_meteores(dice);
             case "fleche_de_feu":
-                Sort.launch_fleche_de_feu(dice);
-                break;
+                return Sort.launch_fleche_de_feu(dice);
             default: throw new Error("echecSortNonTrouve");
         }
     }
@@ -363,8 +349,6 @@ export class Sort {
 
     }
 
-
-
     public static isCoutValide(couleurRequise: Array<string>, couleurEnvoye: Array<string>): boolean {
         if (couleurRequise.length != 3 || couleurEnvoye.length != 3) {
             throw new Error("L'array doit etre egale a 3");
@@ -374,7 +358,6 @@ export class Sort {
             }
         return false;
         }
-
 
     public static getName(id : string): string {
         return sort[id].name;
