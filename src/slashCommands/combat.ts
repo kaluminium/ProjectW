@@ -132,12 +132,29 @@ export const command: SlashCommand = {
             let nomSort = Sort.getName(sortActuel);
 
             //Crée le bouton du sort
-            spellRow.addComponents(
-                new ButtonBuilder()
-                    .setCustomId(`spell_`+(j+1))
-                    .setLabel(nomSort)
-                    .setStyle(ButtonStyle.Danger)
-            )
+            let button = new ButtonBuilder()
+                .setCustomId(`spell_`+j)
+                .setLabel(nomSort)
+
+            //Assigne la couleur du bouton en fonction de son type
+            switch (Sort.getType(sortActuel)){
+
+                case "R" :
+                    button.setStyle(ButtonStyle.Danger);
+                    break;
+
+                case "G" :
+                    button.setStyle(ButtonStyle.Success);
+                    break;
+
+                case "B" :
+                    button.setStyle(ButtonStyle.Primary);
+                    break;
+            }
+
+            //Ajoute le bouton à spellRow
+            spellRow.addComponents(button);
+
             //Crée le champ du sort
             fieldSort[j] = {name : "__"+nomSort+" : __", value : Sort.getDescription(sortActuel) + " : " + Sort.getDegats(sortActuel)}
         }
@@ -181,7 +198,7 @@ export const command: SlashCommand = {
 
                     //region ------ GESTION DES BOUTONS ------
                     switch (i.customId) {
-                        case "spell_1" :
+                        case "spell_0" :
 
                             try{
                                 dmgDuSort = Sort.launch(sortsPerso[0], deLancesDuTour.slice(0,3));
@@ -201,13 +218,13 @@ export const command: SlashCommand = {
                             }
                             break;
 
+                        case "spell_1" :
+                            break;
+
                         case "spell_2" :
                             break;
 
                         case "spell_3" :
-                            break;
-
-                        case "spell_4" :
                             break;
 
                         case "passe_tour" :
