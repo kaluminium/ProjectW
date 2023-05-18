@@ -1,5 +1,3 @@
-import { De } from "./De";
-
 const sort = require("../../sort.json");
 
 export class Sort {
@@ -9,13 +7,59 @@ export class Sort {
     private description: string;
     private cout: Array<string>;
     private association: string;
+    private type: string;
 
     constructor(id: string) {
         this.id = id;
+        this.type = sort[id].type;
         this.name = sort[id].name;
         this.description = sort[id].description;
         this.cout = this.ajoutDuCout(id);
         this.association = sort[id].association;
+    }
+
+
+
+    public static launch(id: string, dice: Array<[number,string]>): void {
+        switch (id) {
+            case "rayon_de_givre":
+                Sort.launch_rayon_de_givre(dice);
+                break;
+            case "tempete_de_grele":
+                Sort.launch_tempete_de_grele(dice);
+                break;
+            case "trait_ensorcele":
+                Sort.launch_trait_ensorcele(dice);
+                break;
+            case "vague_tonnante":
+                Sort.launch_vague_tonnante(dice);
+                break;
+            case "boule_de_feu":
+                Sort.launch_boule_de_feu(dice);
+                break;
+            case "rayon_ardent":
+                Sort.launch_rayon_ardent(dice);
+                break;
+            case "flamme_eternelle":
+                Sort.launch_flamme_eternelle(dice);
+                break;
+            case "epee_de_feu":
+                Sort.launch_epee_de_feu(dice);
+                break;
+            case "eclair":
+                Sort.launch_eclair(dice);
+                break;
+            case "eclat_du_soleil":
+                Sort.launch_eclat_du_soleil(dice);
+                break;
+            case "nuee_de_meteores":
+                Sort.launch_nuee_de_meteores(dice);
+                break;
+            case "fleche_de_feu":
+                Sort.launch_fleche_de_feu(dice);
+                break;
+            default: throw new Error("echecSortNonTrouve");
+        }
     }
 
     public static launch_rayon_de_givre(dice: Array<[number,string]>): number{
@@ -332,7 +376,21 @@ export class Sort {
         }
 
 
+    public static getName(id : string): string {
+        return sort[id].name;
+    }
 
+    public static getDescription(id : string): string {
+        return sort[id].description;
+    }
+
+    public static getDegats(id : string): string {
+        return sort[id].degats;
+    }
+
+    public static getType(id: string): string{
+        return sort[id].type;
+    }
     public ajoutDuCout(id: string): Array<string> {
 
         let cout: Array<string> = [];
@@ -344,14 +402,6 @@ export class Sort {
 
     public getId(): string {
         return this.id;
-    }
-
-    public getName(): string {
-        return this.name;
-    }
-
-    public getDescription(): string {
-        return this.description;
     }
 
     public getCout(): Array<string> {
