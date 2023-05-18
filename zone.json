@@ -6,11 +6,12 @@
 },
   "forest" : {
    "id": "foret",
-   "name": "La foret"
+   "name": "La foret",
    "description": "La foret repaire des gobelins"
 },
   "montagne" : {
    "id": "montagne",
-   "name": "La montagne"
+   "name": "La montagne",
    "description": "La montagne repaire des trolls"
+}
 }

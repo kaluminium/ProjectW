@@ -16,14 +16,21 @@ class Personnage{
     private race : string
     private sex : string;
     private pv : number = 150;
+    private zone : string; // zone actuelle du personnage
+    private timerActuel : number; // temps au lancement de la commande
+    private timerDisponible : number; // temps quand le personnage sera disponible
 
-    constructor(id : number, name: string, divinity : string, race : string, sex : string, xp : number) {
+    constructor(id : number, name: string, divinity : string, race : string, sex : string, xp : number,
+                zone : string, timerActuel : number, timerDisponible : number) {
         this.id = id;
         this.name = name;
         this.divinity = divinity;
         this.race = race;
         this.sex = sex;
         this.xp = xp;
+        this.zone = zone
+        this.timerActuel = timerActuel;
+        this.timerDisponible = timerDisponible;
     }
 
 
@@ -120,6 +127,15 @@ class Personnage{
 
     //region ------ GETTERS ------
 
+    public getZone() : string {
+        return this.zone;
+    }
+    public getTimerActuel() : number{
+        return this.timerActuel;
+        }
+    public getTimerDisponible() : number{
+        return this.timerDisponible;
+        }
     public getRace() : string{
         return this.race;
     }
@@ -151,7 +167,10 @@ class Personnage{
             let race = result[0].race;
             let sex = result[0].sex;
             let xp = result[0].xp;
-            return new Personnage(id, name, divinity, race, sex, xp);
+            let zone = result[0].zone;
+            let timerActuel = result[0].timerActuel;
+            let timerDisponible = result[0].timerDisponible;
+            return new Personnage(id, name, divinity, race, sex, xp, zone, timerActuel,timerDisponible);
         }
         throw new Error("Le personnage n'existe pas");
     }

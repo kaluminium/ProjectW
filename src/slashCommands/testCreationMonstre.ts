@@ -31,6 +31,7 @@ export const command : SlashCommand = {
             autocomplete: true
         },
     ],
+
     autocomplete: async (interaction: AutocompleteInteraction) => {
         const focusedOption : AutocompleteFocusedOption = interaction.options.getFocused(true);
         let choices : Array<{name: string, value: string}>;

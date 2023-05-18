@@ -2,7 +2,7 @@
   "zone" :{
       "listeDeZone" : [
         {
-          "id" : "village",
+          "id" : "village"
         },
         {
           "id" : "foret"

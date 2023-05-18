@@ -22,5 +22,6 @@ export const command : SlashCommand = {
         console.log("Dice en 1 tableau");
         console.log(p.creationDice());
 
+
     }
 }
