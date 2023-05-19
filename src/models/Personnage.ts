@@ -2,6 +2,8 @@ import {Compte} from "./Compte";
 import {ListePersonnage} from "./ListePersonnage";
 import {BDDConnexion} from "./BDDConnexion";
 import {De} from "./De";
+import {Inventaire} from "./Inventaire";
+import {BackPack} from "./BackPack";
 const sortRace = require("../../associationSortRace.json");
 const sortDivinity = require("../../associationSortDivinity.json");
 
@@ -21,6 +23,7 @@ class Personnage{
     private zone : string; // zone actuelle du personnage
     private timerActuel : number; // temps au lancement de la commande
     private timerDisponible : number; // temps quand le personnage sera disponible
+    private backPack : BackPack;
 
     constructor(id : number, name: string, divinity : string, race : string, sex : string, xp : number,
                 zone : string, timerActuel : number, timerDisponible : number, pv : number) {
@@ -196,7 +199,9 @@ class Personnage{
             let timerActuel = result[0].timerActuel;
             let timerDisponible = result[0].timerDisponible;
             let pv = result[0].pv;
-            return new Personnage(id, name, divinity, race, sex, xp, zone, timerActuel,timerDisponible,pv);
+            let personnage = new Personnage(id, name, divinity, race, sex, xp, zone, timerActuel,timerDisponible,pv);
+            personnage.backPack = await BackPack.getBackPack(personnage);
+            return personnage;
         }
         throw new Error("Le personnage n'existe pas");
     }
