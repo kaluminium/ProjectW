@@ -152,6 +152,15 @@ export class Monstre {
     //endregion
 
     //region ------ GETTERS ------
+    public static getOr(tableau: any[]): any {
+        const indexOr = tableau.findIndex((element) => typeof element === 'string' && element.toLowerCase() === 'or');
+        if (indexOr !== -1 && indexOr + 1 < tableau.length) {
+            return tableau[indexOr + 1];
+        }
+        return null;
+
+    }
+
     public getTailleInventaire(): number{
         return this.inventaire.length;
     }

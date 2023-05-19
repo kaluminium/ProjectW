@@ -16,14 +16,14 @@ class Personnage{
     private race : string
     private sex : string;
     //TODO A moyen terme il serait bien de séparer la logique de pvMax en pvDeBase et pvBonus
-    private pv : number = 150;//Hardcode temporaire
-    private pvMax : number = 150;//Hardcode temporaire
+    private pv : number
+    private pvMax : number;
     private zone : string; // zone actuelle du personnage
     private timerActuel : number; // temps au lancement de la commande
     private timerDisponible : number; // temps quand le personnage sera disponible
 
     constructor(id : number, name: string, divinity : string, race : string, sex : string, xp : number,
-                zone : string, timerActuel : number, timerDisponible : number) {
+                zone : string, timerActuel : number, timerDisponible : number, pv : number) {
         this.id = id;
         this.name = name;
         this.divinity = divinity;
@@ -33,7 +33,37 @@ class Personnage{
         this.zone = zone
         this.timerActuel = timerActuel;
         this.timerDisponible = timerDisponible;
+        this.pv = pv;
+        this.pvMax = this.calculDesPvMax(race, divinity);
     }
+
+    //region ------ CREATION VIE MAX ------
+    public calculVieRace(race:string): number{
+        switch (race){
+            case 'human':
+                return  100;
+            case 'elf':
+                return 80;
+            case 'dwarf':
+                return  120;
+            default:
+        }
+    }
+    public calculVieDivinity(divinity:string): number{
+        switch (divinity){
+            case 'mountain':
+                return 120;
+            case 'ocean':
+               return  80;
+            case 'volcano':
+                return 100;
+            default:
+        }
+    }
+    public calculDesPvMax(race : string, divinity : string): number{
+        return this.calculVieRace(race) + this.calculVieDivinity(divinity);
+    }
+    //endregion
 
     //region ------ CREATION DÉS ------
     public creationDice(): Array<De> {
@@ -165,7 +195,8 @@ class Personnage{
             let zone = result[0].zone;
             let timerActuel = result[0].timerActuel;
             let timerDisponible = result[0].timerDisponible;
-            return new Personnage(id, name, divinity, race, sex, xp, zone, timerActuel,timerDisponible);
+            let pv = result[0].pv;
+            return new Personnage(id, name, divinity, race, sex, xp, zone, timerActuel,timerDisponible,pv);
         }
         throw new Error("Le personnage n'existe pas");
     }

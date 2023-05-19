@@ -2,6 +2,7 @@ import {SlashCommand} from "../types";
 import {Compte} from "../models/Compte";
 import {Personnage} from "../models/Personnage";
 import {ListePersonnage} from "../models/ListePersonnage";
+import {Zone} from "../models/Zone";
 
 export const command: SlashCommand = {
     name: "heal",
@@ -45,7 +46,9 @@ export const command: SlashCommand = {
         //endregion
 
         //region ------ SOIN ------
-
+        if (!Zone.verificationZone(selectedPersonnage, "village")){
+            return interaction.reply({content: "Vous devez etre au village pour vous soigner", ephemeral: true});
+        }
         //TODO peut être rajouter une logique qui vérifie dans quelle zone on est avant de pouvoir se soigner
         selectedPersonnage.soignerDegats(25);//Valeurs hardcodée temporaire, pleins de possibilités de comment gérer cela
         await interaction.reply({content: 'Vous vous êtes soigné'});

@@ -96,7 +96,7 @@ export class Zone {
 
     }
     // fonction qui verifier si le personnage est dans la bonne zone
-    public verificationZone(p : Personnage, zone : string) : boolean {
+    public static verificationZone(p : Personnage, zone : string) : boolean {
         if (p.getZone() === zone){
             return true;
         }else {

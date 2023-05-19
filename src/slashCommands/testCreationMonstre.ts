@@ -63,6 +63,8 @@ export const command : SlashCommand = {
         console.log(b.getSort());
         console.log(b.getInventaire());
         console.log(b.degatDeLattaque());
+        console.log("or sur le monstre :");
+        console.log(Monstre.getOr(b.getInventaire()));
 
     }
 }
