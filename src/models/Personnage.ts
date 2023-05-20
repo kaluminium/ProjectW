@@ -43,7 +43,7 @@ class Personnage{
             case 'human':
                 return  100;
             case 'elf':
-                return 80;
+                return 800;
             case 'dwarf':
                 return  120;
             default:

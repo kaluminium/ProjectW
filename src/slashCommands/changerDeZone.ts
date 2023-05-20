@@ -76,5 +76,8 @@ export const command : SlashCommand = {
 
         let zone : string = interaction.options.get('zone').value.toString();
         Zone.changerDeZoneEtMajTimer(selectedPersonnage,timestamp,zone);
+       await interaction.reply({content: `Vous partez en direction de la : ${zone}`, ephemeral: true});
+
+
     }
 }
