@@ -42,6 +42,21 @@ export class Zone {
         Zone.changerZone(personnage,zoneA);
 
     }
+
+    public static async ajoutDunTimer(personnage : Personnage, time : number): Promise<void> {
+        const id = personnage.getId();
+        const bdd = await BDDConnexion.getInstance();
+        try {
+            const query = 'UPDATE personnage SET timerDisponible = ? WHERE id = ?';
+            // Exécution de la requête SQL
+            await bdd.query(query,[time, id]);
+            console.log(`L'enregistrement avec l'id ${id} a ete mis à jour avec le nouveau timerDisponible : ${time}`);
+        } catch (error) {
+            console.error('Erreur lors de la mise à jour de l\'enregistrement :', error);
+        }
+
+    }
+
     // fonction qui ajoute le temps au moment du lancer de la commande
      public static async ajoutTempsActuel(personnage : Personnage, time : number) : Promise<void> {
         const id = personnage.getId();
