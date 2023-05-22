@@ -186,6 +186,9 @@ export class Monstre {
     public getPv(): number {
         return this.pv;
     }
+    public getXp(): number {
+        return this.xp;
+    }
 
     public getDescription(): string {
         return this.description;

@@ -50,8 +50,6 @@ public static listeDinformation(rechercher : string): Array<any> {
             let idRessource : string = ressource[i] + " : " + quantite[i];
             format.push(idRessource);
         }
-
-
     return format;
     }
 }
