@@ -10,11 +10,11 @@ export class Bouclier {
 
     constructor(id: string) {
         this.id = id;
-        this.nom = this.creationNom();
-        this.description = this.creationDescription();
-        this.attack = this.creationAttack();
-        this.defense = this.creationDefense();
-        this.hp = this.creationHp();
+        this.nom = this.creationNom(id);
+        this.description = this.creationDescription(id);
+        this.attack = this.creationAttack(id);
+        this.defense = this.creationDefense(id);
+        this.hp = this.creationHp(id);
 
     }
 
@@ -32,26 +32,26 @@ export class Bouclier {
             return "légendaire"
         }
     }
-    public creationNom(): string {
-        return bouclier[this.id].name;
+    public creationNom(id : string): string {
+        return bouclier[id].name;
     }
 
-    public creationDescription(): string{
-        return bouclier[this.id].description;
+    public creationDescription(id : string): string{
+        return bouclier[id].description;
     }
-    public creationAttack(): number {
-        let valeurMin : number = bouclier[this.id].stats.attack.min;
-        let valeurMax : number = bouclier[this.id].stats.attack.max;
+    public creationAttack(id : string): number {
+        let valeurMin : number = bouclier[id].stats.attack.min;
+        let valeurMax : number = bouclier[id].stats.attack.max;
         return Math.floor((Math.random() * (valeurMax - valeurMin + 1) + valeurMin));
     }
-    public creationDefense(): number {
-        let valeurMin : number = bouclier[this.id].stats.defense.min;
-        let valeurMax : number = bouclier[this.id].stats.defense.max;
+    public creationDefense(id : string): number {
+        let valeurMin : number = bouclier[id].stats.defense.min;
+        let valeurMax : number = bouclier[id].stats.defense.max;
         return Math.floor((Math.random() * (valeurMax - valeurMin + 1) + valeurMin));
     }
-    public creationHp(): number {
-        let valeurMin : number = bouclier[this.id].stats.hp.min;
-        let valeurMax : number = bouclier[this.id].stats.hp.max;
+    public creationHp(id : string): number {
+        let valeurMin : number = bouclier[id].stats.hp.min;
+        let valeurMax : number = bouclier[id].stats.hp.max;
         return Math.floor((Math.random() * (valeurMax - valeurMin + 1) + valeurMin));
     }
 

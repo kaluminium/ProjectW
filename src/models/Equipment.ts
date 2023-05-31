@@ -1,5 +1,6 @@
 import {Personnage} from "./Personnage";
 import {BDDConnexion} from "./BDDConnexion";
+import {Arme} from "./Equipement/Arme";
 const armor = require("../../armure.json");
 const weapon = require("../../arme.json");
 const shield = require("../../bouclier.json");
@@ -25,6 +26,17 @@ export class Equipment{
         this.strength = strength;
         this.armor = armor;
         this.personnage = personnage;
+    }
+
+
+    public static typeEquipement(idEquipement : string): string{
+        if(weapon[idEquipement] != undefined){
+            return "weapon";
+        }else if(armor[idEquipement] != undefined){
+            return "armor";
+        }else if(shield[idEquipement] != undefined){
+            return "shield";
+        }else return "undefined";
     }
 
     public static async getEquipment(id : number): Promise<Equipment>{
@@ -69,6 +81,16 @@ export class Equipment{
             return armor[this.reference].description;
         }else if(shield[this.reference] != undefined){
             return shield[this.reference].description;
+        }else return "undefined";
+    }
+
+    getType() : string {
+        if(weapon[this.reference] != undefined){
+            return "weapon";
+        }else if(armor[this.reference] != undefined){
+            return "armor";
+        }else if(shield[this.reference] != undefined){
+            return "shield";
         }else return "undefined";
     }
 }

@@ -185,7 +185,7 @@
     "id": "iron_shield_recipe",
     "nom" : "Bouclier en fer",
     "metier": "Forgeron",
-    "required_level": 5,
+    "required_level": 0,
     "Xp" : 10,
     "ingredients": [
       {
