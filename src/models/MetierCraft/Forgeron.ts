@@ -55,9 +55,8 @@ export class Forgeron{
     let ressource : Array<string> = this.idDeLaRessourceRequiseNom(id);
     let quantite : Array<string> = this.ressourceRequiseQuantite(id);
     for (let i : number = 0; i < ressource.length; i++){
-        let p :Ressource = await Ressource.getRessourceBDD(personnage, ressource[i]);
-        p.setQuantity(p.getQuantity() - parseInt(quantite[i]));
-        Ressource.setRessourceBDD(p);
+        let p :Ressource = new Ressource(personnage, ressource[i], parseInt(quantite[i]));
+        await Ressource.removeRessourceBDD(p);
     }
 
     }

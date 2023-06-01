@@ -45,8 +45,14 @@ export class Ressource{
         if(otherRessource == null){
             await Ressource.createRessourceBDD(ressource.personnage, ressource.reference, ressource.quantity);
         }else{
-            await bdd.query("UPDATE `ressources` SET `quantity` = ? WHERE `personnage_id` = ? AND `reference` = ?", [ressource.getQuantity() + ressource.quantity, ressource.personnage.getId(), ressource.reference]);
+            await bdd.query("UPDATE `ressources` SET `quantity` = quantity + ? WHERE `personnage_id` = ? AND `reference` = ?", [ressource.quantity, ressource.personnage.getId(), ressource.reference]);
         }
+    }
+
+    public static async removeRessourceBDD(ressource : Ressource){
+        const bdd = await BDDConnexion.getInstance();
+        const otherRessource = await Ressource.getRessourceBDD(ressource.personnage, ressource.reference)
+        if(otherRessource !== null) await bdd.query("UPDATE `ressources` SET `quantity` = quantity - ? WHERE `personnage_id` = ? AND `reference` = ?", [ressource.quantity, ressource.personnage.getId(), ressource.reference]);
     }
 
     public static async setRessourceBDD(ressource : Ressource){

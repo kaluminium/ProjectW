@@ -51,6 +51,7 @@ export const command: SlashCommand = {
         }
         //TODO ajouter dans la bdd les pv
         selectedPersonnage.soignerDegats(25);//Valeurs hardcodée temporaire, pleins de possibilités de comment gérer cela
+        await Personnage.savePersonnage(selectedPersonnage)
         await interaction.reply({content: 'Vous vous êtes soigné'});
 
         //endregion

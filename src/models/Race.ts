@@ -19,7 +19,7 @@ abstract class Race{
     public static getEmote(nom : string):string{
         if(nom == 'human') return ':person_standing:';
         if(nom == 'elf') return ':elf:';
-        if(nom == 'dwarf') return ':pickaxe:';
+        if(nom == 'dwarf') return ':pick:';
     }
 }
 

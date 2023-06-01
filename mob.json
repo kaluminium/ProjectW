@@ -56,7 +56,7 @@
           "description": ""
         },
         {
-          "id": "Or",
+          "id": "or",
           "chance": 100,
           "drop_min": 50,
           "drop_max": 100,
@@ -131,7 +131,7 @@
           "description": ""
         },
         {
-          "id": "Or",
+          "id": "or",
           "chance": 100,
           "drop_min": 150,
           "drop_max": 200,

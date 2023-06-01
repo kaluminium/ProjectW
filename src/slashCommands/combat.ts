@@ -13,6 +13,7 @@ import {De} from "../models/De";
 import {combatLogic} from "../combatLogic";
 import {Monstre} from "../models/Monstre";
 import {Sort} from "../models/sort";
+import {Ressource} from "../models/Ressource";
 export const command: SlashCommand = {
     name: "combat",
     usage: "",
@@ -83,7 +84,6 @@ export const command: SlashCommand = {
         //Création du monstre
         //Valeur hardcodées dans le constructeur pour rendre la démo plus simple
         const monstre : Monstre = new Monstre("Gobelin", "normal");
-
         const nomDuMonstre = monstre.getNom();
         let pvDuMonstre = monstre.getPv();
         let dmgDuMonstre;
@@ -262,7 +262,7 @@ export const command: SlashCommand = {
 
                 //Maj les messages d'actions
                 messageAvantDerniereAction = messageDerniereAction;
-                messageDerniereAction = 'Le '+nomDuMonstre+' vous attaque avec '+'getNomAttaque()'+' : -'+dmgDuMonstre +'PV';
+                messageDerniereAction = 'Le '+nomDuMonstre+' vous attaque avec '+monstre.getSort()+' : -'+dmgDuMonstre +'PV';
 
                 //region ------ LANCEMENT NOUVEAUX DÉS ------
 
@@ -318,35 +318,56 @@ export const command: SlashCommand = {
                 //region ------ VICTOIRE ------
                 if (pvDuMonstre <= 0) {
                     //TODO logique de victoire
+                    for(let i = 0; i < monstre.getInventaire().length; i+=2){
+                        let item : string = monstre.getInventaire()[i].toString();
+                        let quantity : number = parseInt(monstre.getInventaire()[i+1].toString());
+                        console.log(item + ' ' + quantity)
+                        let res = new Ressource(selectedPersonnage, item, quantity);
+                        await Ressource.addRessourceBDD(res);
+                    }
+
+                    let orPersonnage = await Ressource.getRessourceBDD(selectedPersonnage, 'or');
+
                     embedFinCombat
                         .setColor('#00FF00')
                         .setTitle('**------------ VICTOIRE ------------**')
                         .addFields(
                             {name: '__Drop(s) : __', value: monstre.getInventaire().toString()},
-                            {name: '__Votre Or : __', value: 'selectedPersonnage.getOr()', inline: true},
-                            {name: '__Or gagné : __', value: '+' + 'monstre.getOr()', inline: true},
+                            {name: '__Votre Or : __', value: orPersonnage.getQuantity().toString(), inline: true},
+                            {name: '__Or gagné : __', value: '+' + Monstre.getOr(monstre.getInventaire()), inline: true},
                             {name: '\n', value: '\n'},
                             {
                                 name: '__Votre XP : __',
                                 value: selectedPersonnage.getXp().toString(),
                                 inline: true
                             },
-                            {name: '__XP gagnée : __', value: 'monstre.getXp()', inline: true}
+                            {name: '__XP gagnée : __', value: monstre.getXp().toString(), inline: true}
                         )
+                    selectedPersonnage.addXp(monstre.getXp());
                 }
                 //endregion
 
                 //region ------ DÉFAITE ------
                 else if (pvDuJoueur <= 0) {//Pourrait être remplace par juste else, mais ça aide la lecture
                     //TODO logique de défaite
+                    let orPerdu = new Ressource(selectedPersonnage, 'or', Monstre.getOr(monstre.getInventaire()));
+                    await Ressource.removeRessourceBDD(orPerdu);
+                    let orPersonnage = await Ressource.getRessourceBDD(selectedPersonnage, 'or');
+
+
                     embedFinCombat
                         .setColor('#FF0000')
                         .setTitle('**------------ DÉFAITE ------------**')
                         .addFields(
-                            {name: '__Votre Or : __', value: 'selectedPersonnage.getOr()', inline: true},
-                            {name: '__Or perdu : __', value: '-' + 'monstre.getOrDefaite()', inline: true}
+                            {name: '__Votre Or : __', value: orPersonnage.getQuantity().toString(), inline: true},
+                            {name: '__Or perdu : __', value: '-' + Monstre.getOr(monstre.getInventaire()), inline: true}
                         )
                 }
+
+                selectedPersonnage.setPv(pvDuJoueur);
+                await Personnage.savePersonnage(selectedPersonnage);
+
+
                 //endregion
 
                 await i.update({

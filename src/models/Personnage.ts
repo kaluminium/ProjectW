@@ -225,7 +225,7 @@ class Personnage{
         this.name = name;
     }
 
-    private setPv(pv: number){
+    public setPv(pv: number){
         this.pv = pv;
     }
 
@@ -356,6 +356,15 @@ class Personnage{
             //Si après avoir désequipper son objet le joueur a plus de pv que de pvMax, baisse ses pv en conséquences
             if (this.getPv()>this.getPvMax()) this.setPv(this.getPvMax());
         }
+    }
+
+    public addXp(xp : number) {
+        this.xp += xp;
+    }
+
+    public static async savePersonnage(personnage : Personnage){
+        const bdd = await BDDConnexion.getInstance();
+        await bdd.query("UPDATE `personnage` SET `xp` = ?, `pv` = ? WHERE `id` = ?", [personnage.getXp(), personnage.getPv(), personnage.getId()]);
     }
 
     //endregion
