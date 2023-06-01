@@ -13,8 +13,8 @@ import {Compte} from "../models/Compte";
 
 export const command : SlashCommand = {
     category: "test",
-    description: "test",
-    name: "test",
+    description: "permet de créer un personnage",
+    name: "creation_personnage",
     usage: "test",
     options: [
         {
