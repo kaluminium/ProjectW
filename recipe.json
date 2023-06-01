@@ -1,180 +1,215 @@
 {
   "club_troll_recipe": {
-    "id": "club_troll",
+    "id": "club_troll_recipe",
+    "nom" : "Massue de troll",
     "metier": "Forgeron",
     "required_level": 10,
     "Xp" : 10,
     "ingredients": [
       {
         "id": "os_de_troll",
+        "nom": "Os de troll",
         "quantity": 2
       },
       {
         "id": "minerai_de_fer",
+        "nom": "Minerai de fer",
         "quantity": 5
       },
       {
         "id": "dent_de_troll",
+        "nom": "Dent de troll",
         "quantity": 3
       }
     ]
   },
   "iron_sword_recipe": {
     "id": "iron_sword_recipe",
+    "nom" : "Epée en fer",
     "metier": "Forgeron",
     "required_level": 5,
     "Xp" : 5,
     "ingredients": [
       {
-        "id": "iron",
+        "id": "minerai_de_fer",
+        "nom": "Minerai de fer",
         "quantity": 10
       },
       {
         "id": "lingot_de_fer",
+        "nom": "Lingot de fer",
         "quantity": 2
       }
     ]
   },
   "gobelin_sword_recipe": {
     "id": "gobelin_sword_recipe",
+    "nom" : "Epée de gobelin",
     "metier": "Forgeron",
     "required_level": 0,
     "Xp" : 5,
     "ingredients": [
       {
         "id": "os_de_gobelin",
+        "nom": "Os de gobelin",
         "quantity": 2
       },
       {
         "id": "dent_de_gobelin",
+        "nom": "Dent de gobelin",
         "quantity": 3
       },
       {
         "id": "minerai_de_fer",
+        "nom": "Minerai de fer",
         "quantity": 1
       }
     ]
   },
   "troll_faceplate_recipe": {
     "id": "troll_faceplate_recipe",
+    "nom" : "Armure de troll",
     "metier": "Forgeron",
     "required_level": 10,
     "Xp" : 10,
     "ingredients": [
       {
         "id": "os_de_troll",
+        "nom": "Os de troll",
         "quantity": 2
       },
       {
         "id": "dent_de_troll",
+        "nom": "Dent de troll",
         "quantity": 3
       },
       {
         "id": "minerai_de_fer",
+        "nom": "Minerai de fer",
         "quantity": 1
       }
     ]
   },
   "gobelin_faceplate_recipe": {
     "id": "gobelin_faceplate_recipe",
+    "nom" : "Armure de gobelin",
     "metier": "Forgeron",
     "required_level": 0,
     "Xp" : 10,
     "ingredients": [
       {
         "id": "os_de_gobelin",
+        "nom": "Os de gobelin",
         "quantity": 2
       },
       {
         "id": "dent_de_gobelin",
+        "nom": "Dent de gobelin",
         "quantity": 3
       },
       {
         "id": "minerai_de_fer",
+        "nom": "Minerai de fer",
         "quantity": 1
       }
     ]
   },
   "iron_faceplate_recipe": {
     "id": "gobelin_sword_recipe",
+    "nom" : "Armure en fer",
     "metier": "Forgeron",
     "required_level": 5,
     "Xp" : 10,
     "ingredients": [
       {
         "id": "lingot_de_fer",
+        "nom": "Lingot de fer",
         "quantity": 6
       },
       {
         "id": "minerai_de_fer",
+        "nom": "Minerai de fer",
         "quantity": 4
       }
     ]
   },
   "troll_shield_recipe": {
     "id": "troll_shield_recipe",
+    "nom" : "Bouclier de troll",
     "metier": "Forgeron",
     "required_level": 10,
     "Xp" : 10,
     "ingredients": [
       {
         "id": "os_de_troll",
+        "nom": "Os de troll",
         "quantity": 2
       },
       {
         "id": "dent_de_troll",
+        "nom": "Dent de troll",
         "quantity": 3
       },
       {
         "id": "minerai_de_fer",
+        "nom": "Minerai de fer",
         "quantity": 1
       }
     ]
   },
   "gobelin_shield_recipe": {
     "id": "gobelin_shield_recipe",
+    "nom" : "Bouclier de gobelin",
     "metier": "Forgeron",
     "Xp" : 10,
     "required_level": 0,
     "ingredients": [
       {
         "id": "os_de_gobelin",
+        "nom": "Os de gobelin",
         "quantity": 2
       },
       {
         "id": "dent_de_gobelin",
+        "nom": "Dent de gobelin",
         "quantity": 3
       },
       {
         "id": "minerai_de_fer",
+        "nom": "Minerai de fer",
         "quantity": 1
       }
     ]
   },
   "iron_shield_recipe": {
     "id": "iron_shield_recipe",
+    "nom" : "Bouclier en fer",
     "metier": "Forgeron",
-    "required_level": 5,
+    "required_level": 0,
     "Xp" : 10,
     "ingredients": [
       {
         "id": "lingot_de_fer",
+        "nom": "Lingot de fer",
         "quantity": 6
       },
       {
         "id": "minerai_de_fer",
+        "nom": "Minerai de fer",
         "quantity": 4
       }
     ]
   },
   "lingot_de_fer": {
     "id": "lingot_de_fer",
+    "nom": "Lingot de fer",
     "metier": "Forgeron",
     "required_level": 1,
     "Xp" : 10,
     "ingredients": [
       {
         "id": "minerai_de_fer",
+        "nom": "Minerai de fer",
         "quantity": 2
       }
     ]

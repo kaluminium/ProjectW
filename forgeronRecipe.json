@@ -1,0 +1,34 @@
+{
+  "listeRecipe": [
+    {
+      "id": "club_troll_recipe"
+    },
+    {
+      "id": "iron_sword_recipe"
+    },
+    {
+      "id": "gobelin_sword_recipe"
+    },
+    {
+      "id": "troll_faceplate_recipe"
+    },
+    {
+      "id": "gobelin_faceplate_recipe"
+    },
+    {
+      "id": "iron_faceplate_recipe"
+    },
+    {
+      "id": "troll_shield_recipe"
+    },
+    {
+      "id": "gobelin_shield_recipe"
+    },
+    {
+      "id": "iron_shield_recipe"
+    },
+    {
+      "id": "lingot_de_fer"
+    }
+  ]
+}

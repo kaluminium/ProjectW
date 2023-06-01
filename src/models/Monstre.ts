@@ -25,6 +25,17 @@ export class Monstre {
 
     //region ------ FONCTIONS INITIALISATIONS -------
 
+    private creationDuType(): string {
+        let rdm = Math.floor(Math.random() * (100 - 1 + 1)) + 1;
+        if (rdm < 10){
+            return "boss";
+        } else if (rdm < 30){
+            return "elite";
+        } else {
+            return "normal";
+        }
+
+    }
     private creationDuNom(race: string): string {
         let nombreDePrefixe: number = monstre[race].prefixe.length;
         let nombreDeSufixe: number = monstre[race].sufixe.length;
@@ -174,6 +185,9 @@ export class Monstre {
 
     public getPv(): number {
         return this.pv;
+    }
+    public getXp(): number {
+        return this.xp;
     }
 
     public getDescription(): string {
