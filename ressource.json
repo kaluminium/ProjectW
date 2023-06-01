@@ -48,8 +48,12 @@
     "id": "lingot_de_fer",
     "name": "Lingot de fer",
     "description": "Lingot de fer"
+  },
+  "minerai_de_fer": {
+    "id": "minerai_de_fer",
+    "name": "Minerai de fer",
+    "description": "Minerai de fer"
   }
-
   }
 
 

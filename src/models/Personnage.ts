@@ -252,6 +252,8 @@ class Personnage{
         if(listePersonnage.isFull()) throw new Error("Vous avez atteint le nombre maximum de personnage");
         const bdd = await BDDConnexion.getInstance();
         await bdd.query("INSERT INTO `personnage` (`account_id`, `name`, `sex`, `divinity`, `race`) VALUES (?, ?, ?, ?, ?)", [id, name, sex, divinity, race]);
+        let personnageId = await bdd.query("SELECT `id` FROM `personnage` WHERE `account_id` = ? AND `name` = ?", [id, name]);
+        await bdd.query("INSERT INTO `forgeron` (`id`) VALUES (?)", [personnageId[0].id]);
     }
 
     public static ajouterVirgule(xp : number) : string{

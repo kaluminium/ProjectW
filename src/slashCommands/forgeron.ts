@@ -172,9 +172,9 @@ export const command: SlashCommand = {
                             let stuffCraft : Bouclier = new Bouclier(idSansRecipe);
                         }
 
-                        let stuff: Equipment = new Equipment(selectedPersonnage,stuffCraft.getNom(),stuffCraft.getHp(),
+                        let stuff: Equipment = new Equipment(selectedPersonnage,stuffCraft.getIda(),stuffCraft.getHp(),
                             stuffCraft.getAttack(),0,0,0,stuffCraft.getDefense());
-                        Equipment.addEquipmentBDD(stuff);
+                        await Equipment.addEquipmentBDD(stuff);
                         await i.reply('Bravo, vous avez réussi la fabrication de : '+nom[index])
 
                     } else {

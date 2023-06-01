@@ -50,7 +50,7 @@ export const command : SlashCommand = {
 
         let minerai: Ressource = new Ressource(selectedPersonnage, "minerai_de_fer", 100);
         let lingo: Ressource = new Ressource(selectedPersonnage, "lingot_de_fer", 100);
-        await Ressource.setRessourceBDD(minerai);
-        await Ressource.setRessourceBDD(lingo);
+        await Ressource.addRessourceBDD(minerai);
+        await Ressource.addRessourceBDD(lingo);
     }
 }

@@ -111,6 +111,7 @@ class Compte{
     }
 
     public async getSelectedPersonnage(): Promise<Personnage> {
+        if(this.selectedPersonnage == null) return null;
         return await Personnage.getPersonnage(this.selectedPersonnage.getId());
     }
 
