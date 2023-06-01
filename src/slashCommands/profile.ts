@@ -4,6 +4,7 @@ import {Compte} from "../models/Compte";
 import {Personnage} from "../models/Personnage";
 import {Race} from "../models/Race";
 import {Divinite} from "../models/Divinite";
+import {BackPack} from "../models/BackPack";
 
 export const command : SlashCommand = {
     category: "game",
@@ -26,7 +27,25 @@ export const command : SlashCommand = {
                 value: `\`Nom :\` ${personnage.getName()}\n`+
                 `\`Race :\` ${Race.getEmote(personnage.getRace())} (**${personnage.getRace()}**)\n`+
                 `\`Divinité :\` ${Divinite.getEmote(personnage.getDivinity())} (**${personnage.getDivinity()}**)\n`+
-                `\`XP :\` ${personnage.calculerNiveau()}, ${personnage.calculerPourcentageProchainNiveau()}%\n`})
+                `\`PV :\` **${personnage.getPv()}**/${personnage.getPvMax()}\n`+
+                `\`XP :\` **Niv.${personnage.calculerNiveau()}** | *${personnage.calculerPourcentageProchainNiveau()}%*\n`})
+
+        let bp = await BackPack.getBackPack(personnage);
+        const ressources = bp.getRessources();
+        const equipments = bp.getEquipments();
+
+        let ressourcesString = "";
+        for(let i = 0; i < ressources.length; i++){
+            ressourcesString += `\`[${ressources[i].getReference()}]\` **${ressources[i].getQuantity()}x** ${ressources[i].getName()}\n`
+        }
+
+        let equipmentsString = "";
+        for(let i = 0; i < equipments.length; i++){
+            equipmentsString += `\`[${equipments[i].getId()}]\` ${equipments[i].getName()}\n`
+        }
+
+        if(ressourcesString != "") embed.addFields({name: "Ressources", value: ressourcesString});
+        if(equipmentsString != "") embed.addFields({name: "Equipements", value: equipmentsString});
 
         await interaction.reply({embeds: [embed]});
     }
